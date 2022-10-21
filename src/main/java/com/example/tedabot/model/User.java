@@ -1,6 +1,7 @@
 package com.example.tedabot.model;
 
-import com.example.tedabot.constant.State;
+import com.example.tedabot.constant.enums.Language;
+import com.example.tedabot.constant.enums.State;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,5 +24,8 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private State state;
+
+    @Enumerated(EnumType.STRING)
+    private Language language;
 
 }

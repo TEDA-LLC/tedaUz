@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 /**
- * @author * Sunnatullayev Mahmudnazar *  * tedabot *  * 16:06 *
+ * @author * Sunnatullayev Mahmudnazar *  * tedabot *  * 10:40 *
  */
 
 @Entity
@@ -14,10 +14,14 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-public class Category {
+public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nameUz , nameRu;
+    private String nameUz , nameRu , description;
+
+    @ManyToOne
+    private Category category;
+
 }

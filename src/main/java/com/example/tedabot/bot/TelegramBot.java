@@ -1,5 +1,8 @@
 package com.example.tedabot.bot;
 
+import com.example.tedabot.repository.UserRepository;
+import com.example.tedabot.service.AdminService;
+import com.example.tedabot.service.BotService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +23,10 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Value("${telegram_bot_botToken}")
     String botToken;
 
+    private final BotService botService;
+    private final AdminService adminService;
+    private final UserRepository userRepository;
+
 
     @Override
     public String getBotUsername() {
@@ -34,12 +41,14 @@ public class TelegramBot extends TelegramLongPollingBot {
     @SneakyThrows
     @Override
     public void onUpdateReceived(Update update) {
-        if (update.hasMessage()){
+        if (update.hasMessage()) {
             String chatId = String.valueOf(update.getMessage().getChatId());
             String message = update.getMessage().getText();
-            if (message.equals("/start")){
-                execute(SendMessage.builder().chatId(chatId).text("Welcome").build());
+            if (message.equals("/start")) {
+                execute(botService.start(chatId, update));
             }
+        } else if (update.hasCallbackQuery()) {
+
         }
     }
 }
