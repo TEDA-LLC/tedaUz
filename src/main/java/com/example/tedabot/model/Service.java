@@ -24,4 +24,9 @@ public class Service {
     @ManyToOne
     private Category category;
 
+    @OneToOne
+    private Attachment attachment;
+
+    private Double price;
+
 }

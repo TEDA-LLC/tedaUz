@@ -15,17 +15,20 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
+@Builder
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username, phone, fullName, chatId;
+    private String username, phone, fullName;
+
+    @Column(unique = true)
+    private String chatId;
 
     @Enumerated(EnumType.STRING)
     private State state;
 
     @Enumerated(EnumType.STRING)
     private Language language;
-
 }
