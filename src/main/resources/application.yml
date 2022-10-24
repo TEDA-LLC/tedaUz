@@ -16,7 +16,7 @@ spring:
       mode: always
   servlet:
     multipart:
-      max-request-size: 20MB
-      max-file-size: 20MB
+      max-request-size: 8MB
+      max-file-size: 8MB
 telegram_bot_username: tedauz_bot
 telegram_bot_botToken: 5432072116:AAF2651m2xXWtr90dSoffJoctHKDpmEHvq0
