@@ -81,31 +81,42 @@ public class TelegramBot extends TelegramLongPollingBot {
                     execute(botService.language(update, Language.RUS));
                 } else {
                     currentUser = optionalUser.get();
-                    switch (currentUser.getLanguage()) {
-                        case RUS:
-                            break;
-                        case UZB:
-                            switch (currentUser.getState()) {
-                                case CONTACT:
-                                    currentUser.setState(State.MENU);
-                                    if (update.getMessage().getText().equals("Biz haqimizda \uD83D\uDD0E")){
-                                        execute(botService.aboutUs(update,Language.UZB));
-                                    }
-                                        break;
+                    switch (currentUser.getState()) {
+                        case CONTACT:
+                            currentUser.setState(State.MENU);
+                            if (message.getText().equals(ConstantUz.ABOUT_US_BUTTON) || message.getText().equals(ConstantRu.ABOUT_US_BUTTON)) {
+                                execute(botService.aboutUs(update, currentUser.getLanguage()));
+                            } else if (update.getMessage().getText().equals("Bog'lanish \uD83D\uDC64")) {
+                                execute(botService.toAdmin(update, currentUser.getLanguage()));
+                            } else if (update.getMessage().getText().equals("Sozlamalar ⚙")) {
+                                currentUser.setState(State.SETTINGS);
+                                userRepository.save(currentUser);
+                                execute(botService.settings(update, currentUser.getLanguage()));
                             }
+                            break;
+                        case SETTINGS:
+                            if (update.getMessage().getText().equals(ConstantUz.LANGUAGE)){
+                                currentUser.setState(State.CONTACT);
+                            }
+
                             break;
                     }
                 }
             } else if (message.hasContact()) {
-                switch (optionalUser.get().getState()){
+                switch (optionalUser.get().getState()) {
                     case START:
                         User user = optionalUser.get();
                         user.setPhone(message.getContact().getPhoneNumber());
                         user.setState(State.CONTACT);
                         userRepository.save(user);
-                        execute(botService.contact(update ,user.getLanguage()));
+                        execute(botService.contact(update, user.getLanguage()));
                         break;
-                    case EDIT_CONTACT:
+                    case SETTINGS:
+                        User user1 = optionalUser.get();
+                        user1.setPhone(message.getContact().getPhoneNumber());
+                        user1.setState(State.SETTINGS);
+                        userRepository.save(user1);
+                        execute(botService.editContact(update, user1.getLanguage()));
                         break;
                 }
             }
