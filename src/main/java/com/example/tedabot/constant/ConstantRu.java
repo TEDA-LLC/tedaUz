@@ -41,5 +41,7 @@ public interface ConstantRu {
 
     String CHOOSE = "Выберите: ";
 
-    String EDITED = "Ваш номер успешно изменен \uD83C\uDD97";
+    String EDITED = "Успешно изменен \uD83C\uDD97";
+    String CHOOSE_LANGUAGE = "Пожалуйста выберите язык:";
+    String LANGUAGE_ICON = "RUS \uD83C\uDDF7\uD83C\uDDFA";
 }

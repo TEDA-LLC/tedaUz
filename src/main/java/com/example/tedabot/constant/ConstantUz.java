@@ -40,5 +40,8 @@ public interface ConstantUz {
 
     String CHOOSE = "Tanlang: ";
 
-    String EDITED = "Raqamingiz muvafaqiyatli o'zgartirildi \uD83C\uDD97";
+    String EDITED = "Muvafaqiyatli o'zgartirildi \uD83C\uDD97";
+
+    String CHOOSE_LANGUAGE = "Iltimos tilni tanlang:";
+    String LANGUAGE_ICON = "UZB \uD83C\uDDFA\uD83C\uDDFF";
 }

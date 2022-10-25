@@ -86,20 +86,33 @@ public class TelegramBot extends TelegramLongPollingBot {
                             currentUser.setState(State.MENU);
                             if (message.getText().equals(ConstantUz.ABOUT_US_BUTTON) || message.getText().equals(ConstantRu.ABOUT_US_BUTTON)) {
                                 execute(botService.aboutUs(update, currentUser.getLanguage()));
-                            } else if (update.getMessage().getText().equals("Bog'lanish \uD83D\uDC64")) {
+                            } else if (message.getText().equals(ConstantUz.TO_ADMIN_BUTTON) || message.getText().equals(ConstantRu.TO_ADMIN_BUTTON)) {
                                 execute(botService.toAdmin(update, currentUser.getLanguage()));
-                            } else if (update.getMessage().getText().equals("Sozlamalar ⚙")) {
+                            } else if (message.getText().equals(ConstantUz.SETTINGS_BUTTON) || message.getText().equals(ConstantRu.SETTINGS_BUTTON)) {
                                 currentUser.setState(State.SETTINGS);
                                 userRepository.save(currentUser);
                                 execute(botService.settings(update, currentUser.getLanguage()));
                             }
                             break;
                         case SETTINGS:
-                            if (update.getMessage().getText().equals(ConstantUz.LANGUAGE)){
-                                currentUser.setState(State.CONTACT);
+                            if (message.getText().equals(ConstantUz.LANGUAGE) || message.getText().equals(ConstantRu.LANGUAGE)) {
+                                currentUser.setState(State.LANGUAGE);
+                                userRepository.save(currentUser);
+                                execute(botService.editLanguage(update, currentUser.getLanguage()));
                             }
 
                             break;
+                        case LANGUAGE:
+                            if (message.getText().equals(ConstantUz.LANGUAGE_ICON)) {
+                                currentUser.setState(State.SETTINGS);
+                                currentUser.setLanguage(Language.UZB);
+                                userRepository.save(currentUser);
+                            } else if (message.getText().equals(ConstantRu.LANGUAGE_ICON)) {
+                                currentUser.setState(State.SETTINGS);
+                                currentUser.setLanguage(Language.RUS);
+                                userRepository.save(currentUser);
+                            }
+                            execute(botService.languageEdited(update,currentUser.getLanguage()));
                     }
                 }
             } else if (message.hasContact()) {

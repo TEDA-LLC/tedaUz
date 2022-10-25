@@ -208,17 +208,89 @@ public class BotService {
     }
 
     public SendMessage editContact(Update update, Language language) {
-        if (language.equals(Language.UZB)){
+        if (language.equals(Language.UZB)) {
             return SendMessage.builder()
                     .text(ConstantUz.EDITED)
                     .chatId(update.getMessage().getChatId())
                     .build();
-        }
-        else return SendMessage.builder()
+        } else return SendMessage.builder()
                 .text(ConstantRu.EDITED)
                 .chatId(update.getMessage().getChatId())
                 .build();
     }
 
 
+    public SendMessage editLanguage(Update update, Language language) {
+        SendMessage sendMessage = new SendMessage();
+        if (language.equals(Language.UZB)) {
+            sendMessage.setText(ConstantUz.CHOOSE_LANGUAGE);
+        } else {
+            sendMessage.setText(ConstantRu.CHOOSE_LANGUAGE);
+        }
+
+        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+        replyKeyboardMarkup.setSelective(true);
+        replyKeyboardMarkup.setOneTimeKeyboard(true);
+        replyKeyboardMarkup.setResizeKeyboard(true);
+
+        List<KeyboardRow> rowList = new ArrayList<>();
+        KeyboardRow row = new KeyboardRow();
+        KeyboardButton rus = new KeyboardButton();
+        KeyboardButton uzb = new KeyboardButton();
+        rus.setText(ConstantRu.LANGUAGE_ICON);
+        uzb.setText(ConstantUz.LANGUAGE_ICON);
+        row.add(rus);
+        row.add(uzb);
+        rowList.add(row);
+        replyKeyboardMarkup.setKeyboard(rowList);
+
+        sendMessage.setChatId(update.getMessage().getChatId());
+        sendMessage.setReplyMarkup(replyKeyboardMarkup);
+
+        return sendMessage;
+    }
+
+    public SendMessage languageEdited(Update update, Language language) {
+        SendMessage sendMessage = new SendMessage();
+
+        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+        replyKeyboardMarkup.setSelective(true);
+        replyKeyboardMarkup.setOneTimeKeyboard(true);
+        replyKeyboardMarkup.setResizeKeyboard(true);
+
+        List<KeyboardRow> rowList = new ArrayList<>();
+        KeyboardRow row = new KeyboardRow();
+        KeyboardRow row1 = new KeyboardRow();
+        KeyboardButton buttonLanguage = new KeyboardButton();
+        KeyboardButton number = new KeyboardButton();
+        KeyboardButton back = new KeyboardButton();
+
+        number.setRequestContact(true);
+
+        if (language.equals(Language.UZB)) {
+            buttonLanguage.setText(ConstantUz.LANGUAGE);
+            number.setText(ConstantUz.PHONE);
+            back.setText(ConstantUz.BACK);
+
+            sendMessage.setText(ConstantUz.EDITED);
+        } else {
+            buttonLanguage.setText(ConstantRu.LANGUAGE);
+            number.setText(ConstantRu.PHONE);
+            back.setText(ConstantRu.BACK);
+
+            sendMessage.setText(ConstantRu.EDITED);
+        }
+
+        row.add(buttonLanguage);
+        row.add(number);
+        row1.add(back);
+        rowList.add(row);
+        rowList.add(row1);
+        replyKeyboardMarkup.setKeyboard(rowList);
+
+        sendMessage.setChatId(update.getMessage().getChatId());
+        sendMessage.setReplyMarkup(replyKeyboardMarkup);
+
+        return sendMessage;
+    }
 }
