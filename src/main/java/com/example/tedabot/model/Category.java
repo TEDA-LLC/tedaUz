@@ -14,10 +14,15 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
+@Builder
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nameUz , nameRu;
+    @Column(unique = true)
+    private String nameUz;
+
+    @Column(unique = true)
+    private String nameRu;
 }

@@ -3,6 +3,10 @@ package com.example.tedabot.service;
 import com.example.tedabot.constant.ConstantRu;
 import com.example.tedabot.constant.ConstantUz;
 import com.example.tedabot.constant.enums.Language;
+import com.example.tedabot.model.Category;
+import com.example.tedabot.model.Product;
+import com.example.tedabot.repository.CategoryRepository;
+import com.example.tedabot.repository.ProductRepository;
 import com.example.tedabot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,6 +15,8 @@ import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 
 import java.io.File;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * @author * Sunnatullayev Mahmudnazar *  * tedabot *  * 10:36 *
@@ -21,6 +27,8 @@ import java.io.File;
 public class BotService {
     private final UserRepository userRepository;
     private final ButtonService buttonService;
+    private final CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
 
     public SendMessage start(String chatId) {
         return SendMessage.builder()
@@ -147,11 +155,39 @@ public class BotService {
         }
     }
 
-    public SendMessage ok(String chatId,Language language) {
+    public SendMessage ok(String chatId, Language language) {
         return SendMessage.builder()
                 .text(ConstantUz.OK)
                 .chatId(chatId)
                 .replyMarkup(buttonService.menuButton(language))
                 .build();
     }
+
+    public SendMessage services(String chatId, Language language) {
+        if (language.equals(Language.UZB)) {
+            return SendMessage.builder()
+                    .text(ConstantUz.CHOOSE)
+                    .chatId(chatId)
+                    .replyMarkup(buttonService.categories(language))
+                    .build();
+        } else {
+            return SendMessage.builder()
+                    .text(ConstantRu.CHOOSE)
+                    .chatId(chatId)
+                    .replyMarkup(buttonService.categories(language))
+                    .build();
+        }
+    }
+
+    public Long hasInDB(String message) {
+        Optional<Category> categoryOptional = categoryRepository.findByNameRuOrNameUz(message, message);
+        return categoryOptional.get().getId();
+    }
+
+    public SendMessage products(Long categoryId, Language language) {
+            List<Product> serviceList = productRepository.findAllByCategoryId(categoryId);
+
+
+    }
+
 }

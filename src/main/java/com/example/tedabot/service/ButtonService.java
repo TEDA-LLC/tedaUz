@@ -3,13 +3,20 @@ package com.example.tedabot.service;
 import com.example.tedabot.constant.ConstantRu;
 import com.example.tedabot.constant.ConstantUz;
 import com.example.tedabot.constant.enums.Language;
+import com.example.tedabot.model.Category;
+import com.example.tedabot.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.codec.language.bm.Lang;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,6 +26,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ButtonService {
+
+    private final CategoryRepository categoryRepository;
 
     public ReplyKeyboardMarkup menuButton(Language language) {
         ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
@@ -135,7 +144,7 @@ public class ButtonService {
         return replyKeyboardMarkup;
     }
 
-    public ReplyKeyboardMarkup editLanguage(){
+    public ReplyKeyboardMarkup editLanguage() {
         ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
         replyKeyboardMarkup.setSelective(true);
         replyKeyboardMarkup.setOneTimeKeyboard(true);
@@ -154,5 +163,60 @@ public class ButtonService {
 
         return replyKeyboardMarkup;
     }
+
+    public ReplyKeyboardMarkup categories(Language language) {
+
+        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+        replyKeyboardMarkup.setSelective(true);
+        replyKeyboardMarkup.setOneTimeKeyboard(true);
+        replyKeyboardMarkup.setResizeKeyboard(true);
+
+        List<KeyboardRow> rowList = new ArrayList<>();
+        KeyboardRow row1 = new KeyboardRow();
+        KeyboardRow row2 = new KeyboardRow();
+
+        KeyboardButton backButton = new KeyboardButton();
+
+        for (Category category : categoryRepository.findAll()) {
+            KeyboardButton button = new KeyboardButton();
+            if (language.equals(Language.UZB)) {
+                button.setText(category.getNameUz());
+                backButton.setText(ConstantUz.BACK);
+            } else {
+                button.setText(category.getNameUz());
+                backButton.setText(ConstantRu.BACK);
+            }
+            row1.add(button);
+        }
+        row2.add(backButton);
+
+        rowList.add(row1);
+        rowList.add(row2);
+        replyKeyboardMarkup.setKeyboard(rowList);
+
+        return replyKeyboardMarkup;
+
+    }
+
+
+//    }    public InlineKeyboardMarkup categories(Language language) {
+//
+//        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+//        List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
+//
+//        for (Category category : categoryRepository.findAll()) {
+//
+//            if (language.equals(Language.UZB)) {
+//                buttons.add(Collections.singletonList(
+//                        InlineKeyboardButton.builder().text(category.getNameUz()).callbackData(String.valueOf(category.getId())).build()));
+//            } else {
+//                buttons.add(Collections.singletonList(
+//                        InlineKeyboardButton.builder().text(category.getNameRu()).callbackData(String.valueOf(category.getId())).build()));
+//            }
+//        }
+//        inlineKeyboardMarkup.setKeyboard(buttons);
+//
+//        return inlineKeyboardMarkup;
+//    }
 
 }

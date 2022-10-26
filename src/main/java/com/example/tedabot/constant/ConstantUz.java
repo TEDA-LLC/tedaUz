@@ -20,9 +20,9 @@ public interface ConstantUz {
             "Asosiy menyu : ";
 
     String ABOUT_US = "<b>TEDA LLC \n \n</b>" +
-            "Hozirgi kunda rivojlanib borayotgan O'zbekiston xalqining hayotini yaxshilash.\n" +
+            "Hozirgi kunda rivojlanib borayotgan O'zbekiston xalqining hayotini yaxshilash." +
             "\n" +
-            "Raqamli Iqtisodiyot bosqichida ko'plab tadbirkorlarning xizmatlarini elektronlashtirish va ularni qulay narxda taklif qilish." +
+            "Raqamli Iqtisodiyot bosqichida ko'plab tadbirkorlarning xizmatlarini elektronlashtirish va ularni qulay narxda taklif qilish.\n" +
             "\n" +
             "\uD83C\uDF10 <a href=\"https://teda.uz/\"> teda.uz</a>\n" +
             "☎ <b>+998 (97) 450 72 24</b>\n" +

@@ -25,9 +25,9 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 public class TelegramBot extends TelegramLongPollingBot {
-    @Value("${telegram_bot_username}")
+    @Value("${telegram.bot.username}")
     String username;
-    @Value("${telegram_bot_botToken}")
+    @Value("${telegram.bot.token}")
     String botToken;
 
     private final BotService botService;
@@ -55,7 +55,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                 User currentUser;
                 if (update.hasMessage()) {
                     Message message = update.getMessage();
-                    String chatId= String.valueOf(update.getMessage().getChatId());
+                    String chatId = String.valueOf(update.getMessage().getChatId());
                     Optional<User> optionalUser = userRepository.findByChatId(chatId);
                     if (message.hasText()) {
                         if (message.getText().equals("/start")) {
@@ -95,6 +95,10 @@ public class TelegramBot extends TelegramLongPollingBot {
                                         currentUser.setState(State.SETTINGS);
                                         userRepository.save(currentUser);
                                         execute(botService.settings(chatId, currentUser.getLanguage()));
+                                    } else if (message.getText().equals(ConstantUz.SERVICES_BUTTON) || message.getText().equals(ConstantRu.SERVICES_BUTTON)) {
+                                        currentUser.setState(State.SERVICE);
+                                        userRepository.save(currentUser);
+                                        execute(botService.services(chatId, currentUser.getLanguage()));
                                     }
                                     break;
                                 case SETTINGS:
@@ -105,7 +109,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                                     } else if (message.getText().equals(ConstantUz.BACK) || message.getText().equals(ConstantRu.BACK)) {
                                         currentUser.setState(State.CONTACT);
                                         userRepository.save(currentUser);
-                                        execute(botService.ok(chatId,currentUser.getLanguage()));
+                                        execute(botService.ok(chatId, currentUser.getLanguage()));
                                     }
 
                                     break;
@@ -119,7 +123,16 @@ public class TelegramBot extends TelegramLongPollingBot {
                                         currentUser.setLanguage(Language.RUS);
                                         userRepository.save(currentUser);
                                     }
-                                    execute(botService.edited(chatId,currentUser.getLanguage()));
+                                    execute(botService.edited(chatId, currentUser.getLanguage()));
+                                    break;
+                                case SERVICE:
+                                    Long categoryId = botService.hasInDB(message.getText());
+                                    if  (categoryId != null) {
+                                        currentUser.setState(State.PRODUCT);
+                                        userRepository.save(currentUser);
+                                        execute(botService.products(categoryId, currentUser.getLanguage()));
+                                    }
+                                    break;
                             }
                         }
                     } else if (message.hasContact()) {
