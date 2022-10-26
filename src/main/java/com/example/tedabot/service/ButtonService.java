@@ -93,4 +93,66 @@ public class ButtonService {
         return replyKeyboardMarkup;
     }
 
+    public ReplyKeyboardMarkup contact(Language language) {
+        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+        replyKeyboardMarkup.setSelective(true);
+        replyKeyboardMarkup.setOneTimeKeyboard(true);
+        replyKeyboardMarkup.setResizeKeyboard(true);
+
+        List<KeyboardRow> rowList = new ArrayList<>();
+        KeyboardRow row = new KeyboardRow();
+        KeyboardButton button = new KeyboardButton();
+        button.setRequestContact(true);
+
+        if (language.equals(Language.RUS)) {
+            button.setText(ConstantRu.CONTACT_BUTTON);
+        } else button.setText(ConstantUz.CONTACT_BUTTON);
+
+        row.add(button);
+        rowList.add(row);
+        replyKeyboardMarkup.setKeyboard(rowList);
+
+        return replyKeyboardMarkup;
+    }
+
+    public ReplyKeyboardMarkup language() {
+        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+        replyKeyboardMarkup.setSelective(true);
+        replyKeyboardMarkup.setOneTimeKeyboard(true);
+        replyKeyboardMarkup.setResizeKeyboard(true);
+
+        List<KeyboardRow> rowList = new ArrayList<>();
+        KeyboardRow row = new KeyboardRow();
+        KeyboardButton rus = new KeyboardButton();
+        KeyboardButton uzb = new KeyboardButton();
+        rus.setText(ConstantRu.BUTTON);
+        uzb.setText(ConstantUz.BUTTON);
+        row.add(rus);
+        row.add(uzb);
+        rowList.add(row);
+        replyKeyboardMarkup.setKeyboard(rowList);
+
+        return replyKeyboardMarkup;
+    }
+
+    public ReplyKeyboardMarkup editLanguage(){
+        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+        replyKeyboardMarkup.setSelective(true);
+        replyKeyboardMarkup.setOneTimeKeyboard(true);
+        replyKeyboardMarkup.setResizeKeyboard(true);
+
+        List<KeyboardRow> rowList = new ArrayList<>();
+        KeyboardRow row = new KeyboardRow();
+        KeyboardButton rus = new KeyboardButton();
+        KeyboardButton uzb = new KeyboardButton();
+        rus.setText(ConstantRu.LANGUAGE_ICON);
+        uzb.setText(ConstantUz.LANGUAGE_ICON);
+        row.add(rus);
+        row.add(uzb);
+        rowList.add(row);
+        replyKeyboardMarkup.setKeyboard(rowList);
+
+        return replyKeyboardMarkup;
+    }
+
 }

@@ -6,6 +6,7 @@ import com.example.tedabot.constant.enums.Language;
 import com.example.tedabot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.methods.groupadministration.SetChatPhoto;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
@@ -29,60 +30,26 @@ public class BotService {
     private final ButtonService buttonService;
 
     public SendMessage start(Update update) {
-        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-        replyKeyboardMarkup.setSelective(true);
-        replyKeyboardMarkup.setOneTimeKeyboard(true);
-        replyKeyboardMarkup.setResizeKeyboard(true);
-
-        List<KeyboardRow> rowList = new ArrayList<>();
-        KeyboardRow row = new KeyboardRow();
-        KeyboardButton rus = new KeyboardButton();
-        KeyboardButton uzb = new KeyboardButton();
-        rus.setText(ConstantRu.BUTTON);
-        uzb.setText(ConstantUz.BUTTON);
-        row.add(rus);
-        row.add(uzb);
-        rowList.add(row);
-        replyKeyboardMarkup.setKeyboard(rowList);
-
         return SendMessage.builder()
                 .text(ConstantRu.START +
                         "        \n" +
                         ConstantUz.START)
                 .chatId(update.getMessage().getChatId())
-                .replyMarkup(replyKeyboardMarkup)
+                .replyMarkup(buttonService.language())
                 .build();
     }
 
     public SendMessage language(Update update, Language language) {
-        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-        replyKeyboardMarkup.setSelective(true);
-        replyKeyboardMarkup.setOneTimeKeyboard(true);
-        replyKeyboardMarkup.setResizeKeyboard(true);
-
-        List<KeyboardRow> rowList = new ArrayList<>();
-        KeyboardRow row = new KeyboardRow();
-        KeyboardButton button = new KeyboardButton();
-        button.setRequestContact(true);
-
-        if (language.equals(Language.RUS)) {
-            button.setText(ConstantRu.CONTACT_BUTTON);
-        } else button.setText(ConstantUz.CONTACT_BUTTON);
-
-        row.add(button);
-        rowList.add(row);
-        replyKeyboardMarkup.setKeyboard(rowList);
-
         if (language.equals(Language.RUS)) {
             return SendMessage.builder()
                     .text(ConstantRu.CONTACT)
                     .chatId(update.getMessage().getChatId())
-                    .replyMarkup(replyKeyboardMarkup)
+                    .replyMarkup(buttonService.contact(language))
                     .build();
         } else return SendMessage.builder()
                 .text(ConstantUz.CONTACT)
                 .chatId(update.getMessage().getChatId())
-                .replyMarkup(replyKeyboardMarkup)
+                .replyMarkup(buttonService.contact(language))
                 .build();
     }
 
@@ -171,32 +138,27 @@ public class BotService {
 
 
     public SendMessage editLanguage(Update update, Language language) {
-        SendMessage sendMessage = new SendMessage();
         if (language.equals(Language.UZB)) {
-            sendMessage.setText(ConstantUz.CHOOSE_LANGUAGE);
+            return SendMessage.builder()
+                    .text(ConstantUz.CHOOSE_LANGUAGE)
+                    .chatId(update.getMessage().getChatId())
+                    .replyMarkup(buttonService.editLanguage())
+                    .build();
+
         } else {
-            sendMessage.setText(ConstantRu.CHOOSE_LANGUAGE);
+            return SendMessage.builder()
+                    .text(ConstantRu.CHOOSE_LANGUAGE)
+                    .chatId(update.getMessage().getChatId())
+                    .replyMarkup(buttonService.editLanguage())
+                    .build();
         }
+    }
 
-        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-        replyKeyboardMarkup.setSelective(true);
-        replyKeyboardMarkup.setOneTimeKeyboard(true);
-        replyKeyboardMarkup.setResizeKeyboard(true);
-
-        List<KeyboardRow> rowList = new ArrayList<>();
-        KeyboardRow row = new KeyboardRow();
-        KeyboardButton rus = new KeyboardButton();
-        KeyboardButton uzb = new KeyboardButton();
-        rus.setText(ConstantRu.LANGUAGE_ICON);
-        uzb.setText(ConstantUz.LANGUAGE_ICON);
-        row.add(rus);
-        row.add(uzb);
-        rowList.add(row);
-        replyKeyboardMarkup.setKeyboard(rowList);
-
-        sendMessage.setChatId(update.getMessage().getChatId());
-        sendMessage.setReplyMarkup(replyKeyboardMarkup);
-
-        return sendMessage;
+    public SendMessage ok(Update update,Language language) {
+        return SendMessage.builder()
+                .text(ConstantUz.OK)
+                .chatId(update.getMessage().getChatId())
+                .replyMarkup(buttonService.menuButton(language))
+                .build();
     }
 }

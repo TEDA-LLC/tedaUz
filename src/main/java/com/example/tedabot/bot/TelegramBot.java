@@ -98,6 +98,10 @@ public class TelegramBot extends TelegramLongPollingBot {
                                 currentUser.setState(State.LANGUAGE);
                                 userRepository.save(currentUser);
                                 execute(botService.editLanguage(update, currentUser.getLanguage()));
+                            } else if (message.getText().equals(ConstantUz.BACK) || message.getText().equals(ConstantRu.BACK)) {
+                                currentUser.setState(State.CONTACT);
+                                userRepository.save(currentUser);
+                                execute(botService.ok(update,currentUser.getLanguage()));
                             }
 
                             break;

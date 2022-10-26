@@ -44,4 +44,6 @@ public interface ConstantUz {
 
     String CHOOSE_LANGUAGE = "Iltimos tilni tanlang:";
     String LANGUAGE_ICON = "UZB \uD83C\uDDFA\uD83C\uDDFF";
+
+    String OK ="\uD83C\uDD97";
 }
