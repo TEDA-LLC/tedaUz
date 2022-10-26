@@ -83,7 +83,6 @@ public class TelegramBot extends TelegramLongPollingBot {
                     currentUser = optionalUser.get();
                     switch (currentUser.getState()) {
                         case CONTACT:
-                            currentUser.setState(State.MENU);
                             if (message.getText().equals(ConstantUz.ABOUT_US_BUTTON) || message.getText().equals(ConstantRu.ABOUT_US_BUTTON)) {
                                 execute(botService.aboutUs(update, currentUser.getLanguage()));
                             } else if (message.getText().equals(ConstantUz.TO_ADMIN_BUTTON) || message.getText().equals(ConstantRu.TO_ADMIN_BUTTON)) {
@@ -112,7 +111,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                                 currentUser.setLanguage(Language.RUS);
                                 userRepository.save(currentUser);
                             }
-                            execute(botService.languageEdited(update,currentUser.getLanguage()));
+                            execute(botService.edited(update,currentUser.getLanguage()));
                     }
                 }
             } else if (message.hasContact()) {
@@ -129,7 +128,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                         user1.setPhone(message.getContact().getPhoneNumber());
                         user1.setState(State.SETTINGS);
                         userRepository.save(user1);
-                        execute(botService.editContact(update, user1.getLanguage()));
+                        execute(botService.edited(update, user1.getLanguage()));
                         break;
                 }
             }
