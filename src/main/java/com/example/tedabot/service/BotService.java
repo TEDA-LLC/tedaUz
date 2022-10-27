@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 
 import java.io.File;
 import java.util.List;
@@ -179,15 +180,30 @@ public class BotService {
         }
     }
 
-    public Long hasInDB(String message) {
+    public Long getCategoryId(String message) {
         Optional<Category> categoryOptional = categoryRepository.findByNameRuOrNameUz(message, message);
-        return categoryOptional.get().getId();
+        if (categoryOptional.isEmpty())return null;
+
+        else return categoryOptional.get().getId();
     }
 
-    public SendMessage products(Long categoryId, Language language) {
-            List<Product> serviceList = productRepository.findAllByCategoryId(categoryId);
+    public SendMessage products(Long categoryId, Language language, String chatId) {
 
+        InlineKeyboardMarkup inlineKeyboardMarkup = buttonService.productButtons(productRepository.findAllByCategoryId(categoryId), language);
 
+        if (language.equals(Language.UZB)) {
+            return SendMessage.builder()
+                    .text(ConstantUz.CHOOSE)
+                    .chatId(chatId)
+                    .replyMarkup(inlineKeyboardMarkup)
+                    .build();
+        } else {
+            return SendMessage.builder()
+                    .text(ConstantRu.CHOOSE)
+                    .chatId(chatId)
+                    .replyMarkup(inlineKeyboardMarkup)
+                    .build();
+        }
     }
 
 }

@@ -4,6 +4,7 @@ import com.example.tedabot.constant.ConstantRu;
 import com.example.tedabot.constant.ConstantUz;
 import com.example.tedabot.constant.enums.Language;
 import com.example.tedabot.model.Category;
+import com.example.tedabot.model.Product;
 import com.example.tedabot.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.codec.language.bm.Lang;
@@ -183,7 +184,7 @@ public class ButtonService {
                 button.setText(category.getNameUz());
                 backButton.setText(ConstantUz.BACK);
             } else {
-                button.setText(category.getNameUz());
+                button.setText(category.getNameRu());
                 backButton.setText(ConstantRu.BACK);
             }
             row1.add(button);
@@ -198,25 +199,64 @@ public class ButtonService {
 
     }
 
+    public InlineKeyboardMarkup productButtons(List<Product> products, Language language) {
 
-//    }    public InlineKeyboardMarkup categories(Language language) {
-//
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
+
+        for (Product product : products) {
+
+            if (language.equals(Language.UZB)) {
+                buttons.add(Collections.singletonList(
+                        InlineKeyboardButton.builder().text(product.getNameUz()).callbackData(String.valueOf(product.getId())).build()));
+            } else {
+                buttons.add(Collections.singletonList(
+                        InlineKeyboardButton.builder().text(product.getNameRu()).callbackData(String.valueOf(product.getId())).build()));
+            }
+        }
+        if (language.equals(Language.UZB))
+            buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantUz.BACK).callbackData("#back").build()));
+        else  buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantRu.BACK).callbackData("#back").build()));
+
+        inlineKeyboardMarkup.setKeyboard(buttons);
+
+        return inlineKeyboardMarkup;
+    }
+
+//    public EditMessageText mainMenu(Update update, String chatId) {
 //        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
-//        List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
+//        //keyboard
+//        List<List<InlineKeyboardButton>> rows = new ArrayList<>();
+////row
+//        List<InlineKeyboardButton> row = new ArrayList<>();
+//        List<InlineKeyboardButton> row1 = new ArrayList<>();
+//        //button
+//        InlineKeyboardButton uzbek = new InlineKeyboardButton();
+//        InlineKeyboardButton europa = new InlineKeyboardButton();
+//        InlineKeyboardButton addresses = new InlineKeyboardButton();
+//        uzbek.setCallbackData("#uzbek");
+//        europa.setCallbackData("#europa");
+//        addresses.setCallbackData("#addresses");
 //
-//        for (Category category : categoryRepository.findAll()) {
+//        uzbek.setText("Uzbek taomlari");
+//        europa.setText("Yevropa taomlari");
+//        addresses.setText("Bizning manzillar");
 //
-//            if (language.equals(Language.UZB)) {
-//                buttons.add(Collections.singletonList(
-//                        InlineKeyboardButton.builder().text(category.getNameUz()).callbackData(String.valueOf(category.getId())).build()));
-//            } else {
-//                buttons.add(Collections.singletonList(
-//                        InlineKeyboardButton.builder().text(category.getNameRu()).callbackData(String.valueOf(category.getId())).build()));
-//            }
-//        }
-//        inlineKeyboardMarkup.setKeyboard(buttons);
+//        row.add(uzbek);
+//        row.add(europa);
+//        row1.add(addresses);
+//        rows.add(row);
+//        rows.add(row1);
 //
-//        return inlineKeyboardMarkup;
+//        inlineKeyboardMarkup.setKeyboard(rows);
+//
+//        return EditMessageText.builder()
+//                .text("Main menu")
+//                .chatId(chatId)
+//                .messageId(update.getCallbackQuery().getMessage().getMessageId())
+//                .replyMarkup(inlineKeyboardMarkup)
+//                .build();
 //    }
+
 
 }

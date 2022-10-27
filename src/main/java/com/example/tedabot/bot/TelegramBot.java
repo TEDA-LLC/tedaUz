@@ -55,7 +55,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                 User currentUser;
                 if (update.hasMessage()) {
                     Message message = update.getMessage();
-                    String chatId = String.valueOf(update.getMessage().getChatId());
+                    String chatId = String.valueOf(message.getChatId());
                     Optional<User> optionalUser = userRepository.findByChatId(chatId);
                     if (message.hasText()) {
                         if (message.getText().equals("/start")) {
@@ -126,11 +126,15 @@ public class TelegramBot extends TelegramLongPollingBot {
                                     execute(botService.edited(chatId, currentUser.getLanguage()));
                                     break;
                                 case SERVICE:
-                                    Long categoryId = botService.hasInDB(message.getText());
-                                    if  (categoryId != null) {
-                                        currentUser.setState(State.PRODUCT);
+                                    Long categoryId = botService.getCategoryId(message.getText());
+                                    if (categoryId != null) {
+//                                        currentUser.setState(State.PRODUCT);
+//                                        userRepository.save(currentUser);
+                                        execute(botService.products(categoryId, currentUser.getLanguage(), chatId));
+                                    } else if (message.getText().equals(ConstantUz.BACK) || message.getText().equals(ConstantRu.BACK)) {
+                                        currentUser.setState(State.CONTACT);
                                         userRepository.save(currentUser);
-                                        execute(botService.products(categoryId, currentUser.getLanguage()));
+                                        execute(botService.ok(chatId, currentUser.getLanguage()));
                                     }
                                     break;
                             }
