@@ -21,9 +21,6 @@ public class Attachment {
     @Column(nullable = false)
     private byte[] bytes;
 
-    @Column(nullable = false)
-    private String contentType;
-
-    private Long size;
+    private String originalName;
 
 }

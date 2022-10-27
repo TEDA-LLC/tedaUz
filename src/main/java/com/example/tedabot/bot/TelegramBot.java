@@ -16,6 +16,8 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -86,7 +88,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                         } else {
                             currentUser = optionalUser.get();
                             switch (currentUser.getState()) {
-                                case CONTACT:
+                                case CONTACT -> {
                                     if (message.getText().equals(ConstantUz.ABOUT_US_BUTTON) || message.getText().equals(ConstantRu.ABOUT_US_BUTTON)) {
                                         execute(botService.aboutUs(chatId, currentUser.getLanguage()));
                                     } else if (message.getText().equals(ConstantUz.TO_ADMIN_BUTTON) || message.getText().equals(ConstantRu.TO_ADMIN_BUTTON)) {
@@ -100,8 +102,8 @@ public class TelegramBot extends TelegramLongPollingBot {
                                         userRepository.save(currentUser);
                                         execute(botService.services(chatId, currentUser.getLanguage()));
                                     }
-                                    break;
-                                case SETTINGS:
+                                }
+                                case SETTINGS -> {
                                     if (message.getText().equals(ConstantUz.LANGUAGE) || message.getText().equals(ConstantRu.LANGUAGE)) {
                                         currentUser.setState(State.LANGUAGE);
                                         userRepository.save(currentUser);
@@ -112,8 +114,8 @@ public class TelegramBot extends TelegramLongPollingBot {
                                         execute(botService.ok(chatId, currentUser.getLanguage()));
                                     }
 
-                                    break;
-                                case LANGUAGE:
+                                }
+                                case LANGUAGE -> {
                                     if (message.getText().equals(ConstantUz.LANGUAGE_ICON)) {
                                         currentUser.setState(State.SETTINGS);
                                         currentUser.setLanguage(Language.UZB);
@@ -124,37 +126,59 @@ public class TelegramBot extends TelegramLongPollingBot {
                                         userRepository.save(currentUser);
                                     }
                                     execute(botService.edited(chatId, currentUser.getLanguage()));
-                                    break;
-                                case SERVICE:
+                                }
+                                case SERVICE -> {
                                     Long categoryId = botService.getCategoryId(message.getText());
                                     if (categoryId != null) {
-//                                        currentUser.setState(State.PRODUCT);
-//                                        userRepository.save(currentUser);
                                         execute(botService.products(categoryId, currentUser.getLanguage(), chatId));
                                     } else if (message.getText().equals(ConstantUz.BACK) || message.getText().equals(ConstantRu.BACK)) {
                                         currentUser.setState(State.CONTACT);
                                         userRepository.save(currentUser);
                                         execute(botService.ok(chatId, currentUser.getLanguage()));
                                     }
-                                    break;
+                                }
                             }
                         }
                     } else if (message.hasContact()) {
                         switch (optionalUser.get().getState()) {
-                            case START:
+                            case START -> {
                                 User user = optionalUser.get();
                                 user.setPhone(message.getContact().getPhoneNumber());
                                 user.setState(State.CONTACT);
                                 userRepository.save(user);
                                 execute(botService.contact(chatId, user.getLanguage()));
-                                break;
-                            case SETTINGS:
+                            }
+                            case SETTINGS -> {
                                 User user1 = optionalUser.get();
                                 user1.setPhone(message.getContact().getPhoneNumber());
-                                user1.setState(State.SETTINGS);
                                 userRepository.save(user1);
                                 execute(botService.edited(chatId, user1.getLanguage()));
-                                break;
+                            }
+                        }
+                    }
+                } else if (update.hasCallbackQuery()) {
+                    String chatId = String.valueOf(update.getCallbackQuery().getMessage().getChatId());
+                    Optional<User> optionalUser = userRepository.findByChatId(chatId);
+                    currentUser = optionalUser.get();
+                    switch (currentUser.getState()) {
+                        case SERVICE -> {
+                            if (update.getCallbackQuery().getData().startsWith("$back")) {
+                                execute(botService.deleteMessage(chatId, update.getCallbackQuery().getMessage().getMessageId()));
+                                execute(botService.services(chatId, currentUser.getLanguage()));
+                            } else {
+                                currentUser.setState(State.PRODUCT);
+                                userRepository.save(currentUser);
+                                execute(botService.deleteMessage(chatId, update.getCallbackQuery().getMessage().getMessageId()));
+                                execute(botService.getProduct(update, currentUser.getLanguage()));
+                            }
+                        }
+                        case PRODUCT -> {
+                            if (update.getCallbackQuery().getData().startsWith("$back")) {
+                                currentUser.setState(State.SERVICE);
+                                userRepository.save(currentUser);
+                                execute(botService.deleteMessage(chatId, update.getCallbackQuery().getMessage().getMessageId()));
+                                execute(botService.backToProducts(update, chatId, currentUser.getLanguage()));
+                            }
                         }
                     }
                 }

@@ -3,6 +3,7 @@ package com.example.tedabot.service;
 import com.example.tedabot.constant.ConstantRu;
 import com.example.tedabot.constant.ConstantUz;
 import com.example.tedabot.constant.enums.Language;
+import com.example.tedabot.model.Attachment;
 import com.example.tedabot.model.Category;
 import com.example.tedabot.model.Product;
 import com.example.tedabot.repository.CategoryRepository;
@@ -10,11 +11,20 @@ import com.example.tedabot.repository.ProductRepository;
 import com.example.tedabot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.methods.groupadministration.SetChatPhoto;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageCaption;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageReplyMarkup;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
+import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.util.List;
 import java.util.Optional;
@@ -182,7 +192,7 @@ public class BotService {
 
     public Long getCategoryId(String message) {
         Optional<Category> categoryOptional = categoryRepository.findByNameRuOrNameUz(message, message);
-        if (categoryOptional.isEmpty())return null;
+        if (categoryOptional.isEmpty()) return null;
 
         else return categoryOptional.get().getId();
     }
@@ -206,4 +216,72 @@ public class BotService {
         }
     }
 
+    public SendPhoto getProduct(Update update, Language language) {
+        SendPhoto sendPhoto = new SendPhoto();
+        sendPhoto.setChatId(String.valueOf(update.getCallbackQuery().getMessage().getChatId()));
+
+
+        Optional<Product> productOptional = productRepository.findById(Long.valueOf(update.getCallbackQuery().getData()));
+        Product product = productOptional.get();
+
+        StringBuilder builder = new StringBuilder();
+        if (language.equals(Language.UZB)) {
+            builder.append(product.getNameUz())
+                    .append("\n")
+                    .append(product.getDescriptionUz())
+                    .append("\n")
+                    .append(product.getPrice())
+                    .append("+")
+                    .append("\n");
+        } else {
+            builder.append(product.getNameRu())
+                    .append("\n")
+                    .append(product.getDescriptionRu())
+                    .append("\n")
+                    .append(product.getPrice())
+                    .append("+")
+                    .append("\n");
+        }
+
+        sendPhoto.setCaption(String.valueOf(builder));
+
+        InputFile inputFile = new InputFile(new ByteArrayInputStream(product.getAttachment().getBytes()), product.getAttachment().getOriginalName());
+        sendPhoto.setPhoto(inputFile);
+        sendPhoto.setReplyMarkup(buttonService.backButton(language, product));
+        return sendPhoto;
+    }
+
+    public DeleteMessage deleteMessage(String chatId, Integer messageId) {
+        return DeleteMessage.builder()
+                .chatId(chatId)
+                .messageId(messageId)
+                .build();
+    }
+
+    public SendMessage backToProducts(Update update, String chatId, Language language) {
+        String data = update.getCallbackQuery().getData();
+
+        Long categoryId = Long.valueOf(data.substring(5));
+
+        List<Product> productList = productRepository.findAllByCategoryId(categoryId);
+
+
+        InlineKeyboardMarkup inlineKeyboardMarkup = buttonService.productButtons(productList, language);
+
+        if (language.equals(Language.UZB)) {
+            return SendMessage.builder()
+                    .text(ConstantUz.CHOOSE)
+                    .chatId(chatId)
+                    .replyMarkup(inlineKeyboardMarkup)
+                    .build();
+        } else {
+            return SendMessage.builder()
+                    .text(ConstantRu.CHOOSE)
+                    .chatId(chatId)
+                    .replyMarkup(inlineKeyboardMarkup)
+                    .build();
+        }
+
+
+    }
 }

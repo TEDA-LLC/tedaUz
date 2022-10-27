@@ -25,7 +25,7 @@ public class Product {
     @ManyToOne
     private Category category;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Attachment attachment;
 
     private Double price;

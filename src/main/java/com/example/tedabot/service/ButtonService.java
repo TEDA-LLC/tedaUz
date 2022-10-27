@@ -9,6 +9,9 @@ import com.example.tedabot.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.codec.language.bm.Lang;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageReplyMarkup;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
+import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -215,15 +218,31 @@ public class ButtonService {
             }
         }
         if (language.equals(Language.UZB))
-            buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantUz.BACK).callbackData("#back").build()));
-        else  buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantRu.BACK).callbackData("#back").build()));
+            buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantUz.BACK).callbackData("$back").build()));
+        else
+            buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantRu.BACK).callbackData("$back").build()));
 
         inlineKeyboardMarkup.setKeyboard(buttons);
 
         return inlineKeyboardMarkup;
     }
 
-//    public EditMessageText mainMenu(Update update, String chatId) {
+    public InlineKeyboardMarkup backButton(Language language, Product product) {
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
+
+        if (language.equals(Language.UZB))
+            buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantUz.BACK).callbackData("$back" + product.getCategory().getId()).build()));
+        else
+            buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantRu.BACK).callbackData("$back" + product.getCategory().getId()).build()));
+
+        inlineKeyboardMarkup.setKeyboard(buttons);
+
+        return inlineKeyboardMarkup;
+    }
+
+
+//    public EditMessageReplyMarkup mainMenu(Update update, String chatId) {
 //        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 //        //keyboard
 //        List<List<InlineKeyboardButton>> rows = new ArrayList<>();
@@ -250,12 +269,13 @@ public class ButtonService {
 //
 //        inlineKeyboardMarkup.setKeyboard(rows);
 //
-//        return EditMessageText.builder()
-//                .text("Main menu")
-//                .chatId(chatId)
-//                .messageId(update.getCallbackQuery().getMessage().getMessageId())
-//                .replyMarkup(inlineKeyboardMarkup)
-//                .build();
+////        return EditMessageText.builder()
+////                .text("Main menu")
+////                .chatId(chatId)
+////                .messageId(update.getCallbackQuery().getMessage().getMessageId())
+////                .replyMarkup(inlineKeyboardMarkup)
+////                .build();
+//
 //    }
 
 
