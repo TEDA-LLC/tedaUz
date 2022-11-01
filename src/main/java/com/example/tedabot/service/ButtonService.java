@@ -7,11 +7,7 @@ import com.example.tedabot.model.Category;
 import com.example.tedabot.model.Product;
 import com.example.tedabot.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.codec.language.bm.Lang;
 import org.springframework.stereotype.Service;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageReplyMarkup;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
-import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -19,7 +15,6 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -240,43 +235,5 @@ public class ButtonService {
 
         return inlineKeyboardMarkup;
     }
-
-
-//    public EditMessageReplyMarkup mainMenu(Update update, String chatId) {
-//        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
-//        //keyboard
-//        List<List<InlineKeyboardButton>> rows = new ArrayList<>();
-////row
-//        List<InlineKeyboardButton> row = new ArrayList<>();
-//        List<InlineKeyboardButton> row1 = new ArrayList<>();
-//        //button
-//        InlineKeyboardButton uzbek = new InlineKeyboardButton();
-//        InlineKeyboardButton europa = new InlineKeyboardButton();
-//        InlineKeyboardButton addresses = new InlineKeyboardButton();
-//        uzbek.setCallbackData("#uzbek");
-//        europa.setCallbackData("#europa");
-//        addresses.setCallbackData("#addresses");
-//
-//        uzbek.setText("Uzbek taomlari");
-//        europa.setText("Yevropa taomlari");
-//        addresses.setText("Bizning manzillar");
-//
-//        row.add(uzbek);
-//        row.add(europa);
-//        row1.add(addresses);
-//        rows.add(row);
-//        rows.add(row1);
-//
-//        inlineKeyboardMarkup.setKeyboard(rows);
-//
-////        return EditMessageText.builder()
-////                .text("Main menu")
-////                .chatId(chatId)
-////                .messageId(update.getCallbackQuery().getMessage().getMessageId())
-////                .replyMarkup(inlineKeyboardMarkup)
-////                .build();
-//
-//    }
-
 
 }
