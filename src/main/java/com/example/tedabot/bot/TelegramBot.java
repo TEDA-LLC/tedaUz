@@ -169,7 +169,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                                 currentUser.setState(State.PRODUCT);
                                 userRepository.save(currentUser);
                                 execute(botService.deleteMessage(chatId, update.getCallbackQuery().getMessage().getMessageId()));
-                                execute(botService.getProduct(update, currentUser.getLanguage()));
+                                execute(botService.getProduct(update, currentUser));
                             }
                         }
                         case PRODUCT -> {

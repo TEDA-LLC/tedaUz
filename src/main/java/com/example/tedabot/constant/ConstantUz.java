@@ -11,14 +11,12 @@ public interface ConstantUz {
     String CONTACT = "Telefon raqamingizni kiriting\n" +
             " \n" +
             "<RAQAMNI JO'NATISH> tugmasi yordamida raqamni yuboring";
-
     String ABOUT_US_BUTTON = "Biz haqimizda \uD83D\uDD0E";
     String SERVICES_BUTTON = "Xizmat turlari \uD83D\uDEE0";
     String SETTINGS_BUTTON = "Sozlamalar ⚙";
     String TO_ADMIN_BUTTON = "Bog'lanish \uD83D\uDC64";
     String WELCOME = "Bo'timizdan muvafaqiyatli ro'yxatdan o'tdingiz! \n" +
             "Asosiy menyu : ";
-
     String ABOUT_US = "<b>TEDA LLC \n \n</b>" +
             "Hozirgi kunda rivojlanib borayotgan O'zbekiston xalqining hayotini yaxshilash." +
             "\n" +
@@ -33,17 +31,12 @@ public interface ConstantUz {
             "Savolingizni qoldiring va menejerimiz sizga imkon qadar \n" +
             "tezroq javob beradi.\n" +
             "\uD83D\uDC64 Manager : @smahmudnazar\n";
-
     String LANGUAGE = "Tilni o'zgartirish \uD83C\uDDF7\uD83C\uDDFA / \uD83C\uDDFA\uD83C\uDDFF";
     String PHONE = "Raqamni o'zgartirish \uD83D\uDCDE";
     String BACK = "Orqaga ⬅";
-
     String CHOOSE = "Tanlang: ";
-
     String EDITED = "Muvafaqiyatli o'zgartirildi \uD83C\uDD97";
-
     String CHOOSE_LANGUAGE = "Iltimos tilni tanlang:";
     String LANGUAGE_ICON = "UZB \uD83C\uDDFA\uD83C\uDDFF";
-
     String OK ="\uD83C\uDD97";
 }

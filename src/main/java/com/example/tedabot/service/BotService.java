@@ -5,8 +5,11 @@ import com.example.tedabot.constant.ConstantUz;
 import com.example.tedabot.constant.enums.Language;
 import com.example.tedabot.model.Category;
 import com.example.tedabot.model.Product;
+import com.example.tedabot.model.User;
+import com.example.tedabot.model.UserHistory;
 import com.example.tedabot.repository.CategoryRepository;
 import com.example.tedabot.repository.ProductRepository;
+import com.example.tedabot.repository.UserHistoryRepository;
 import com.example.tedabot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,6 +33,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BotService {
     private final UserRepository userRepository;
+    private final UserHistoryRepository userHistoryRepository;
     private final ButtonService buttonService;
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
@@ -209,7 +213,7 @@ public class BotService {
         }
     }
 
-    public SendPhoto getProduct(Update update, Language language) {
+    public SendPhoto getProduct(Update update, User currentUser) {
         SendPhoto sendPhoto = new SendPhoto();
         sendPhoto.setChatId(String.valueOf(update.getCallbackQuery().getMessage().getChatId()));
 
@@ -218,7 +222,7 @@ public class BotService {
         Product product = productOptional.get();
 
         StringBuilder builder = new StringBuilder();
-        if (language.equals(Language.UZB)) {
+        if (currentUser.getLanguage().equals(Language.UZB)) {
             builder.append(product.getNameUz())
                     .append("\n")
                     .append(product.getDescriptionUz())
@@ -235,12 +239,16 @@ public class BotService {
                     .append("+")
                     .append("\n");
         }
+        UserHistory userHistory = new UserHistory();
+        userHistory.setUser(currentUser);
+        userHistory.setProduct(product);
+        userHistoryRepository.save(userHistory);
 
         sendPhoto.setCaption(String.valueOf(builder));
 
         InputFile inputFile = new InputFile(new ByteArrayInputStream(product.getAttachment().getBytes()), product.getAttachment().getOriginalName());
         sendPhoto.setPhoto(inputFile);
-        sendPhoto.setReplyMarkup(buttonService.backButton(language, product));
+        sendPhoto.setReplyMarkup(buttonService.backButton(currentUser.getLanguage(), product));
         return sendPhoto;
     }
 
