@@ -34,46 +34,8 @@ public class DataLoader implements CommandLineRunner {
                     .nameUz("Tizimlar\uD83D\uDCBB")
                     .nameRu("Системы\uD83D\uDCBB")
                     .build();
-            Category serviceSaved = categoryRepository.save(service);
-            Category systemSaved = categoryRepository.save(system);
-
-
-//            Product site = Product.builder()
-//                    .nameUz("Web site")
-//                    .nameRu("Сайты")
-//                    .category(serviceSaved)
-//                    .build();
-//
-//            Product mobile = Product.builder()
-//                    .nameUz("Mobile apps")
-//                    .nameRu("Приложение")
-//                    .category(serviceSaved)
-//                    .build();
-//
-//            Product bot = Product.builder()
-//                    .nameUz("TelegramBot")
-//                    .nameRu("Телеграм Бот")
-//                    .category(serviceSaved)
-//                    .build();
-//
-//
-//            Product pMPro = Product.builder()
-//                    .nameUz("Profit Model Pro")
-//                    .nameRu("Пм Про")
-//                    .category(systemSaved)
-//                    .build();
-//
-//            Product event = Product.builder()
-//                    .nameUz("Event")
-//                    .nameRu("Ивент")
-//                    .category(systemSaved)
-//                    .build();
-//
-//            productRepository.save(site);
-//            productRepository.save(mobile);
-//            productRepository.save(bot);
-//            productRepository.save(pMPro);
-//            productRepository.save(event);
+            categoryRepository.save(service);
+            categoryRepository.save(system);
 
         }
     }

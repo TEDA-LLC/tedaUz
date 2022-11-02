@@ -16,8 +16,6 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 /**

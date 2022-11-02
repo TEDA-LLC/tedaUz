@@ -27,7 +27,6 @@ public interface ConstantUz {
             "\uD83D\uDCE7 <b>tedacompanyinfo@gmail.com</b>\n" +
             "\uD83D\uDCCD <b>Toshkent sh. Do'stlik metro ,Toshkent 700000</b>\n" +
             "\uD83D\uDCF8 <a href=\"https://instagram.com/teda.uz?igshid=YmMyMTA2M2Y=\"> @teda_uz</a>\n";
-
     String TO_ADMIN = "Assalomu aleykum! Teda LLCga xush kelibsiz. \n" +
             "Savolingizni qoldiring va menejerimiz sizga imkon qadar \n" +
             "tezroq javob beradi.\n" +
@@ -39,5 +38,5 @@ public interface ConstantUz {
     String EDITED = "Muvafaqiyatli o'zgartirildi \uD83C\uDD97";
     String CHOOSE_LANGUAGE = "Iltimos tilni tanlang:";
     String LANGUAGE_ICON = "UZB \uD83C\uDDFA\uD83C\uDDFF";
-    String OK ="\uD83C\uDD97";
+    String OK = "\uD83C\uDD97";
 }

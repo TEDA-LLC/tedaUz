@@ -32,7 +32,6 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class BotService {
-    private final UserRepository userRepository;
     private final UserHistoryRepository userHistoryRepository;
     private final ButtonService buttonService;
     private final CategoryRepository categoryRepository;

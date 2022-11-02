@@ -2,6 +2,7 @@ package com.example.tedabot.model;
 
 import com.example.tedabot.constant.enums.Language;
 import com.example.tedabot.constant.enums.State;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class User {
     private String chatId;
 
     @Enumerated(EnumType.STRING)
+    @JsonIgnore
     private State state;
 
     @Enumerated(EnumType.STRING)
