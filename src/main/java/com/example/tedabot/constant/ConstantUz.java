@@ -24,6 +24,7 @@ public interface ConstantUz {
             "\n" +
             "\uD83C\uDF10 <a href=\"https://teda.uz/\"> teda.uz</a>\n" +
             "☎ <b>+998 (97) 450 72 24</b>\n" +
+            "\uD83D\uDCE7 <b>tedacompanyinfo@gmail.com</b>\n" +
             "\uD83D\uDCCD <b>Toshkent sh. Do'stlik metro ,Toshkent 700000</b>\n" +
             "\uD83D\uDCF8 <a href=\"https://instagram.com/teda.uz?igshid=YmMyMTA2M2Y=\"> @teda_uz</a>\n";
 
