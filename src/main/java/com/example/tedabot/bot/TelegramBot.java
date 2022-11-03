@@ -6,7 +6,6 @@ import com.example.tedabot.constant.enums.Language;
 import com.example.tedabot.constant.enums.State;
 import com.example.tedabot.model.User;
 import com.example.tedabot.repository.UserRepository;
-import com.example.tedabot.service.AdminService;
 import com.example.tedabot.service.BotService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -31,7 +30,6 @@ public class TelegramBot extends TelegramLongPollingBot {
     String botToken;
 
     private final BotService botService;
-    private final AdminService adminService;
     private final UserRepository userRepository;
 
 

@@ -5,7 +5,7 @@ package com.example.tedabot.constant;
  */
 public interface ConstantRu {
     String START = "Здравствуйте! Добро пожаловать в наш бот! \n" +
-            "Давайте для начала выберем язык обслуживания!\n";
+            "Для начала выберите язык обслуживания:\n";
     String BUTTON = "Русский \uD83C\uDDF7\uD83C\uDDFA";
     String CONTACT_BUTTON = "Отправить контакт \uD83D\uDCDE";
     String CONTACT = "Введите свой номер телефона\n" +
@@ -27,8 +27,7 @@ public interface ConstantRu {
             "\uD83D\uDCE7 <b>tedacompanyinfo@gmail.com</b>\n" +
             "\uD83D\uDCCD <b>Г. Ташкент, Дустлик метро, Тошкент 700000</b>\n" +
             "\uD83D\uDCF8 <a href=\"https://instagram.com/teda.uz?igshid=YmMyMTA2M2Y=\"> @teda_uz</a>\n";
-    String TO_ADMIN = "Здравствуйте! Вас приветствует компания Teda LLC.\n" +
-            "Оставьте ваше сообщение и наш\n" +
+    String TO_ADMIN = "Оставьте ваше сообщение и наш\n" +
             "менеджер ответит вам в ближайшее время.\n" +
             "\uD83D\uDC64 Менеджер : @smahmudnazar\n";
     String LANGUAGE = "Изменить язык \uD83C\uDDF7\uD83C\uDDFA / \uD83C\uDDFA\uD83C\uDDFF";

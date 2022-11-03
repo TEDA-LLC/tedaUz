@@ -16,15 +16,4 @@ public class ApiResponse<T> {
     private boolean success;
     private int status;
     private T data;
-
-    public ApiResponse(String message, boolean success, int status) {
-        this.message = message;
-        this.success = success;
-        this.status = status;
-    }
-
-    public ApiResponse(String message, boolean success) {
-        this.message = message;
-        this.success = success;
-    }
 }

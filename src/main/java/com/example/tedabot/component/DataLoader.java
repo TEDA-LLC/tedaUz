@@ -1,7 +1,6 @@
 package com.example.tedabot.component;
 
 import com.example.tedabot.model.Category;
-import com.example.tedabot.model.Product;
 import com.example.tedabot.repository.CategoryRepository;
 import com.example.tedabot.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,14 +15,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class DataLoader implements CommandLineRunner {
     private final CategoryRepository categoryRepository;
-    private final ProductRepository productRepository;
 
     @Value("${spring.sql.init.mode}")
     String mode;
 
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args){
         if (mode.equals("always")){
             Category service = Category.builder()
                     .nameUz("Xizmatlar⚙️")
