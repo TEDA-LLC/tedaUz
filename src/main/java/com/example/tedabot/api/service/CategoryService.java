@@ -15,7 +15,6 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class CategoryService {
-
     private final CategoryRepository categoryRepository;
 
     public ApiResponse<List<Category>> getAll() {

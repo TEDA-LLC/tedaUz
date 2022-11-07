@@ -46,6 +46,8 @@ public class TelegramBot extends TelegramLongPollingBot {
     @SneakyThrows
     @Override
     public void onUpdateReceived(Update update) {
+
+        System.out.println(update.toString());
         new Thread(new Runnable() {
             @SneakyThrows
             @Override

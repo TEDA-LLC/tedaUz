@@ -8,8 +8,12 @@ import com.example.tedabot.repository.ProductRepository;
 import com.example.tedabot.repository.UserHistoryRepository;
 import com.example.tedabot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +26,8 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserHistoryRepository userHistoryRepository;
     private final ProductRepository productRepository;
+    @Value("${telegram.bot.token}")
+    String botToken;
 
     public ApiResponse<List<User>> getAll() {
         List<User> users = userRepository.findAll();
@@ -60,5 +66,25 @@ public class UserService {
                     data(amount).
                     build();
         }
+    }
+
+    @SneakyThrows
+    public void validateToken(HttpServletRequest request) {
+        String token = request.getHeader("Authorization");
+        if (token != null && token.length() > 8) {
+            token = token.substring(7);
+            if (token.equals(botToken)) {
+                return;
+            }
+        }
+           throw new AccessDeniedException("Forbidden !");
+    }
+
+    public ApiResponse<?> error() {
+        return ApiResponse.builder()
+                .success(false)
+                .status(403)
+                .message("Forbidden !")
+                .build();
     }
 }

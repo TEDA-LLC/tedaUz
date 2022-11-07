@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -35,8 +36,10 @@ public class UserController {
     }
 
     @GetMapping("/amount/{productId}")
-    public ResponseEntity<?> getAmountByProduct(@PathVariable Long productId) {
+    public ResponseEntity<?> getAmountByProduct(@PathVariable Long productId, HttpServletRequest request) {
+        userService.validateToken(request);
         ApiResponse<?> response = userService.getAmountByProduct(productId);
+
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
