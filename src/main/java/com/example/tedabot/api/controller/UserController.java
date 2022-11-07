@@ -24,13 +24,15 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/all")
-    public ResponseEntity<?> getAllUsers() {
+    public ResponseEntity<?> getAllUsers(HttpServletRequest request) {
+        userService.validateToken(request);
         ApiResponse<List<User>> response = userService.getAll();
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     @GetMapping("/history")
-    public ResponseEntity<?> getAllHistory() {
+    public ResponseEntity<?> getAllHistory(HttpServletRequest request) {
+        userService.validateToken(request);
         ApiResponse<List<UserHistory>> response = userService.getUserHistory();
         return ResponseEntity.status(response.getStatus()).body(response);
     }

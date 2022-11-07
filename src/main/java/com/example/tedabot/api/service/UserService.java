@@ -77,14 +77,6 @@ public class UserService {
                 return;
             }
         }
-           throw new AccessDeniedException("Forbidden !");
-    }
-
-    public ApiResponse<?> error() {
-        return ApiResponse.builder()
-                .success(false)
-                .status(403)
-                .message("Forbidden !")
-                .build();
+        throw new AccessDeniedException("Forbidden !");
     }
 }
