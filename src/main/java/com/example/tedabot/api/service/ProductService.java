@@ -83,8 +83,10 @@ public class ProductService {
         product.setPrice(productDTO.getPrice());
         product.setNameRu(productDTO.getNameRu());
         product.setNameUz(productDTO.getNameUz());
+        product.setNameEn(productDTO.getNameEn());
         product.setDescriptionRu(productDTO.getDescriptionRu());
         product.setDescriptionUz(productDTO.getDescriptionUz());
+        product.setDescriptionEn(productDTO.getDescriptionEn());
 
         productRepository.save(product);
 
@@ -122,8 +124,10 @@ public class ProductService {
         Product product = optionalProduct.get();
         product.setNameUz(productDTO.getNameUz());
         product.setNameRu(productDTO.getNameRu());
+        product.setNameEn(productDTO.getNameEn());
         product.setDescriptionUz(productDTO.getNameUz());
         product.setDescriptionRu(productDTO.getDescriptionRu());
+        product.setDescriptionEn(productDTO.getDescriptionEn());
         product.setPrice(productDTO.getPrice());
         product.setCategory(optionalCategory.get());
         product.setAttachment(attachment);

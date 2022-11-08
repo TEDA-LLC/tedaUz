@@ -25,4 +25,7 @@ public class Category {
 
     @Column(unique = true)
     private String nameRu;
+
+    @Column(unique = true)
+    private String nameEn;
 }

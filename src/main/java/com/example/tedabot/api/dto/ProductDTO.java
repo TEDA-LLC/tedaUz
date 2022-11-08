@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Setter
 @ToString
 public class ProductDTO {
-    private String nameUz , nameRu , descriptionUz ,descriptionRu;
+    private String nameUz, nameRu, nameEn, descriptionUz, descriptionRu, descriptionEn;
 
     private Long categoryId;
 

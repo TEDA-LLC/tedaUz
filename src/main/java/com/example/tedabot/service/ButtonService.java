@@ -1,5 +1,6 @@
 package com.example.tedabot.service;
 
+import com.example.tedabot.constant.ConstantEn;
 import com.example.tedabot.constant.ConstantRu;
 import com.example.tedabot.constant.ConstantUz;
 import com.example.tedabot.constant.enums.Language;
@@ -48,6 +49,11 @@ public class ButtonService {
             button1.setText(ConstantUz.SERVICES_BUTTON);
             button2.setText(ConstantUz.SETTINGS_BUTTON);
             button3.setText(ConstantUz.TO_ADMIN_BUTTON);
+        } else if (language.equals(Language.ENG)) {
+            button.setText(ConstantEn.ABOUT_US_BUTTON);
+            button1.setText(ConstantEn.SERVICES_BUTTON);
+            button2.setText(ConstantEn.SETTINGS_BUTTON);
+            button3.setText(ConstantEn.TO_ADMIN_BUTTON);
         } else {
             button.setText(ConstantRu.ABOUT_US_BUTTON);
             button1.setText(ConstantRu.SERVICES_BUTTON);
@@ -85,6 +91,10 @@ public class ButtonService {
             languageButton.setText(ConstantUz.LANGUAGE);
             number.setText(ConstantUz.PHONE);
             back.setText(ConstantUz.BACK);
+        } else if (language.equals(Language.ENG)) {
+            languageButton.setText(ConstantEn.LANGUAGE);
+            number.setText(ConstantEn.PHONE);
+            back.setText(ConstantEn.BACK);
         } else {
             languageButton.setText(ConstantRu.LANGUAGE);
             number.setText(ConstantRu.PHONE);
@@ -114,6 +124,8 @@ public class ButtonService {
 
         if (language.equals(Language.RUS)) {
             button.setText(ConstantRu.CONTACT_BUTTON);
+        } else if (language.equals(Language.ENG)) {
+            button.setText(ConstantEn.CONTACT_BUTTON);
         } else button.setText(ConstantUz.CONTACT_BUTTON);
 
         row.add(button);
@@ -132,10 +144,13 @@ public class ButtonService {
         List<KeyboardRow> rowList = new ArrayList<>();
         KeyboardRow row = new KeyboardRow();
         KeyboardButton rus = new KeyboardButton();
+        KeyboardButton eng = new KeyboardButton();
         KeyboardButton uzb = new KeyboardButton();
         rus.setText(ConstantRu.BUTTON);
+        eng.setText(ConstantEn.BUTTON);
         uzb.setText(ConstantUz.BUTTON);
         row.add(rus);
+        row.add(eng);
         row.add(uzb);
         rowList.add(row);
         replyKeyboardMarkup.setKeyboard(rowList);
@@ -152,10 +167,13 @@ public class ButtonService {
         List<KeyboardRow> rowList = new ArrayList<>();
         KeyboardRow row = new KeyboardRow();
         KeyboardButton rus = new KeyboardButton();
+        KeyboardButton eng = new KeyboardButton();
         KeyboardButton uzb = new KeyboardButton();
         rus.setText(ConstantRu.LANGUAGE_ICON);
+        eng.setText(ConstantEn.LANGUAGE_ICON);
         uzb.setText(ConstantUz.LANGUAGE_ICON);
         row.add(rus);
+        row.add(eng);
         row.add(uzb);
         rowList.add(row);
         replyKeyboardMarkup.setKeyboard(rowList);
@@ -181,6 +199,9 @@ public class ButtonService {
             if (language.equals(Language.UZB)) {
                 button.setText(category.getNameUz());
                 backButton.setText(ConstantUz.BACK);
+            } else if (language.equals(Language.ENG)) {
+                button.setText(category.getNameEn());
+                backButton.setText(ConstantEn.BACK);
             } else {
                 button.setText(category.getNameRu());
                 backButton.setText(ConstantRu.BACK);
@@ -207,16 +228,21 @@ public class ButtonService {
             if (language.equals(Language.UZB)) {
                 buttons.add(Collections.singletonList(
                         InlineKeyboardButton.builder().text(product.getNameUz()).callbackData(String.valueOf(product.getId())).build()));
+            } else if (language.equals(Language.ENG)) {
+                buttons.add(Collections.singletonList(
+                        InlineKeyboardButton.builder().text(product.getNameEn()).callbackData(String.valueOf(product.getId())).build()));
             } else {
                 buttons.add(Collections.singletonList(
                         InlineKeyboardButton.builder().text(product.getNameRu()).callbackData(String.valueOf(product.getId())).build()));
             }
         }
-        if (language.equals(Language.UZB))
+        if (language.equals(Language.UZB)) {
             buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantUz.BACK).callbackData("$back").build()));
-        else
+        } else if (language.equals(Language.ENG)) {
+            buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantEn.BACK).callbackData("$back").build()));
+        } else {
             buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantRu.BACK).callbackData("$back").build()));
-
+        }
         inlineKeyboardMarkup.setKeyboard(buttons);
 
         return inlineKeyboardMarkup;
@@ -226,11 +252,13 @@ public class ButtonService {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
 
-        if (language.equals(Language.UZB))
+        if (language.equals(Language.UZB)) {
             buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantUz.BACK).callbackData("$back" + product.getCategory().getId()).build()));
-        else
+        } else if (language.equals(Language.ENG)) {
+            buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantEn.BACK).callbackData("$back" + product.getCategory().getId()).build()));
+        } else {
             buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantRu.BACK).callbackData("$back" + product.getCategory().getId()).build()));
-
+        }
         inlineKeyboardMarkup.setKeyboard(buttons);
 
         return inlineKeyboardMarkup;

@@ -1,5 +1,6 @@
 package com.example.tedabot.service;
 
+import com.example.tedabot.constant.ConstantEn;
 import com.example.tedabot.constant.ConstantRu;
 import com.example.tedabot.constant.ConstantUz;
 import com.example.tedabot.constant.enums.Language;
@@ -40,7 +41,9 @@ public class BotService {
         return SendMessage.builder()
                 .text(ConstantRu.START +
                         "        \n" +
-                        ConstantUz.START)
+                        ConstantUz.START +
+                        "        \n" +
+                        ConstantEn.START)
                 .chatId(chatId)
                 .replyMarkup(buttonService.language())
                 .build();
@@ -50,6 +53,12 @@ public class BotService {
         if (language.equals(Language.RUS)) {
             return SendMessage.builder()
                     .text(ConstantRu.CONTACT)
+                    .chatId(chatId)
+                    .replyMarkup(buttonService.contact(language))
+                    .build();
+        } else if (language.equals(Language.ENG)) {
+            return SendMessage.builder()
+                    .text(ConstantEn.CONTACT)
                     .chatId(chatId)
                     .replyMarkup(buttonService.contact(language))
                     .build();
@@ -64,6 +73,12 @@ public class BotService {
         if (language.equals(Language.UZB)) {
             return SendMessage.builder()
                     .text(ConstantUz.WELCOME)
+                    .chatId(chatId)
+                    .replyMarkup(buttonService.menuButton(language))
+                    .build();
+        } else if (language.equals(Language.ENG)) {
+            return SendMessage.builder()
+                    .text(ConstantEn.WELCOME)
                     .chatId(chatId)
                     .replyMarkup(buttonService.menuButton(language))
                     .build();
@@ -83,6 +98,8 @@ public class BotService {
 
         if (language.equals(Language.UZB)) {
             sendPhoto.setCaption(ConstantUz.ABOUT_US);
+        } else if (language.equals(Language.ENG)) {
+            sendPhoto.setCaption(ConstantEn.ABOUT_US);
         } else {
             sendPhoto.setCaption(ConstantRu.ABOUT_US);
         }
@@ -103,6 +120,12 @@ public class BotService {
                     .chatId(chatId)
                     .replyMarkup(buttonService.menuButton(language))
                     .build();
+        } else if (language.equals(Language.ENG)) {
+            return SendMessage.builder()
+                    .text(ConstantEn.TO_ADMIN)
+                    .chatId(chatId)
+                    .replyMarkup(buttonService.menuButton(language))
+                    .build();
         } else {
             return SendMessage.builder()
                     .text(ConstantRu.TO_ADMIN)
@@ -117,6 +140,12 @@ public class BotService {
         if (language.equals(Language.UZB)) {
             return SendMessage.builder()
                     .text(ConstantUz.CHOOSE)
+                    .chatId(chatId)
+                    .replyMarkup(buttonService.settingsMenu(language))
+                    .build();
+        } else if (language.equals(Language.ENG)) {
+            return SendMessage.builder()
+                    .text(ConstantEn.CHOOSE)
                     .chatId(chatId)
                     .replyMarkup(buttonService.settingsMenu(language))
                     .build();
@@ -136,6 +165,12 @@ public class BotService {
                     .chatId(chatId)
                     .replyMarkup(buttonService.settingsMenu(language))
                     .build();
+        } else if (language.equals(Language.ENG)) {
+            return SendMessage.builder()
+                    .text(ConstantEn.EDITED)
+                    .chatId(chatId)
+                    .replyMarkup(buttonService.settingsMenu(language))
+                    .build();
         } else return SendMessage.builder()
                 .text(ConstantRu.EDITED)
                 .chatId(chatId)
@@ -152,6 +187,12 @@ public class BotService {
                     .replyMarkup(buttonService.editLanguage())
                     .build();
 
+        } else if (language.equals(Language.ENG)) {
+            return SendMessage.builder()
+                    .text(ConstantEn.CHOOSE_LANGUAGE)
+                    .chatId(chatId)
+                    .replyMarkup(buttonService.editLanguage())
+                    .build();
         } else {
             return SendMessage.builder()
                     .text(ConstantRu.CHOOSE_LANGUAGE)
@@ -176,6 +217,12 @@ public class BotService {
                     .chatId(chatId)
                     .replyMarkup(buttonService.categories(language))
                     .build();
+        } else if (language.equals(Language.ENG)) {
+            return SendMessage.builder()
+                    .text(ConstantEn.CHOOSE)
+                    .chatId(chatId)
+                    .replyMarkup(buttonService.categories(language))
+                    .build();
         } else {
             return SendMessage.builder()
                     .text(ConstantRu.CHOOSE)
@@ -186,7 +233,7 @@ public class BotService {
     }
 
     public Long getCategoryId(String message) {
-        Optional<Category> categoryOptional = categoryRepository.findByNameRuOrNameUz(message, message);
+        Optional<Category> categoryOptional = categoryRepository.findByNameRuOrNameUzOrNameEn(message, message, message);
         if (categoryOptional.isEmpty()) return null;
 
         else return categoryOptional.get().getId();
@@ -199,6 +246,12 @@ public class BotService {
         if (language.equals(Language.UZB)) {
             return SendMessage.builder()
                     .text(ConstantUz.CHOOSE)
+                    .chatId(chatId)
+                    .replyMarkup(inlineKeyboardMarkup)
+                    .build();
+        } else if (language.equals(Language.ENG)) {
+            return SendMessage.builder()
+                    .text(ConstantEn.CHOOSE)
                     .chatId(chatId)
                     .replyMarkup(inlineKeyboardMarkup)
                     .build();
@@ -224,6 +277,14 @@ public class BotService {
             builder.append(product.getNameUz())
                     .append("\n")
                     .append(product.getDescriptionUz())
+                    .append("\n")
+                    .append(product.getPrice())
+                    .append("+")
+                    .append("\n");
+        } else if (currentUser.getLanguage().equals(Language.ENG)) {
+            builder.append(product.getNameEn())
+                    .append("\n")
+                    .append(product.getDescriptionEn())
                     .append("\n")
                     .append(product.getPrice())
                     .append("+")
@@ -273,6 +334,12 @@ public class BotService {
                     .chatId(chatId)
                     .replyMarkup(inlineKeyboardMarkup)
                     .build();
+        } else if (language.equals(Language.ENG)) {
+            return SendMessage.builder()
+                    .text(ConstantEn.CHOOSE)
+                    .chatId(chatId)
+                    .replyMarkup(inlineKeyboardMarkup)
+                    .build();
         } else {
             return SendMessage.builder()
                     .text(ConstantRu.CHOOSE)
@@ -280,7 +347,5 @@ public class BotService {
                     .replyMarkup(inlineKeyboardMarkup)
                     .build();
         }
-
-
     }
 }

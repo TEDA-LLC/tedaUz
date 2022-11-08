@@ -2,7 +2,6 @@ package com.example.tedabot.component;
 
 import com.example.tedabot.model.Category;
 import com.example.tedabot.repository.CategoryRepository;
-import com.example.tedabot.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -15,26 +14,25 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class DataLoader implements CommandLineRunner {
     private final CategoryRepository categoryRepository;
-
     @Value("${spring.sql.init.mode}")
     String mode;
 
-
     @Override
-    public void run(String... args){
-        if (mode.equals("always")){
+    public void run(String... args) {
+        if (mode.equals("always")) {
             Category service = Category.builder()
                     .nameUz("Xizmatlar⚙️")
                     .nameRu("Услуги⚙️")
+                    .nameEn("Services⚙️")
                     .build();
 
             Category system = Category.builder()
                     .nameUz("Tizimlar\uD83D\uDCBB")
                     .nameRu("Системы\uD83D\uDCBB")
+                    .nameEn("Systems\uD83D\uDCBB")
                     .build();
             categoryRepository.save(service);
             categoryRepository.save(system);
-
         }
     }
 }

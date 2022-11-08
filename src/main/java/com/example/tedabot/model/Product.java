@@ -21,7 +21,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nameUz , nameRu , descriptionUz ,descriptionRu;
+    private String nameUz, nameRu, nameEn, descriptionUz, descriptionRu, descriptionEn;
 
     @ManyToOne
     private Category category;

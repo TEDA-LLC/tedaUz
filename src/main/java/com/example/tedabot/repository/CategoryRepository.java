@@ -11,6 +11,6 @@ import java.util.Optional;
  */
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-    Optional<Category> findByNameRuOrNameUz(String nameRu, String nameUz);
+    Optional<Category> findByNameRuOrNameUzOrNameEn(String nameRu, String nameUz, String nameEn);
 
 }
