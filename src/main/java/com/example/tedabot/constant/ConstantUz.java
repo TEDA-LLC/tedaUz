@@ -5,7 +5,7 @@ package com.example.tedabot.constant;
  */
 public interface ConstantUz {
     String START = "Assalomu aleykum! Botimizga xush kelibsiz! \n" +
-            "Xizmat ko’rsatish tilini tanlang:";
+            "Xizmat ko’rsatish tilini tanlang:\n";
     String BUTTON = "O'zbekcha \uD83C\uDDFA\uD83C\uDDFF";
     String CONTACT_BUTTON = "Raqamni jo'natish \uD83D\uDCDE";
     String CONTACT = "Telefon raqamingizni kiriting\n" +

@@ -43,7 +43,6 @@ public class ButtonService {
         KeyboardButton button2 = new KeyboardButton();
         KeyboardButton button3 = new KeyboardButton();
 
-
         if (language.equals(Language.UZB)) {
             button.setText(ConstantUz.ABOUT_US_BUTTON);
             button1.setText(ConstantUz.SERVICES_BUTTON);
