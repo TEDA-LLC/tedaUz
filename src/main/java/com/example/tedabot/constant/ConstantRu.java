@@ -27,14 +27,15 @@ public interface ConstantRu {
             "\uD83D\uDCE7 <b>tedacompanyinfo@gmail.com</b>\n" +
             "\uD83D\uDCCD <b>Г. Ташкент, Дустлик метро, Тошкент 700000</b>\n" +
             "\uD83D\uDCF8 <a href=\"https://instagram.com/teda.uz?igshid=YmMyMTA2M2Y=\"> @teda_uz</a>\n";
-    String TO_ADMIN = "Оставьте ваше сообщение и наш\n" +
-            "менеджер ответит вам в ближайшее время.\n" +
+    String TO_ADMIN = "Оставьте свой вопрос нашему менеджеру и \n" +
+            "наш менеджер ответит вам в ближайшее время.\n" +
             "\uD83D\uDC64 Менеджер : @smahmudnazar\n";
-    String LANGUAGE = "Изменить язык \uD83C\uDDF7\uD83C\uDDFA / \uD83C\uDDFA\uD83C\uDDFF";
+    String LANGUAGE = "Изменить язык \uD83C\uDDF7\uD83C\uDDFA/\uD83C\uDDFA\uD83C\uDDFF/\uD83C\uDDEC\uD83C\uDDE7";
     String PHONE = "Изменить номер \uD83D\uDCDE";
     String BACK = "Назад ⬅";
     String CHOOSE = "Выберите: ";
     String EDITED = "Успешно изменен \uD83C\uDD97";
     String CHOOSE_LANGUAGE = "Пожалуйста выберите язык:";
     String LANGUAGE_ICON = "RUS \uD83C\uDDF7\uD83C\uDDFA";
+    String IN_DETAIL = "Подробно\uD83D\uDD0E";
 }

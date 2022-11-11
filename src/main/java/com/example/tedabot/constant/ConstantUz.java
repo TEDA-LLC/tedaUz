@@ -27,10 +27,10 @@ public interface ConstantUz {
             "\uD83D\uDCE7 <b>tedacompanyinfo@gmail.com</b>\n" +
             "\uD83D\uDCCD <b>Toshkent sh. Do'stlik metro ,Toshkent 700000</b>\n" +
             "\uD83D\uDCF8 <a href=\"https://instagram.com/teda.uz?igshid=YmMyMTA2M2Y=\"> @teda_uz</a>\n";
-    String TO_ADMIN = "Savolingizni qoldiring va menejerimiz sizga imkon qadar \n" +
-            "tezroq javob beradi.\n" +
+    String TO_ADMIN = "Menejirimizga savolingizni qoldiring va menejerimiz sizga \n" +
+            "imkon qadar tezroq javob beradi.\n" +
             "\uD83D\uDC64 Manager : @smahmudnazar\n";
-    String LANGUAGE = "Tilni o'zgartirish \uD83C\uDDF7\uD83C\uDDFA / \uD83C\uDDFA\uD83C\uDDFF";
+    String LANGUAGE = "Tilni o'zgartirish \uD83C\uDDF7\uD83C\uDDFA/\uD83C\uDDFA\uD83C\uDDFF/\uD83C\uDDEC\uD83C\uDDE7";
     String PHONE = "Raqamni o'zgartirish \uD83D\uDCDE";
     String BACK = "Orqaga ⬅";
     String CHOOSE = "Tanlang: ";
@@ -38,4 +38,5 @@ public interface ConstantUz {
     String CHOOSE_LANGUAGE = "Iltimos tilni tanlang:";
     String LANGUAGE_ICON = "UZB \uD83C\uDDFA\uD83C\uDDFF";
     String OK = "\uD83C\uDD97";
+    String IN_DETAIL = "Batafsil\uD83D\uDD0E";
 }

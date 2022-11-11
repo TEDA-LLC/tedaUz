@@ -325,7 +325,6 @@ public class BotService {
 
         List<Product> productList = productRepository.findAllByCategoryId(categoryId);
 
-
         InlineKeyboardMarkup inlineKeyboardMarkup = buttonService.productButtons(productList, language);
 
         if (language.equals(Language.UZB)) {

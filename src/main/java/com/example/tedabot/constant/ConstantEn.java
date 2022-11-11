@@ -28,8 +28,8 @@ public interface ConstantEn {
             "\uD83D\uDCE7 <b>tedacompanyinfo@gmail.com</b>\n" +
             "\uD83D\uDCCD <b>Tashkent, Dustlik metro station, Tashkent 700000</b>\n" +
             "\uD83D\uDCF8 <a href=\"https://instagram.com/teda.uz?igshid=YmMyMTA2M2Y=\"> @teda_uz</a>\n";
-    String TO_ADMIN = "Leave your message and our\n" +
-            "the manager will answer you as soon as possible.\n" +
+    String TO_ADMIN = "Leave your question to our manager and\n" +
+            "our manager will answer you as soon as possible.\n" +
             "\uD83D\uDC64 Manager : @smahmudnazar\n";
     String LANGUAGE = "Change language \uD83C\uDDF7\uD83C\uDDFA/\uD83C\uDDFA\uD83C\uDDFF/\uD83C\uDDEC\uD83C\uDDE7";
     String PHONE = "Change number \uD83D\uDCDE";
@@ -38,4 +38,5 @@ public interface ConstantEn {
     String EDITED = "Successfully modified \uD83C\uDD97";
     String CHOOSE_LANGUAGE = "Choose language:";
     String LANGUAGE_ICON = "ENG \uD83C\uDDEC\uD83C\uDDE7";
+    String IN_DETAIL = "In Detail\uD83D\uDD0E";
 }
