@@ -43,7 +43,6 @@ public class ButtonService {
         KeyboardButton button2 = new KeyboardButton();
         KeyboardButton button3 = new KeyboardButton();
 
-
         if (language.equals(Language.UZB)) {
             button.setText(ConstantUz.ABOUT_US_BUTTON);
             button1.setText(ConstantUz.SERVICES_BUTTON);
@@ -253,12 +252,16 @@ public class ButtonService {
         List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
 
         if (language.equals(Language.UZB)) {
+            buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantUz.IN_DETAIL).url("https://teda.uz/").build()));
             buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantUz.BACK).callbackData("$back" + product.getCategory().getId()).build()));
         } else if (language.equals(Language.ENG)) {
+            buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantEn.IN_DETAIL).url("https://teda.uz/").build()));
             buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantEn.BACK).callbackData("$back" + product.getCategory().getId()).build()));
         } else {
+            buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantRu.IN_DETAIL).url("https://teda.uz/").build()));
             buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantRu.BACK).callbackData("$back" + product.getCategory().getId()).build()));
         }
+
         inlineKeyboardMarkup.setKeyboard(buttons);
 
         return inlineKeyboardMarkup;

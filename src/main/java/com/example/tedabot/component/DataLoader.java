@@ -16,7 +16,6 @@ public class DataLoader implements CommandLineRunner {
     private final CategoryRepository categoryRepository;
     @Value("${spring.sql.init.mode}")
     String mode;
-
     @Override
     public void run(String... args) {
         if (mode.equals("always")) {
@@ -25,7 +24,6 @@ public class DataLoader implements CommandLineRunner {
                     .nameRu("Услуги⚙️")
                     .nameEn("Services⚙️")
                     .build();
-
             Category system = Category.builder()
                     .nameUz("Tizimlar\uD83D\uDCBB")
                     .nameRu("Системы\uD83D\uDCBB")
