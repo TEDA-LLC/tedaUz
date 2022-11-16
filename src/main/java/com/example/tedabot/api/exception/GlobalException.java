@@ -11,7 +11,7 @@ import java.nio.file.AccessDeniedException;
 /**
  * @author * Sunnatullayev Mahmudnazar *  * tedabot *  * 15:11 *
  */
-@ControllerAdvice
+
 public class GlobalException {
     @ExceptionHandler(AccessDeniedException.class)
     public HttpEntity<?> handleError(){
