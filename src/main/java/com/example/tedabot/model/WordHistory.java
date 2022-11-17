@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 @Setter
 @ToString
 @Builder
-public class WordsHistory {
+public class WordHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

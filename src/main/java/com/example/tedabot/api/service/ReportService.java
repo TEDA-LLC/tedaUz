@@ -4,16 +4,14 @@ import com.example.tedabot.api.dto.ApiResponse;
 import com.example.tedabot.model.Product;
 import com.example.tedabot.model.User;
 import com.example.tedabot.model.UserHistory;
+import com.example.tedabot.model.WordHistory;
 import com.example.tedabot.repository.ProductRepository;
 import com.example.tedabot.repository.UserHistoryRepository;
 import com.example.tedabot.repository.UserRepository;
+import com.example.tedabot.repository.WordHistoryRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,12 +20,11 @@ import java.util.Optional;
  */
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class ReportService {
     private final UserRepository userRepository;
     private final UserHistoryRepository userHistoryRepository;
     private final ProductRepository productRepository;
-    @Value("${telegram.bot.token}")
-    String botToken;
+    private final WordHistoryRepository wordHistoryRepository;
 
     public ApiResponse<List<User>> getAll() {
         List<User> users = userRepository.findAll();
@@ -67,16 +64,13 @@ public class UserService {
                     build();
         }
     }
-
-    @SneakyThrows
-    public void validateToken(HttpServletRequest request) {
-        String token = request.getHeader("Authorization");
-        if (token != null && token.length() > 8) {
-            token = token.substring(7);
-            if (token.equals(botToken)) {
-                return;
-            }
-        }
-        throw new AccessDeniedException("Forbidden !");
+    public ApiResponse<List<WordHistory>> getWordsHistory() {
+        List<WordHistory> history = wordHistoryRepository.findAll();
+        return ApiResponse.<List<WordHistory>>builder().
+                message("Here").
+                status(200).
+                success(true).
+                data(history).
+                build();
     }
 }

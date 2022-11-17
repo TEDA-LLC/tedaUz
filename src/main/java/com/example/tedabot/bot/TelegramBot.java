@@ -27,17 +27,15 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TelegramBot extends TelegramLongPollingBot {
     @Value("${telegram.bot.username}")
-    String username;
+    private String userName;
     @Value("${telegram.bot.token}")
-    String botToken;
-
+    private String botToken;
     private final BotService botService;
     private final UserRepository userRepository;
 
-
     @Override
     public String getBotUsername() {
-        return username;
+        return userName;
     }
 
     @Override
@@ -48,8 +46,6 @@ public class TelegramBot extends TelegramLongPollingBot {
     @SneakyThrows
     @Override
     public void onUpdateReceived(Update update) {
-
-        System.out.println(update.toString());
         new Thread(new Runnable() {
             @SneakyThrows
             @Override
@@ -92,7 +88,6 @@ public class TelegramBot extends TelegramLongPollingBot {
                             execute(botService.language(chatId, Language.ENG));
                         } else {
                             currentUser = optionalUser.get();
-//                            botService.storyWriter(currentUser, message);
                             switch (currentUser.getState()) {
                                 case CONTACT -> {
                                     if (message.getText().equals(ConstantUz.ABOUT_US_BUTTON) || message.getText().equals(ConstantRu.ABOUT_US_BUTTON) || message.getText().equals(ConstantEn.ABOUT_US_BUTTON)) {

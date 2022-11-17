@@ -349,7 +349,7 @@ public class BotService {
     }
 
     public void storyWriter(User user, Message message) {
-        WordsHistory wordsHistory = WordsHistory.builder().
+        WordHistory wordsHistory = WordHistory.builder().
                 user(user).
                 word(message.getText()).
                 build();
