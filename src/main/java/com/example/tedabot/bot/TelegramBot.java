@@ -13,6 +13,7 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -91,6 +92,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                             execute(botService.language(chatId, Language.ENG));
                         } else {
                             currentUser = optionalUser.get();
+//                            botService.storyWriter(currentUser, message);
                             switch (currentUser.getState()) {
                                 case CONTACT -> {
                                     if (message.getText().equals(ConstantUz.ABOUT_US_BUTTON) || message.getText().equals(ConstantRu.ABOUT_US_BUTTON) || message.getText().equals(ConstantEn.ABOUT_US_BUTTON)) {
@@ -105,6 +107,8 @@ public class TelegramBot extends TelegramLongPollingBot {
                                         currentUser.setState(State.SERVICE);
                                         userRepository.save(currentUser);
                                         execute(botService.services(chatId, currentUser.getLanguage()));
+                                    }else {
+                                        botService.storyWriter(currentUser, message);
                                     }
                                 }
                                 case SETTINGS -> {
@@ -116,6 +120,8 @@ public class TelegramBot extends TelegramLongPollingBot {
                                         currentUser.setState(State.CONTACT);
                                         userRepository.save(currentUser);
                                         execute(botService.ok(chatId, currentUser.getLanguage()));
+                                    }else {
+                                        botService.storyWriter(currentUser, message);
                                     }
                                 }
                                 case LANGUAGE -> {
@@ -131,6 +137,8 @@ public class TelegramBot extends TelegramLongPollingBot {
                                         currentUser.setState(State.SETTINGS);
                                         currentUser.setLanguage(Language.RUS);
                                         userRepository.save(currentUser);
+                                    } else {
+                                        botService.storyWriter(currentUser, message);
                                     }
                                     execute(botService.edited(chatId, currentUser.getLanguage()));
                                 }
@@ -142,8 +150,9 @@ public class TelegramBot extends TelegramLongPollingBot {
                                         currentUser.setState(State.CONTACT);
                                         userRepository.save(currentUser);
                                         execute(botService.ok(chatId, currentUser.getLanguage()));
-                                    }
+                                    } else botService.storyWriter(currentUser, message);
                                 }
+                                default -> botService.storyWriter(currentUser, message);
                             }
                         }
                     } else if (message.hasContact()) {
@@ -164,26 +173,27 @@ public class TelegramBot extends TelegramLongPollingBot {
                         }
                     }
                 } else if (update.hasCallbackQuery()) {
-                    String chatId = String.valueOf(update.getCallbackQuery().getMessage().getChatId());
+                    CallbackQuery callbackQuery = update.getCallbackQuery();
+                    String chatId = String.valueOf(callbackQuery.getMessage().getChatId());
                     Optional<User> optionalUser = userRepository.findByChatId(chatId);
                     currentUser = optionalUser.get();
                     switch (currentUser.getState()) {
                         case SERVICE -> {
-                            if (update.getCallbackQuery().getData().startsWith("$back")) {
-                                execute(botService.deleteMessage(chatId, update.getCallbackQuery().getMessage().getMessageId()));
+                            if (callbackQuery.getData().startsWith("$back")) {
+                                execute(botService.deleteMessage(chatId, callbackQuery.getMessage().getMessageId()));
                                 execute(botService.services(chatId, currentUser.getLanguage()));
                             } else {
                                 currentUser.setState(State.PRODUCT);
                                 userRepository.save(currentUser);
-                                execute(botService.deleteMessage(chatId, update.getCallbackQuery().getMessage().getMessageId()));
+                                execute(botService.deleteMessage(chatId, callbackQuery.getMessage().getMessageId()));
                                 execute(botService.getProduct(update, currentUser));
                             }
                         }
                         case PRODUCT -> {
-                            if (update.getCallbackQuery().getData().startsWith("$back")) {
+                            if (callbackQuery.getData().startsWith("$back")) {
                                 currentUser.setState(State.SERVICE);
                                 userRepository.save(currentUser);
-                                execute(botService.deleteMessage(chatId, update.getCallbackQuery().getMessage().getMessageId()));
+                                execute(botService.deleteMessage(chatId, callbackQuery.getMessage().getMessageId()));
                                 execute(botService.backToProducts(update, chatId, currentUser.getLanguage()));
                             }
                         }

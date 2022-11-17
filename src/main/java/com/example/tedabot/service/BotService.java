@@ -4,19 +4,18 @@ import com.example.tedabot.constant.ConstantEn;
 import com.example.tedabot.constant.ConstantRu;
 import com.example.tedabot.constant.ConstantUz;
 import com.example.tedabot.constant.enums.Language;
-import com.example.tedabot.model.Category;
-import com.example.tedabot.model.Product;
-import com.example.tedabot.model.User;
-import com.example.tedabot.model.UserHistory;
+import com.example.tedabot.model.*;
 import com.example.tedabot.repository.CategoryRepository;
 import com.example.tedabot.repository.ProductRepository;
 import com.example.tedabot.repository.UserHistoryRepository;
+import com.example.tedabot.repository.WordHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 
@@ -36,6 +35,7 @@ public class BotService {
     private final ButtonService buttonService;
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
+    private final WordHistoryRepository wordHistoryRepository;
 
     public SendMessage start(String chatId) {
         return SendMessage.builder()
@@ -346,5 +346,14 @@ public class BotService {
                     .replyMarkup(inlineKeyboardMarkup)
                     .build();
         }
+    }
+
+    public void storyWriter(User user, Message message) {
+        WordsHistory wordsHistory = WordsHistory.builder().
+                user(user).
+                word(message.getText()).
+                build();
+        wordHistoryRepository.save(wordsHistory);
+
     }
 }
