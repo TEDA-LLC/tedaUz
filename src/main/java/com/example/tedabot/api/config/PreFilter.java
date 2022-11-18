@@ -4,6 +4,7 @@ import com.example.tedabot.api.dto.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -38,12 +39,12 @@ public class PreFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         } catch (AccessDeniedException exception) {
             response.setStatus(403);
-            response.getWriter().print(ApiResponse.builder().
-                    message("Forbidden").
-                    status(403).
-                    success(false).
-                    build());
-
+            response.getWriter().print(ResponseEntity.status(403).body(
+                    ApiResponse.builder().
+                            message("Forbidden").
+                            status(403).
+                            success(false).
+                            build()));
         }
     }
 }
