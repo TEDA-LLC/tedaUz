@@ -26,16 +26,16 @@ public class PreFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) {
         String token = request.getHeader("Authorization");
         try {
+            response.addHeader("Access-Control-Allow-Origin", "*");
+            response.addHeader("Access-Control-Allow-Headers", "*");
+            response.addHeader("Access-Control-Allow-Methods", "*");
+            response.addHeader("Access-Control-Allow-Credentials", "false");
             if (token != null && token.length() > 8) {
                 token = token.substring(7);
                 if (!token.equals(botToken)) {
                     throw new AccessDeniedException("Forbidden !");
                 }
             } else throw new AccessDeniedException("Forbidden !");
-            response.addHeader("Access-Control-Allow-Origin", "*");
-            response.addHeader("Access-Control-Allow-Headers", "*");
-            response.addHeader("Access-Control-Allow-Methods", "*");
-            response.addHeader("Access-Control-Allow-Credentials", "false");
             filterChain.doFilter(request, response);
         } catch (AccessDeniedException exception) {
             response.setStatus(403);
