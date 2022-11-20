@@ -24,27 +24,23 @@ public class PreFilter extends OncePerRequestFilter {
     @SneakyThrows
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) {
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Headers", "*");
+        response.addHeader("Access-Control-Allow-Methods", "*");
+        response.addHeader("Access-Control-Allow-Credentials", "true");
         String token = request.getHeader("Authorization");
-        try {
-            response.addHeader("Access-Control-Allow-Origin", "*");
-            response.addHeader("Access-Control-Allow-Headers", "*");
-            response.addHeader("Access-Control-Allow-Methods", "*");
-            response.addHeader("Access-Control-Allow-Credentials", "false");
-            if (token != null && token.length() > 8) {
-                token = token.substring(7);
-                if (!token.equals(botToken)) {
-                    throw new AccessDeniedException("Forbidden !");
-                }
-            } else throw new AccessDeniedException("Forbidden !");
-            filterChain.doFilter(request, response);
-        } catch (AccessDeniedException exception) {
-            response.setStatus(403);
+        if (token == null || token.length() <= 8 || !token.substring(7).equals(botToken)) {
             response.getWriter().print(ResponseEntity.status(403).body(
                     ApiResponse.builder().
                             message("Forbidden").
                             status(403).
                             success(false).
                             build()));
+            if(!request.getMethod().equalsIgnoreCase("OPTIONS")){
+                response.setStatus(403);
+            }
+            return;
         }
+        filterChain.doFilter(request, response);
     }
 }
