@@ -20,6 +20,12 @@ import java.util.List;
 public class ReportController {
     private final ReportService reportService;
 
+
+    @GetMapping("/auth")
+    public ResponseEntity<?> checkAuth(){
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/users")
     public ResponseEntity<?> getAllUsers() {
         ApiResponse<List<User>> response = reportService.getAll();
@@ -27,7 +33,7 @@ public class ReportController {
     }
 
     @GetMapping("/userHistory")
-    public ResponseEntity<?> getUserlHistory() {
+    public ResponseEntity<?> getUserHistory() {
         ApiResponse<List<UserHistory>> response = reportService.getUserHistory();
         return ResponseEntity.status(response.getStatus()).body(response);
     }
