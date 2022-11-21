@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @Builder
-@Entity(name = "user_table")
+@Entity(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
