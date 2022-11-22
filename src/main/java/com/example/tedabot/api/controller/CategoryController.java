@@ -2,7 +2,7 @@ package com.example.tedabot.api.controller;
 
 import com.example.tedabot.api.dto.ApiResponse;
 import com.example.tedabot.api.service.CategoryService;
-import com.example.tedabot.model.Category;
+import com.example.tedabot.bot.model.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

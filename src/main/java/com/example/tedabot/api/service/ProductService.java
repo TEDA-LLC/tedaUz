@@ -2,11 +2,11 @@ package com.example.tedabot.api.service;
 
 import com.example.tedabot.api.dto.ApiResponse;
 import com.example.tedabot.api.dto.ProductDTO;
-import com.example.tedabot.model.Attachment;
-import com.example.tedabot.model.Category;
-import com.example.tedabot.model.Product;
-import com.example.tedabot.repository.CategoryRepository;
-import com.example.tedabot.repository.ProductRepository;
+import com.example.tedabot.bot.model.Attachment;
+import com.example.tedabot.bot.model.Category;
+import com.example.tedabot.bot.model.Product;
+import com.example.tedabot.bot.repository.CategoryRepository;
+import com.example.tedabot.bot.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;

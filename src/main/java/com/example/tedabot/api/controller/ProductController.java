@@ -3,7 +3,7 @@ package com.example.tedabot.api.controller;
 import com.example.tedabot.api.service.ProductService;
 import com.example.tedabot.api.dto.ApiResponse;
 import com.example.tedabot.api.dto.ProductDTO;
-import com.example.tedabot.model.Product;
+import com.example.tedabot.bot.model.Product;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;

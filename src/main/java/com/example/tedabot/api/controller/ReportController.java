@@ -2,9 +2,9 @@ package com.example.tedabot.api.controller;
 
 import com.example.tedabot.api.dto.ApiResponse;
 import com.example.tedabot.api.service.ReportService;
-import com.example.tedabot.model.User;
-import com.example.tedabot.model.UserHistory;
-import com.example.tedabot.model.WordHistory;
+import com.example.tedabot.bot.model.User;
+import com.example.tedabot.bot.model.UserHistory;
+import com.example.tedabot.bot.model.WordHistory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

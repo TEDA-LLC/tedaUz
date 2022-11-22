@@ -1,8 +1,8 @@
-package com.example.tedabot.model;
+package com.example.tedabot.bot.model;
 
-import com.example.tedabot.constant.enums.Language;
-import com.example.tedabot.constant.enums.RegistrationType;
-import com.example.tedabot.constant.enums.State;
+import com.example.tedabot.bot.constant.enums.Language;
+import com.example.tedabot.bot.constant.enums.RegistrationType;
+import com.example.tedabot.bot.constant.enums.State;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 

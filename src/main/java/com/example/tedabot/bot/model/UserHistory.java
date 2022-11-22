@@ -1,4 +1,4 @@
-package com.example.tedabot.model;
+package com.example.tedabot.bot.model;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

@@ -1,14 +1,14 @@
 package com.example.tedabot.api.service;
 
 import com.example.tedabot.api.dto.ApiResponse;
-import com.example.tedabot.model.Product;
-import com.example.tedabot.model.User;
-import com.example.tedabot.model.UserHistory;
-import com.example.tedabot.model.WordHistory;
-import com.example.tedabot.repository.ProductRepository;
-import com.example.tedabot.repository.UserHistoryRepository;
-import com.example.tedabot.repository.UserRepository;
-import com.example.tedabot.repository.WordHistoryRepository;
+import com.example.tedabot.bot.model.Product;
+import com.example.tedabot.bot.model.User;
+import com.example.tedabot.bot.model.UserHistory;
+import com.example.tedabot.bot.model.WordHistory;
+import com.example.tedabot.bot.repository.ProductRepository;
+import com.example.tedabot.bot.repository.UserHistoryRepository;
+import com.example.tedabot.bot.repository.UserRepository;
+import com.example.tedabot.bot.repository.WordHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

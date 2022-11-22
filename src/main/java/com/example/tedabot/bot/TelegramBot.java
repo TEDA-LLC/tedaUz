@@ -1,14 +1,14 @@
 package com.example.tedabot.bot;
 
-import com.example.tedabot.constant.ConstantEn;
-import com.example.tedabot.constant.ConstantRu;
-import com.example.tedabot.constant.ConstantUz;
-import com.example.tedabot.constant.enums.Language;
-import com.example.tedabot.constant.enums.RegistrationType;
-import com.example.tedabot.constant.enums.State;
-import com.example.tedabot.model.User;
-import com.example.tedabot.repository.UserRepository;
-import com.example.tedabot.service.BotService;
+import com.example.tedabot.bot.constant.ConstantEn;
+import com.example.tedabot.bot.constant.ConstantRu;
+import com.example.tedabot.bot.constant.ConstantUz;
+import com.example.tedabot.bot.constant.enums.Language;
+import com.example.tedabot.bot.constant.enums.RegistrationType;
+import com.example.tedabot.bot.constant.enums.State;
+import com.example.tedabot.bot.model.User;
+import com.example.tedabot.bot.repository.UserRepository;
+import com.example.tedabot.bot.service.BotService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;

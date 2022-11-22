@@ -1,14 +1,15 @@
-package com.example.tedabot.service;
+package com.example.tedabot.bot.service;
 
-import com.example.tedabot.constant.ConstantEn;
-import com.example.tedabot.constant.ConstantRu;
-import com.example.tedabot.constant.ConstantUz;
-import com.example.tedabot.constant.enums.Language;
+import com.example.tedabot.bot.constant.ConstantEn;
+import com.example.tedabot.bot.constant.ConstantUz;
+import com.example.tedabot.bot.constant.enums.Language;
+import com.example.tedabot.bot.model.*;
+import com.example.tedabot.bot.repository.UserHistoryRepository;
+import com.example.tedabot.bot.repository.WordHistoryRepository;
+import com.example.tedabot.bot.constant.ConstantRu;
 import com.example.tedabot.model.*;
-import com.example.tedabot.repository.CategoryRepository;
-import com.example.tedabot.repository.ProductRepository;
-import com.example.tedabot.repository.UserHistoryRepository;
-import com.example.tedabot.repository.WordHistoryRepository;
+import com.example.tedabot.bot.repository.CategoryRepository;
+import com.example.tedabot.bot.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -354,6 +355,5 @@ public class BotService {
                 word(message.getText()).
                 build();
         wordHistoryRepository.save(wordsHistory);
-
     }
 }

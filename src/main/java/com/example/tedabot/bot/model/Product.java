@@ -1,4 +1,4 @@
-package com.example.tedabot.model;
+package com.example.tedabot.bot.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;

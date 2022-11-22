@@ -1,4 +1,4 @@
-package com.example.tedabot.constant;
+package com.example.tedabot.bot.constant;
 
 /**
  * @author * Sunnatullayev Mahmudnazar *  * tedabot *  * 15:19 *

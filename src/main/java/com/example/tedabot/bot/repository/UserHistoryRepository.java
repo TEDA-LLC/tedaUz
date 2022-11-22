@@ -1,6 +1,6 @@
-package com.example.tedabot.repository;
+package com.example.tedabot.bot.repository;
 
-import com.example.tedabot.model.UserHistory;
+import com.example.tedabot.bot.model.UserHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

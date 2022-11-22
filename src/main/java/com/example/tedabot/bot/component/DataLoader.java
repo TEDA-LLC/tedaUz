@@ -1,7 +1,7 @@
-package com.example.tedabot.component;
+package com.example.tedabot.bot.component;
 
-import com.example.tedabot.model.Category;
-import com.example.tedabot.repository.CategoryRepository;
+import com.example.tedabot.bot.model.Category;
+import com.example.tedabot.bot.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;

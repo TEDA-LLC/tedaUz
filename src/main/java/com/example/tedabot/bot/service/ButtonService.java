@@ -1,12 +1,12 @@
-package com.example.tedabot.service;
+package com.example.tedabot.bot.service;
 
-import com.example.tedabot.constant.ConstantEn;
-import com.example.tedabot.constant.ConstantRu;
-import com.example.tedabot.constant.ConstantUz;
-import com.example.tedabot.constant.enums.Language;
-import com.example.tedabot.model.Category;
-import com.example.tedabot.model.Product;
-import com.example.tedabot.repository.CategoryRepository;
+import com.example.tedabot.bot.constant.ConstantEn;
+import com.example.tedabot.bot.constant.ConstantRu;
+import com.example.tedabot.bot.constant.ConstantUz;
+import com.example.tedabot.bot.constant.enums.Language;
+import com.example.tedabot.bot.model.Category;
+import com.example.tedabot.bot.model.Product;
+import com.example.tedabot.bot.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
