@@ -7,7 +7,6 @@ import com.example.tedabot.bot.model.*;
 import com.example.tedabot.bot.repository.UserHistoryRepository;
 import com.example.tedabot.bot.repository.WordHistoryRepository;
 import com.example.tedabot.bot.constant.ConstantRu;
-import com.example.tedabot.model.*;
 import com.example.tedabot.bot.repository.CategoryRepository;
 import com.example.tedabot.bot.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;

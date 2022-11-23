@@ -11,7 +11,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.nio.file.AccessDeniedException;
 
 
 @Component
@@ -36,7 +35,8 @@ public class PreFilter extends OncePerRequestFilter {
                             status(403).
                             success(false).
                             build()));
-            if(!request.getMethod().equalsIgnoreCase("OPTIONS")){
+            response.setContentType("application/json");
+            if (!request.getMethod().equalsIgnoreCase("OPTIONS")) {
                 response.setStatus(403);
             }
             return;
