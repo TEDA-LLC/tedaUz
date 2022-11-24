@@ -2,6 +2,7 @@ package com.example.tedabot.api.controller;
 
 import com.example.tedabot.api.dto.ApiResponse;
 import com.example.tedabot.api.service.ReportService;
+import com.example.tedabot.api.service.SiteService;
 import com.example.tedabot.bot.model.User;
 import com.example.tedabot.bot.model.UserHistory;
 import com.example.tedabot.bot.model.WordHistory;
@@ -19,7 +20,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReportController {
     private final ReportService reportService;
-
 
     @GetMapping("/auth")
     public ResponseEntity<?> checkAuth(){
@@ -47,6 +47,12 @@ public class ReportController {
     @GetMapping("/wordHistory")
     public ResponseEntity<?> getAllHistory() {
         ApiResponse<List<WordHistory>> response = reportService.getWordsHistory();
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+    @PatchMapping("/view/{requestId}")
+    public ResponseEntity<?> editView(@PathVariable Long requestId){
+        ApiResponse<?> response = reportService.editView(requestId);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 }

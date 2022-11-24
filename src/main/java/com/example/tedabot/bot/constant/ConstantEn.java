@@ -39,4 +39,7 @@ public interface ConstantEn {
     String CHOOSE_LANGUAGE = "Choose language:";
     String LANGUAGE_ICON = "ENG \uD83C\uDDEC\uD83C\uDDE7";
     String IN_DETAIL = "In Detail\uD83D\uDD0E";
+    String REQUEST = "Request\uD83D\uDCCC";
+    String RESPONSE_FOR_REQUEST= "Your request has been successfully received.✅\n" +
+            "Our manager will contact you soon.";
 }

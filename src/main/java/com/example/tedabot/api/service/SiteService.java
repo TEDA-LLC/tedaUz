@@ -28,23 +28,4 @@ public class SiteService {
                 data(save).
                 build();
     }
-
-    public ApiResponse<?> editView(Long id) {
-        Optional<Request> requestOptional = requestRepository.findById(id);
-        if (requestOptional.isEmpty()) {
-            return ApiResponse.builder().
-                    message("Request id not found !").
-                    status(400).
-                    success(false).
-                    build();
-        }
-        Request request = requestOptional.get();
-        request.setView(true);
-        requestRepository.save(request);
-        return ApiResponse.builder().
-                message("Edited !").
-                status(201).
-                success(true).
-                build();
-    }
 }

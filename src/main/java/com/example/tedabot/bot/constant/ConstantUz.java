@@ -39,4 +39,7 @@ public interface ConstantUz {
     String LANGUAGE_ICON = "UZB \uD83C\uDDFA\uD83C\uDDFF";
     String OK = "\uD83C\uDD97";
     String IN_DETAIL = "Batafsil\uD83D\uDD0E";
+    String REQUEST = "So'rov\uD83D\uDCCC";
+    String RESPONSE_FOR_REQUEST= "Murojaatingiz muvafaqiyatli qabul qilindi.✅\n" +
+            "Tez orada menejerimiz aloqaga chiqadi.";
 }

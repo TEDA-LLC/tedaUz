@@ -16,6 +16,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -217,13 +218,11 @@ public class ButtonService {
 
     }
 
-    public InlineKeyboardMarkup productButtons(List<Product> products, Language language) {
-
+    public InlineKeyboardMarkup products(List<Product> products, Language language) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
 
         for (Product product : products) {
-
             if (language.equals(Language.UZB)) {
                 buttons.add(Collections.singletonList(
                         InlineKeyboardButton.builder().text(product.getNameUz()).callbackData(String.valueOf(product.getId())).build()));
@@ -247,18 +246,24 @@ public class ButtonService {
         return inlineKeyboardMarkup;
     }
 
-    public InlineKeyboardMarkup backButton(Language language, Product product) {
+    public InlineKeyboardMarkup aboutProduct(Language language, Product product) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
 
         if (language.equals(Language.UZB)) {
-            buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantUz.IN_DETAIL).url("https://teda.uz/").build()));
+            buttons.add(Arrays.asList(
+                    InlineKeyboardButton.builder().text(ConstantUz.IN_DETAIL).url("https://teda.uz/").build(),
+                    InlineKeyboardButton.builder().text(ConstantUz.REQUEST).callbackData("$request" + product.getId()).build()));
             buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantUz.BACK).callbackData("$back" + product.getCategory().getId()).build()));
         } else if (language.equals(Language.ENG)) {
-            buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantEn.IN_DETAIL).url("https://teda.uz/").build()));
+            buttons.add(Arrays.asList(
+                    InlineKeyboardButton.builder().text(ConstantEn.IN_DETAIL).url("https://teda.uz/").build(),
+                    InlineKeyboardButton.builder().text(ConstantEn.REQUEST).callbackData("$request" + product.getId()).build()));
             buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantEn.BACK).callbackData("$back" + product.getCategory().getId()).build()));
         } else {
-            buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantRu.IN_DETAIL).url("https://teda.uz/").build()));
+            buttons.add(Arrays.asList(
+                    InlineKeyboardButton.builder().text(ConstantRu.IN_DETAIL).url("https://teda.uz/").build(),
+                    InlineKeyboardButton.builder().text(ConstantRu.REQUEST).callbackData("$request" + product.getId()).build()));
             buttons.add(Collections.singletonList(InlineKeyboardButton.builder().text(ConstantRu.BACK).callbackData("$back" + product.getCategory().getId()).build()));
         }
 

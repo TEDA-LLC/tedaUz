@@ -17,7 +17,6 @@ public class PreFilter extends OncePerRequestFilter {
     @Value("${telegram.bot.token}")
     String botToken;
 
-
     @SneakyThrows
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) {
@@ -26,8 +25,8 @@ public class PreFilter extends OncePerRequestFilter {
         response.addHeader("Access-Control-Allow-Methods", "*");
         response.addHeader("Access-Control-Allow-Credentials", "true");
         String token = request.getHeader("Authorization");
-        if (token == null || token.length() <= 8 || !token.substring(7).equals(botToken)) {
-            if (!request.getServletPath().equals("/api/site/contact")) {
+        if (!request.getServletPath().equals("/api/site") && !request.getMethod().equals("POST")) {
+            if (token == null || token.length() <= 8 || !token.substring(7).equals(botToken)) {
                 response.getWriter().print("{\"message\":\"Forbidden!\",\"success\":false,\"status\":403}");
                 response.setContentType("application/json");
                 if (!request.getMethod().equalsIgnoreCase("OPTIONS")) {
@@ -35,7 +34,7 @@ public class PreFilter extends OncePerRequestFilter {
                 }
                 return;
             }
-            filterChain.doFilter(request, response);
         }
+        filterChain.doFilter(request, response);
     }
 }
