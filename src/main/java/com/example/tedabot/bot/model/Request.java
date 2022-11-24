@@ -1,11 +1,9 @@
-package com.example.tedabot.api.model;
+package com.example.tedabot.bot.model;
 
+import com.example.tedabot.bot.model.enums.RequestType;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @author Mansurov Abdusamad  *  24.11.2022  *  10:22   *  tedaUz
@@ -24,8 +22,10 @@ public class Request {
 
     private String name, phone;
 
-    private String text;
+    private String aboutProduct;
 
     private boolean view = false;
 
+    @Enumerated(EnumType.STRING)
+    private RequestType requestType;
 }

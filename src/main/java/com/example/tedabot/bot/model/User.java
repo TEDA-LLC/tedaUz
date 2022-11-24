@@ -1,8 +1,7 @@
 package com.example.tedabot.bot.model;
 
-import com.example.tedabot.bot.constant.enums.Language;
-import com.example.tedabot.bot.constant.enums.RegistrationType;
-import com.example.tedabot.bot.constant.enums.State;
+import com.example.tedabot.bot.model.enums.Language;
+import com.example.tedabot.bot.model.enums.State;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -36,9 +35,6 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Language language;
-
-    @Enumerated(EnumType.STRING)
-    private RegistrationType registrationType;
 
     private LocalDateTime registeredTime,lastOperationTime;
 }
