@@ -1,14 +1,8 @@
 package com.example.tedabot.api.service;
 
 import com.example.tedabot.api.dto.ApiResponse;
-import com.example.tedabot.bot.model.Product;
-import com.example.tedabot.bot.model.User;
-import com.example.tedabot.bot.model.UserHistory;
-import com.example.tedabot.bot.model.WordHistory;
-import com.example.tedabot.bot.repository.ProductRepository;
-import com.example.tedabot.bot.repository.UserHistoryRepository;
-import com.example.tedabot.bot.repository.UserRepository;
-import com.example.tedabot.bot.repository.WordHistoryRepository;
+import com.example.tedabot.bot.model.*;
+import com.example.tedabot.bot.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +19,7 @@ public class ReportService {
     private final UserHistoryRepository userHistoryRepository;
     private final ProductRepository productRepository;
     private final WordHistoryRepository wordHistoryRepository;
+    private final RequestRepository requestRepository;
 
     public ApiResponse<List<User>> getAll() {
         List<User> users = userRepository.findAll();
@@ -72,5 +67,24 @@ public class ReportService {
                 success(true).
                 data(history).
                 build();
+    }
+
+    public ApiResponse<?> editView(Long requestId) {
+            Optional<Request> requestOptional = requestRepository.findById(requestId);
+            if (requestOptional.isEmpty()) {
+                return ApiResponse.builder().
+                        message("Request id not found !").
+                        status(400).
+                        success(false).
+                        build();
+            }
+            Request request = requestOptional.get();
+            request.setView(true);
+            requestRepository.save(request);
+            return ApiResponse.builder().
+                    message("Edited !").
+                    status(201).
+                    success(true).
+                    build();
     }
 }

@@ -38,4 +38,7 @@ public interface ConstantRu {
     String CHOOSE_LANGUAGE = "Пожалуйста выберите язык:";
     String LANGUAGE_ICON = "RUS \uD83C\uDDF7\uD83C\uDDFA";
     String IN_DETAIL = "Подробно\uD83D\uDD0E";
+    String REQUEST = "Заявка\uD83D\uDCCC";
+    String RESPONSE_FOR_REQUEST= "Ваш запрос успешно получен.✅\n" +
+            "Наш менеджер свяжется с вами в ближайшее время.";
 }

@@ -4,11 +4,9 @@ import com.example.tedabot.bot.constant.ConstantEn;
 import com.example.tedabot.bot.constant.ConstantUz;
 import com.example.tedabot.bot.model.enums.Language;
 import com.example.tedabot.bot.model.*;
-import com.example.tedabot.bot.repository.UserHistoryRepository;
-import com.example.tedabot.bot.repository.WordHistoryRepository;
+import com.example.tedabot.bot.model.enums.RequestType;
+import com.example.tedabot.bot.repository.*;
 import com.example.tedabot.bot.constant.ConstantRu;
-import com.example.tedabot.bot.repository.CategoryRepository;
-import com.example.tedabot.bot.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -36,6 +34,7 @@ public class BotService {
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
     private final WordHistoryRepository wordHistoryRepository;
+    private final RequestRepository requestRepository;
 
     public SendMessage start(String chatId) {
         return SendMessage.builder()
@@ -240,8 +239,7 @@ public class BotService {
     }
 
     public SendMessage products(Long categoryId, Language language, String chatId) {
-
-        InlineKeyboardMarkup inlineKeyboardMarkup = buttonService.productButtons(productRepository.findAllByCategoryId(categoryId), language);
+        InlineKeyboardMarkup inlineKeyboardMarkup = buttonService.products(productRepository.findAllByCategoryId(categoryId), language);
 
         if (language.equals(Language.UZB)) {
             return SendMessage.builder()
@@ -267,7 +265,6 @@ public class BotService {
     public SendPhoto getProduct(Update update, User currentUser) {
         SendPhoto sendPhoto = new SendPhoto();
         sendPhoto.setChatId(String.valueOf(update.getCallbackQuery().getMessage().getChatId()));
-
 
         Optional<Product> productOptional = productRepository.findById(Long.valueOf(update.getCallbackQuery().getData()));
         Product product = productOptional.get();
@@ -307,7 +304,7 @@ public class BotService {
 
         InputFile inputFile = new InputFile(new ByteArrayInputStream(product.getAttachment().getBytes()), product.getAttachment().getOriginalName());
         sendPhoto.setPhoto(inputFile);
-        sendPhoto.setReplyMarkup(buttonService.backButton(currentUser.getLanguage(), product));
+        sendPhoto.setReplyMarkup(buttonService.aboutProduct(currentUser.getLanguage(), product));
         return sendPhoto;
     }
 
@@ -325,7 +322,7 @@ public class BotService {
 
         List<Product> productList = productRepository.findAllByCategoryId(categoryId);
 
-        InlineKeyboardMarkup inlineKeyboardMarkup = buttonService.productButtons(productList, language);
+        InlineKeyboardMarkup inlineKeyboardMarkup = buttonService.products(productList, language);
 
         if (language.equals(Language.UZB)) {
             return SendMessage.builder()
@@ -354,5 +351,36 @@ public class BotService {
                 word(message.getText()).
                 build();
         wordHistoryRepository.save(wordsHistory);
+    }
+
+    public SendMessage saveRequest(Update update, User currentUser) {
+        String data = update.getCallbackQuery().getData();
+
+        Long productId = Long.valueOf(data.substring(8));
+        Optional<Product> productOptional = productRepository.findById(productId);
+
+        Request request = Request.builder().
+                aboutProduct(productOptional.get().getNameEn()).
+                requestType(RequestType.BOT).
+                phone(currentUser.getPhone()).
+                build();
+        requestRepository.save(request);
+
+        if (currentUser.getLanguage().equals(Language.UZB)) {
+            return SendMessage.builder()
+                    .text(ConstantUz.RESPONSE_FOR_REQUEST)
+                    .chatId(update.getCallbackQuery().getMessage().getChatId())
+                    .build();
+        } else if (currentUser.getLanguage().equals(Language.ENG)) {
+            return SendMessage.builder()
+                    .text(ConstantEn.RESPONSE_FOR_REQUEST)
+                    .chatId(update.getCallbackQuery().getMessage().getChatId())
+                    .build();
+        } else {
+            return SendMessage.builder()
+                    .text(ConstantRu.RESPONSE_FOR_REQUEST)
+                    .chatId(update.getCallbackQuery().getMessage().getChatId())
+                    .build();
+        }
     }
 }

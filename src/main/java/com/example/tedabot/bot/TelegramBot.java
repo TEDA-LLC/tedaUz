@@ -4,7 +4,6 @@ import com.example.tedabot.bot.constant.ConstantEn;
 import com.example.tedabot.bot.constant.ConstantRu;
 import com.example.tedabot.bot.constant.ConstantUz;
 import com.example.tedabot.bot.model.enums.Language;
-import com.example.tedabot.bot.model.enums.RequestType;
 import com.example.tedabot.bot.model.enums.State;
 import com.example.tedabot.bot.model.User;
 import com.example.tedabot.bot.repository.UserRepository;
@@ -70,7 +69,6 @@ public class TelegramBot extends TelegramLongPollingBot {
                                 currentUser.setChatId(String.valueOf(update.getMessage().getChatId()));
                                 currentUser.setFullName(message.getFrom().getFirstName());
                                 currentUser.setUsername(message.getFrom().getUserName());
-                                currentUser.setRegistrationType(RequestType.BOT);
                                 currentUser.setRegisteredTime(LocalDateTime.now());
                                 currentUser.setState(State.START);
                                 currentUser.setLastOperationTime(LocalDateTime.now());
@@ -214,6 +212,9 @@ public class TelegramBot extends TelegramLongPollingBot {
                                 userRepository.save(currentUser);
                                 execute(botService.deleteMessage(chatId, callbackQuery.getMessage().getMessageId()));
                                 execute(botService.backToProducts(update, chatId, currentUser.getLanguage()));
+                            } else if (callbackQuery.getData().startsWith("$request")) {
+                                currentUser.setLastOperationTime(LocalDateTime.now());
+                                execute(botService.saveRequest(update, currentUser));
                             }
                         }
                     }

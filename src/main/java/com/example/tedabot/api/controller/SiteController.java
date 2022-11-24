@@ -22,11 +22,4 @@ public class SiteController {
         ApiResponse<?> response = siteService.add(request);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
-
-    @PatchMapping("/{id}")
-    public ResponseEntity<?> editView(@PathVariable Long id){
-        ApiResponse<?> response = siteService.editView(id);
-        return ResponseEntity.status(response.getStatus()).body(response);
-    }
-
 }
