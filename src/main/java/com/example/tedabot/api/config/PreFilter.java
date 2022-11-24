@@ -1,10 +1,8 @@
 package com.example.tedabot.api.config;
 
-import com.example.tedabot.api.dto.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -29,7 +27,7 @@ public class PreFilter extends OncePerRequestFilter {
         response.addHeader("Access-Control-Allow-Credentials", "true");
         String token = request.getHeader("Authorization");
         if (token == null || token.length() <= 8 || !token.substring(7).equals(botToken)) {
-            if (!request.getServletPath().equals("/api/site/contact")) {
+            if (!request.getServletPath().equals("/api/site/contact") && !request.getServletPath().equals("/api/site/add")) {
                 response.getWriter().print("{\"message\":\"Forbidden!\",\"success\":false,\"status\":403}");
                 response.setContentType("application/json");
                 if (!request.getMethod().equalsIgnoreCase("OPTIONS")) {
