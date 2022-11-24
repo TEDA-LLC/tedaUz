@@ -3,7 +3,7 @@ package com.example.tedabot.bot.service;
 import com.example.tedabot.bot.constant.ConstantEn;
 import com.example.tedabot.bot.constant.ConstantRu;
 import com.example.tedabot.bot.constant.ConstantUz;
-import com.example.tedabot.bot.constant.enums.Language;
+import com.example.tedabot.bot.model.enums.Language;
 import com.example.tedabot.bot.model.Category;
 import com.example.tedabot.bot.model.Product;
 import com.example.tedabot.bot.repository.CategoryRepository;

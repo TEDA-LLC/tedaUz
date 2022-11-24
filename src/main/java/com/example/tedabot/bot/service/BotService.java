@@ -2,7 +2,7 @@ package com.example.tedabot.bot.service;
 
 import com.example.tedabot.bot.constant.ConstantEn;
 import com.example.tedabot.bot.constant.ConstantUz;
-import com.example.tedabot.bot.constant.enums.Language;
+import com.example.tedabot.bot.model.enums.Language;
 import com.example.tedabot.bot.model.*;
 import com.example.tedabot.bot.repository.UserHistoryRepository;
 import com.example.tedabot.bot.repository.WordHistoryRepository;
