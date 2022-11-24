@@ -22,7 +22,7 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String email, phone;
+    private String name, phone;
 
     private String text;
 
