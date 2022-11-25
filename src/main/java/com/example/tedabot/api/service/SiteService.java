@@ -9,6 +9,7 @@ import com.example.tedabot.bot.repository.SiteHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -36,6 +37,40 @@ public class SiteService {
                 message("History created !").
                 status(201).
                 success(true).
+                build();
+    }
+
+    public ApiResponse<List<Request>> getRequest() {
+        List<Request> requests = requestRepository.findAll();
+        if (requests.isEmpty()) {
+            return ApiResponse.<List<Request>>builder().
+                    message("Requests are not found !").
+                    status(400).
+                    success(false).
+                    build();
+        }
+        return ApiResponse.<List<Request>>builder().
+                message("Requests here !").
+                status(200).
+                success(true).
+                data(requests).
+                build();
+    }
+
+    public ApiResponse<List<SiteHistory>> getSiteHistory() {
+        List<SiteHistory> siteHistories = siteHistoryRepository.findAll();
+        if (siteHistories.isEmpty()) {
+            return ApiResponse.<List<SiteHistory>>builder().
+                    message("History are not found !").
+                    status(400).
+                    success(false).
+                    build();
+        }
+        return ApiResponse.<List<SiteHistory>>builder().
+                message("History here !").
+                status(200).
+                success(true).
+                data(siteHistories).
                 build();
     }
 }

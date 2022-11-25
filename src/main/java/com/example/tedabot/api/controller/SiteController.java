@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author * Sunnatullayev Mahmudnazar *  * tedabot *  * 18:21 *
  */
@@ -17,6 +19,18 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class SiteController {
     private final SiteService siteService;
+
+    @GetMapping("/getRequest")
+    public ResponseEntity<?> getRequest(){
+       ApiResponse<List<Request>> response=  siteService.getRequest();
+       return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+    @GetMapping("/getHistory")
+    public ResponseEntity<?> getSiteHistory(){
+        ApiResponse<List<SiteHistory>> response=  siteService.getSiteHistory();
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
 
     @PostMapping
     public ResponseEntity<?> add(@RequestBody Request request){
