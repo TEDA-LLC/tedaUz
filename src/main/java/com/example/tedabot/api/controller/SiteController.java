@@ -1,6 +1,7 @@
 package com.example.tedabot.api.controller;
 
 import com.example.tedabot.api.dto.ApiResponse;
+import com.example.tedabot.api.dto.RequestDTO;
 import com.example.tedabot.bot.model.Request;
 import com.example.tedabot.api.service.SiteService;
 import com.example.tedabot.bot.model.SiteHistory;
@@ -33,14 +34,14 @@ public class SiteController {
     }
 
     @PostMapping
-    public ResponseEntity<?> add(@RequestBody Request request) {
-        ApiResponse<?> response = siteService.add(request);
+    public ResponseEntity<?> add(@RequestBody RequestDTO dto) {
+        ApiResponse<?> response = siteService.add(dto);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     @PostMapping("/history")
-    public ResponseEntity<?> main(@RequestBody SiteHistory history) {
-        ApiResponse<?> response = siteService.historyWriter(history);
+    public ResponseEntity<?> main(@RequestBody SiteHistory history, @RequestParam String phone) {
+        ApiResponse<?> response = siteService.historyWriter(history, phone);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 }

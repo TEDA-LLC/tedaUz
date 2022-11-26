@@ -362,7 +362,7 @@ public class BotService {
         Request request = Request.builder().
                 aboutProduct(productOptional.get().getNameEn()).
                 requestType(RequestType.BOT).
-                phone(currentUser.getPhone()).
+                user(currentUser).
                 build();
         requestRepository.save(request);
 

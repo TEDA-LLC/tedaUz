@@ -20,11 +20,12 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name, email, phone;
-
     private String aboutProduct, category;
 
     private boolean view = false;
+
+    @ManyToOne
+    private User user;
 
     @Enumerated(EnumType.STRING)
     private RequestType requestType;

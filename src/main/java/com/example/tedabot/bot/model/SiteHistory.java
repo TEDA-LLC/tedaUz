@@ -19,6 +19,8 @@ public class SiteHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String ipAddress, email, about;
+    private String ipAddress, about;
 
+    @ManyToOne
+    private User user;
 }
