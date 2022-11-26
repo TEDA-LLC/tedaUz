@@ -20,9 +20,9 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name, phone;
+    private String name, email, phone;
 
-    private String aboutProduct;
+    private String aboutProduct, category;
 
     private boolean view = false;
 

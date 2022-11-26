@@ -21,25 +21,25 @@ public class SiteController {
     private final SiteService siteService;
 
     @GetMapping("/getRequest")
-    public ResponseEntity<?> getRequest(){
-       ApiResponse<List<Request>> response=  siteService.getRequest();
-       return ResponseEntity.status(response.getStatus()).body(response);
+    public ResponseEntity<?> getRequest(@RequestParam(defaultValue = "0") int page) {
+        ApiResponse<List<Request>> response = siteService.getRequest();
+        return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     @GetMapping("/getHistory")
-    public ResponseEntity<?> getSiteHistory(){
-        ApiResponse<List<SiteHistory>> response=  siteService.getSiteHistory();
+    public ResponseEntity<?> getSiteHistory(@RequestParam(defaultValue = "0") int page) {
+        ApiResponse<List<SiteHistory>> response = siteService.getSiteHistory();
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     @PostMapping
-    public ResponseEntity<?> add(@RequestBody Request request){
+    public ResponseEntity<?> add(@RequestBody Request request) {
         ApiResponse<?> response = siteService.add(request);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     @PostMapping("/history")
-    public ResponseEntity<?>main(@RequestBody SiteHistory history){
+    public ResponseEntity<?> main(@RequestBody SiteHistory history) {
         ApiResponse<?> response = siteService.historyWriter(history);
         return ResponseEntity.status(response.getStatus()).body(response);
     }

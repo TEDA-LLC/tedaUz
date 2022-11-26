@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Mansurov Abdusamad  *  24.11.2022  *  10:28   *  tedaUz
@@ -28,6 +27,7 @@ public class SiteService {
                 message("Request was added !").
                 status(201).
                 success(true).
+                data(save).
                 build();
     }
 
