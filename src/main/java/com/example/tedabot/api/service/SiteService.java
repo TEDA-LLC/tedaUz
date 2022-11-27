@@ -41,6 +41,8 @@ public class SiteService {
                 user.setPhone(dto.getPhone());
                 user.setFullName(dto.getName());
                 user.setCount(1);
+                if (dto.getEmail() != null)
+                    user.setEmail(dto.getEmail());
                 User save = userRepository.save(user);
                 request.setUser(save);
             }
@@ -58,7 +60,7 @@ public class SiteService {
 
     public ApiResponse<?> historyWriter(SiteHistory history, String phone) {
 
-        if (phone != null){
+        if (phone != null) {
             Optional<User> userOptional = userRepository.findByPhone(phone);
             if (userOptional.isPresent()) {
                 User user = userOptional.get();
