@@ -91,25 +91,42 @@ public class BotService {
 
     }
 
-    public SendPhoto aboutUs(String chatId, Language language) {
-        SendPhoto sendPhoto = new SendPhoto();
-        sendPhoto.setParseMode("HTML");
+//    public SendPhoto aboutUs(String chatId, Language language) {
+//        SendPhoto sendPhoto = new SendPhoto();
+//        sendPhoto.setParseMode("HTML");
+//
+//        if (language.equals(Language.UZB)) {
+//            sendPhoto.setCaption(ConstantUz.ABOUT_US);
+//        } else if (language.equals(Language.ENG)) {
+//            sendPhoto.setCaption(ConstantEn.ABOUT_US);
+//        } else {
+//            sendPhoto.setCaption(ConstantRu.ABOUT_US);
+//        }
+//        File logo = new File("src/main/resources/img/tedaLOGO.jpg");
+//        InputFile inputFile = new InputFile(logo);
+//
+//        sendPhoto.setPhoto(inputFile);
+//        sendPhoto.setChatId(chatId);
+//        sendPhoto.setReplyMarkup(buttonService.menuButton(language));
+//
+//        return sendPhoto;
+//    }
 
-        if (language.equals(Language.UZB)) {
-            sendPhoto.setCaption(ConstantUz.ABOUT_US);
-        } else if (language.equals(Language.ENG)) {
-            sendPhoto.setCaption(ConstantEn.ABOUT_US);
-        } else {
-            sendPhoto.setCaption(ConstantRu.ABOUT_US);
-        }
-        File logo = new File("src/main/resources/img/tedaLOGO.jpg");
-        InputFile inputFile = new InputFile(logo);
+    public SendMessage aboutUs(String chatId, Language language){
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setParseMode("HTML");
+        if (language.equals(Language.UZB))
+            sendMessage.setText(ConstantUz.ABOUT_US);
+        else if (language.equals(Language.RUS))
+            sendMessage.setText(ConstantRu.ABOUT_US);
+        else sendMessage.setText(ConstantEn.ABOUT_US);
 
-        sendPhoto.setPhoto(inputFile);
-        sendPhoto.setChatId(chatId);
-        sendPhoto.setReplyMarkup(buttonService.menuButton(language));
+        sendMessage.setChatId(chatId);
 
-        return sendPhoto;
+        sendMessage.setReplyMarkup(buttonService.menuButton(language));
+
+        return sendMessage;
+
     }
 
     public SendMessage toAdmin(String chatId, Language language) {
