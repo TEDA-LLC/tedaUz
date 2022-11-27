@@ -23,13 +23,13 @@ public interface ConstantRu {
             "На этапе цифровой экономики оцифровка услуг многих предпринимателей и предложение их по доступной цене.\n" +
             "\n" +
             "\uD83C\uDF10 <a href=\"https://teda.uz/\"> teda.uz</a>\n" +
-            "☎ <b>+998 (97) 450 72 24</b>\n" +
+            "☎ <b>+998 ((94) 708 04 28</b>\n" +
             "\uD83D\uDCE7 <b>tedacompanyinfo@gmail.com</b>\n" +
             "\uD83D\uDCCD <b>Г. Ташкент, Дустлик метро, Тошкент 700000</b>\n" +
             "\uD83D\uDCF8 <a href=\"https://instagram.com/teda.uz?igshid=YmMyMTA2M2Y=\"> @teda_uz</a>\n";
     String TO_ADMIN = "Оставьте свой вопрос нашему менеджеру и \n" +
             "наш менеджер ответит вам в ближайшее время.\n" +
-            "\uD83D\uDC64 Менеджер : @smahmudnazar\n";
+            "\uD83D\uDC64 Менеджер : @CEO_777\n";
     String LANGUAGE = "Изменить язык \uD83C\uDDF7\uD83C\uDDFA/\uD83C\uDDFA\uD83C\uDDFF/\uD83C\uDDEC\uD83C\uDDE7";
     String PHONE = "Изменить номер \uD83D\uDCDE";
     String BACK = "Назад ⬅";
