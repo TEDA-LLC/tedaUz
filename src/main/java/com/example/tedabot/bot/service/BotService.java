@@ -35,6 +35,7 @@ public class BotService {
     private final ProductRepository productRepository;
     private final WordHistoryRepository wordHistoryRepository;
     private final RequestRepository requestRepository;
+    private final InfoRepository infoRepository;
 
     public SendMessage start(String chatId) {
         return SendMessage.builder()
