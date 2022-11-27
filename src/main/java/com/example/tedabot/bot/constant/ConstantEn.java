@@ -24,13 +24,13 @@ public interface ConstantEn {
             "At the stage of the digital economy, the services of many entrepreneurs are being digitalized and offered at an affordable price.\n" +
             "\n" +
             "\uD83C\uDF10 <a href=\"https://teda.uz/\"> teda.uz</a>\n" +
-            "☎ <b>+998 (97) 450 72 24</b>\n" +
+            "☎ <b>+998 (94) 708 04 28</b>\n" +
             "\uD83D\uDCE7 <b>tedacompanyinfo@gmail.com</b>\n" +
             "\uD83D\uDCCD <b>Tashkent, Dustlik metro station, Tashkent 700000</b>\n" +
             "\uD83D\uDCF8 <a href=\"https://instagram.com/teda.uz?igshid=YmMyMTA2M2Y=\"> @teda_uz</a>\n";
     String TO_ADMIN = "Leave your question to our manager and\n" +
             "our manager will answer you as soon as possible.\n" +
-            "\uD83D\uDC64 Manager : @smahmudnazar\n";
+            "\uD83D\uDC64 Manager : @CEO_777\n";
     String LANGUAGE = "Change language \uD83C\uDDF7\uD83C\uDDFA/\uD83C\uDDFA\uD83C\uDDFF/\uD83C\uDDEC\uD83C\uDDE7";
     String PHONE = "Change number \uD83D\uDCDE";
     String BACK = "Back ⬅";
