@@ -45,8 +45,9 @@ public class SiteService {
                     user.setEmail(dto.getEmail());
                 User save = userRepository.save(user);
                 request.setUser(save);
+            }else {
+                request.setUser(userOptional.get());
             }
-            request.setUser(userOptional.get());
         }
 
         Request save = requestRepository.save(request);
