@@ -36,5 +36,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Language language;
 
+    private int count = 0;
+
     private LocalDateTime registeredTime,lastOperationTime;
 }

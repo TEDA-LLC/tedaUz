@@ -1,12 +1,15 @@
 package com.example.tedabot.api.controller;
 
 import com.example.tedabot.api.dto.ApiResponse;
+import com.example.tedabot.api.dto.RequestDTO;
 import com.example.tedabot.bot.model.Request;
 import com.example.tedabot.api.service.SiteService;
 import com.example.tedabot.bot.model.SiteHistory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author * Sunnatullayev Mahmudnazar *  * tedabot *  * 18:21 *
@@ -18,15 +21,27 @@ import org.springframework.web.bind.annotation.*;
 public class SiteController {
     private final SiteService siteService;
 
+    @GetMapping("/getRequest")
+    public ResponseEntity<?> getRequest(@RequestParam(defaultValue = "0") int page) {
+        ApiResponse<List<Request>> response = siteService.getRequest();
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+    @GetMapping("/getHistory")
+    public ResponseEntity<?> getSiteHistory(@RequestParam(defaultValue = "0") int page) {
+        ApiResponse<List<SiteHistory>> response = siteService.getSiteHistory();
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
     @PostMapping
-    public ResponseEntity<?> add(@RequestBody Request request){
-        ApiResponse<?> response = siteService.add(request);
+    public ResponseEntity<?> add(@RequestBody RequestDTO dto) {
+        ApiResponse<?> response = siteService.add(dto);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     @PostMapping("/history")
-    public ResponseEntity<?>main(@RequestBody SiteHistory history){
-        ApiResponse<?> response = siteService.historyWriter(history);
+    public ResponseEntity<?> main(@RequestBody SiteHistory history, @RequestParam String phone) {
+        ApiResponse<?> response = siteService.historyWriter(history, phone);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 }
