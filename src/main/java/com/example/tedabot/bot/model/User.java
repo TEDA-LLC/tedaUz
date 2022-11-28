@@ -24,7 +24,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username, phone, fullName;
+    private String username, phone, fullName, email;
 
     @Column(unique = true)
     private String chatId;
