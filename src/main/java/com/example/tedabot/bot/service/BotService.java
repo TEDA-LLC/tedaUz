@@ -18,7 +18,6 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +34,6 @@ public class BotService {
     private final ProductRepository productRepository;
     private final WordHistoryRepository wordHistoryRepository;
     private final RequestRepository requestRepository;
-    private final InfoRepository infoRepository;
 
     public SendMessage start(String chatId) {
         return SendMessage.builder()
@@ -91,27 +89,6 @@ public class BotService {
         }
 
     }
-
-//    public SendPhoto aboutUs(String chatId, Language language) {
-//        SendPhoto sendPhoto = new SendPhoto();
-//        sendPhoto.setParseMode("HTML");
-//
-//        if (language.equals(Language.UZB)) {
-//            sendPhoto.setCaption(ConstantUz.ABOUT_US);
-//        } else if (language.equals(Language.ENG)) {
-//            sendPhoto.setCaption(ConstantEn.ABOUT_US);
-//        } else {
-//            sendPhoto.setCaption(ConstantRu.ABOUT_US);
-//        }
-//        File logo = new File("src/main/resources/img/tedaLOGO.jpg");
-//        InputFile inputFile = new InputFile(logo);
-//
-//        sendPhoto.setPhoto(inputFile);
-//        sendPhoto.setChatId(chatId);
-//        sendPhoto.setReplyMarkup(buttonService.menuButton(language));
-//
-//        return sendPhoto;
-//    }
 
     public SendMessage aboutUs(String chatId, Language language){
         SendMessage sendMessage = new SendMessage();

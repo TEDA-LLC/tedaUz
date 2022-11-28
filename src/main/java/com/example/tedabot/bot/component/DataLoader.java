@@ -20,14 +20,14 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) {
         if (mode.equals("always")) {
             Category service = Category.builder()
-                    .nameUz("Xizmatlar⚙️")
-                    .nameRu("Услуги⚙️")
-                    .nameEn("Services⚙️")
+                    .nameUz("Xizmatlar \uD83D\uDEE0")
+                    .nameRu("Услуги \uD83D\uDEE0")
+                    .nameEn("Services \uD83D\uDEE0")
                     .build();
             Category system = Category.builder()
-                    .nameUz("Tizimlar\uD83D\uDCBB")
-                    .nameRu("Системы\uD83D\uDCBB")
-                    .nameEn("Systems\uD83D\uDCBB")
+                    .nameUz("Tizimlar \uD83D\uDCBB")
+                    .nameRu("Системы \uD83D\uDCBB")
+                    .nameEn("Systems \uD83D\uDCBB")
                     .build();
             categoryRepository.save(service);
             categoryRepository.save(system);

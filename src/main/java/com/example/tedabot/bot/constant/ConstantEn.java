@@ -13,6 +13,7 @@ public interface ConstantEn {
             "Send number using <Share contact> button";
     String ABOUT_US_BUTTON = "About us \uD83D\uDD0E";
     String SERVICES_BUTTON = "Services \uD83D\uDEE0";
+    String SYSTEMS_BUTTON = "Systems \uD83D\uDCBB";
     String SETTINGS_BUTTON = "Settings ⚙";
     String TO_ADMIN_BUTTON = "Connection \uD83D\uDC64";
     String WELCOME = "You have successfully registered ! \n" +

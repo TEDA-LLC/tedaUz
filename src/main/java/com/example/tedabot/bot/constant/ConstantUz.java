@@ -12,7 +12,8 @@ public interface ConstantUz {
             " \n" +
             "<RAQAMNI JO'NATISH> tugmasi yordamida raqamni yuboring";
     String ABOUT_US_BUTTON = "Biz haqimizda \uD83D\uDD0E";
-    String SERVICES_BUTTON = "Xizmat turlari \uD83D\uDEE0";
+    String SERVICES_BUTTON = "Xizmatlar \uD83D\uDEE0";
+    String SYSTEMS_BUTTON = "Tizimlar \uD83D\uDCBB";
     String SETTINGS_BUTTON = "Sozlamalar ⚙";
     String TO_ADMIN_BUTTON = "Bog'lanish \uD83D\uDC64";
     String WELCOME = "Bo'timizdan muvafaqiyatli ro'yxatdan o'tdingiz! \n" +
@@ -40,6 +41,6 @@ public interface ConstantUz {
     String OK = "\uD83C\uDD97";
     String IN_DETAIL = "Batafsil\uD83D\uDD0E";
     String REQUEST = "So'rov\uD83D\uDCCC";
-    String RESPONSE_FOR_REQUEST= "Murojaatingiz muvafaqiyatli qabul qilindi.✅\n" +
+    String RESPONSE_FOR_REQUEST = "Murojaatingiz muvafaqiyatli qabul qilindi.✅\n" +
             "Tez orada menejerimiz aloqaga chiqadi.";
 }

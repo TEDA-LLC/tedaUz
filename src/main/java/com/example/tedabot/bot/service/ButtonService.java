@@ -43,27 +43,35 @@ public class ButtonService {
         KeyboardButton button1 = new KeyboardButton();
         KeyboardButton button2 = new KeyboardButton();
         KeyboardButton button3 = new KeyboardButton();
+        KeyboardButton button4 = new KeyboardButton();
 
         if (language.equals(Language.UZB)) {
-            button.setText(ConstantUz.ABOUT_US_BUTTON);
-            button1.setText(ConstantUz.SERVICES_BUTTON);
+            button.setText(ConstantUz.SERVICES_BUTTON);
+            button1.setText(ConstantUz.SYSTEMS_BUTTON);
+
             button2.setText(ConstantUz.SETTINGS_BUTTON);
-            button3.setText(ConstantUz.TO_ADMIN_BUTTON);
+            button3.setText(ConstantUz.ABOUT_US_BUTTON);
+            button4.setText(ConstantUz.TO_ADMIN_BUTTON);
         } else if (language.equals(Language.ENG)) {
-            button.setText(ConstantEn.ABOUT_US_BUTTON);
-            button1.setText(ConstantEn.SERVICES_BUTTON);
+            button.setText(ConstantEn.SERVICES_BUTTON);
+            button1.setText(ConstantEn.SYSTEMS_BUTTON);
+
             button2.setText(ConstantEn.SETTINGS_BUTTON);
-            button3.setText(ConstantEn.TO_ADMIN_BUTTON);
+            button3.setText(ConstantEn.ABOUT_US_BUTTON);
+            button4.setText(ConstantEn.TO_ADMIN_BUTTON);
         } else {
-            button.setText(ConstantRu.ABOUT_US_BUTTON);
-            button1.setText(ConstantRu.SERVICES_BUTTON);
+            button.setText(ConstantRu.SERVICES_BUTTON);
+            button1.setText(ConstantRu.SYSTEMS_BUTTON);
+
             button2.setText(ConstantRu.SETTINGS_BUTTON);
-            button3.setText(ConstantRu.TO_ADMIN_BUTTON);
+            button3.setText(ConstantRu.ABOUT_US_BUTTON);
+            button4.setText(ConstantRu.TO_ADMIN_BUTTON);
         }
         row.add(button);
         row.add(button1);
         row1.add(button2);
         row1.add(button3);
+        row1.add(button4);
         rowList.add(row);
         rowList.add(row1);
         replyKeyboardMarkup.setKeyboard(rowList);

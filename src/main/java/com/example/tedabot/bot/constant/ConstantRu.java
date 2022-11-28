@@ -13,6 +13,7 @@ public interface ConstantRu {
             "Отправить номер с помощью кнопки <ОТПРАВИТЬ КОНТАКТ>";
     String ABOUT_US_BUTTON = "О нас \uD83D\uDD0E";
     String SERVICES_BUTTON = "Услуги \uD83D\uDEE0";
+    String SYSTEMS_BUTTON = "Системы \uD83D\uDCBB";
     String SETTINGS_BUTTON = "Настройки ⚙";
     String TO_ADMIN_BUTTON = "Связь \uD83D\uDC64";
     String WELCOME = "Вы успешно зарегистрировались ! \n" +
