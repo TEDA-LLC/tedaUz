@@ -12,6 +12,7 @@ import com.example.tedabot.bot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,13 +41,18 @@ public class SiteService {
                 User user = new User();
                 user.setPhone(dto.getPhone());
                 user.setFullName(dto.getName());
+                user.setRegisteredTime(LocalDateTime.now());
+                user.setLastOperationTime(LocalDateTime.now());
                 user.setCount(1);
                 if (dto.getEmail() != null)
                     user.setEmail(dto.getEmail());
                 User save = userRepository.save(user);
                 request.setUser(save);
             }else {
-                request.setUser(userOptional.get());
+                User user = userOptional.get();
+                user.setLastOperationTime(LocalDateTime.now());
+                User save = userRepository.save(user);
+                request.setUser(save);
             }
         }
 
@@ -65,6 +71,7 @@ public class SiteService {
             Optional<User> userOptional = userRepository.findByPhone(phone);
             if (userOptional.isPresent()) {
                 User user = userOptional.get();
+                user.setLastOperationTime(LocalDateTime.now());
                 user.setCount(user.getCount() + 1);
                 history.setUser(user);
                 userRepository.save(user);
