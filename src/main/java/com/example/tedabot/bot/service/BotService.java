@@ -226,8 +226,8 @@ public class BotService {
         }
     }
 
-    public Long getCategoryId(String message) {
-        Optional<Category> categoryOptional = categoryRepository.findByNameRuOrNameUzOrNameEn(message, message, message);
+    public Long getCategoryIdByName(String message) {
+        Optional<Category> categoryOptional = categoryRepository.findByNameUzOrNameRuOrNameEn(message, message, message);
         if (categoryOptional.isEmpty()) return null;
 
         else return categoryOptional.get().getId();

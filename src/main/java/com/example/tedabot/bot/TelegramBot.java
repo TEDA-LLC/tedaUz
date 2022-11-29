@@ -111,10 +111,15 @@ public class TelegramBot extends TelegramLongPollingBot {
                                         userRepository.save(currentUser);
                                         execute(botService.settings(chatId, currentUser.getLanguage()));
                                     } else if (message.getText().equals(ConstantUz.SERVICES_BUTTON) || message.getText().equals(ConstantRu.SERVICES_BUTTON) || message.getText().equals(ConstantEn.SERVICES_BUTTON)) {
-                                        currentUser.setState(State.SERVICE);
-                                        currentUser.setLastOperationTime(LocalDateTime.now());
-                                        userRepository.save(currentUser);
-                                        execute(botService.services(chatId, currentUser.getLanguage()));
+                                        Long categoryId = botService.getCategoryIdByName(message.getText());
+                                        if (categoryId != null) {
+                                            execute(botService.products(categoryId, currentUser.getLanguage(), chatId));
+                                        } else if (message.getText().equals(ConstantUz.BACK) || message.getText().equals(ConstantRu.BACK) || message.getText().equals(ConstantEn.BACK)) {
+                                            currentUser.setState(State.CONTACT);
+                                            currentUser.setLastOperationTime(LocalDateTime.now());
+                                            userRepository.save(currentUser);
+                                            execute(botService.ok(chatId, currentUser.getLanguage()));
+                                        }
                                     }else {
                                         botService.storyWriter(currentUser, message);
                                     }
@@ -155,17 +160,17 @@ public class TelegramBot extends TelegramLongPollingBot {
                                     }
                                     execute(botService.edited(chatId, currentUser.getLanguage()));
                                 }
-                                case SERVICE -> {
-                                    Long categoryId = botService.getCategoryId(message.getText());
-                                    if (categoryId != null) {
-                                        execute(botService.products(categoryId, currentUser.getLanguage(), chatId));
-                                    } else if (message.getText().equals(ConstantUz.BACK) || message.getText().equals(ConstantRu.BACK) || message.getText().equals(ConstantEn.BACK)) {
-                                        currentUser.setState(State.CONTACT);
-                                        currentUser.setLastOperationTime(LocalDateTime.now());
-                                        userRepository.save(currentUser);
-                                        execute(botService.ok(chatId, currentUser.getLanguage()));
-                                    } else botService.storyWriter(currentUser, message);
-                                }
+//                                case SERVICE -> {
+//                                    Long categoryId = botService.getCategoryId(message.getText());
+//                                    if (categoryId != null) {
+//                                        execute(botService.products(categoryId, currentUser.getLanguage(), chatId));
+//                                    } else if (message.getText().equals(ConstantUz.BACK) || message.getText().equals(ConstantRu.BACK) || message.getText().equals(ConstantEn.BACK)) {
+//                                        currentUser.setState(State.CONTACT);
+//                                        currentUser.setLastOperationTime(LocalDateTime.now());
+//                                        userRepository.save(currentUser);
+//                                        execute(botService.ok(chatId, currentUser.getLanguage()));
+//                                    } else botService.storyWriter(currentUser, message);
+//                                }
                                 default -> botService.storyWriter(currentUser, message);
                             }
                         }
