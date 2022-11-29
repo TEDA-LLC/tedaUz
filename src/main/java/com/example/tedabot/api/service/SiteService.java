@@ -65,7 +65,7 @@ public class SiteService {
                 build();
     }
 
-    public ApiResponse<?> historyWriter(SiteHistory history, String phone) {
+    public ApiResponse<?> historyWriter(SiteHistory history, String phone, String email) {
 
         if (phone != null) {
             Optional<User> userOptional = userRepository.findByPhone(phone);
@@ -73,6 +73,9 @@ public class SiteService {
                 User user = userOptional.get();
                 user.setLastOperationTime(LocalDateTime.now());
                 user.setCount(user.getCount() + 1);
+                if (user.getEmail() == null) {
+                    user.setEmail(email);
+                }
                 history.setUser(user);
                 userRepository.save(user);
             }

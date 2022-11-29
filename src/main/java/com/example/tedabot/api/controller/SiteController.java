@@ -40,8 +40,8 @@ public class SiteController {
     }
 
     @PostMapping("/history")
-    public ResponseEntity<?> main(@RequestBody SiteHistory history, @RequestParam String phone) {
-        ApiResponse<?> response = siteService.historyWriter(history, phone);
+    public ResponseEntity<?> main(@RequestBody SiteHistory history, @RequestParam String phone, @RequestParam String email) {
+        ApiResponse<?> response = siteService.historyWriter(history, phone, email);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 }
