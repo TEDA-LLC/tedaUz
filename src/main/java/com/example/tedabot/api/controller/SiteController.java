@@ -21,14 +21,14 @@ import java.util.List;
 public class SiteController {
     private final SiteService siteService;
 
-    @GetMapping("/getRequest")
+    @GetMapping("/request")
     public ResponseEntity<?> getRequest(@RequestParam(defaultValue = "0") int page) {
         ApiResponse<List<Request>> response = siteService.getRequest();
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
-    @GetMapping("/getHistory")
-    public ResponseEntity<?> getSiteHistory(@RequestParam(defaultValue = "0") int page) {
+    @GetMapping("/history")
+    public ResponseEntity<?> getHistory(@RequestParam(defaultValue = "0") int page) {
         ApiResponse<List<SiteHistory>> response = siteService.getSiteHistory();
         return ResponseEntity.status(response.getStatus()).body(response);
     }

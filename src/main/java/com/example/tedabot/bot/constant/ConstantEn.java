@@ -16,8 +16,7 @@ public interface ConstantEn {
     String SYSTEMS_BUTTON = "Systems \uD83D\uDCBB";
     String SETTINGS_BUTTON = "Settings ⚙";
     String TO_ADMIN_BUTTON = "Connection \uD83D\uDC64";
-    String WELCOME = "You have successfully registered ! \n" +
-            "Main menu : ";
+    String MENU = "Main menu : ";
     String ABOUT_US = "<b>TEDA LLC \n \n</b>" +
             "Improving the life of the people of Uzbekistan, which is developing today." +
             "\n" +

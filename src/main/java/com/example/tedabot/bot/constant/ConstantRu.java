@@ -16,8 +16,7 @@ public interface ConstantRu {
     String SYSTEMS_BUTTON = "Системы \uD83D\uDCBB";
     String SETTINGS_BUTTON = "Настройки ⚙";
     String TO_ADMIN_BUTTON = "Связь \uD83D\uDC64";
-    String WELCOME = "Вы успешно зарегистрировались ! \n" +
-            "Главное меню : ";
+    String MENU = "Главное меню : ";
     String ABOUT_US = "<b>TEDA LLC \n \n</b>" +
             "Улучшение жизни народа Узбекистана, которая развивается сегодня." +
             "\n" +

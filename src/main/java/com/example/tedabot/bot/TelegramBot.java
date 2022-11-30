@@ -110,8 +110,10 @@ public class TelegramBot extends TelegramLongPollingBot {
                                         currentUser.setLastOperationTime(LocalDateTime.now());
                                         userRepository.save(currentUser);
                                         execute(botService.settings(chatId, currentUser.getLanguage()));
-                                    } else if (message.getText().equals(ConstantUz.SERVICES_BUTTON) || message.getText().equals(ConstantRu.SERVICES_BUTTON) || message.getText().equals(ConstantEn.SERVICES_BUTTON)) {
-                                        Long categoryId = botService.getCategoryIdByName(message.getText());
+//                                    } else if ((message.getText().equals(ConstantUz.SERVICES_BUTTON) || message.getText().equals(ConstantRu.SERVICES_BUTTON) || message.getText().equals(ConstantEn.SERVICES_BUTTON))||
+//                                            (message.getText().equals(ConstantUz.SYSTEMS_BUTTON) || message.getText().equals(ConstantRu.SYSTEMS_BUTTON) || message.getText().equals(ConstantEn.SYSTEMS_BUTTON))) {
+                                    }else if ((message.getText().matches("("+ConstantUz.SYSTEMS_BUTTON+"|"+ConstantRu.SYSTEMS_BUTTON+"|"+ConstantEn.SYSTEMS_BUTTON+"|"+ConstantUz.SERVICES_BUTTON+"|"+ConstantRu.SERVICES_BUTTON+"|"+ConstantEn.SERVICES_BUTTON+")"))){
+                                            Long categoryId = botService.getCategoryIdByName(message.getText());
                                         if (categoryId != null) {
                                             execute(botService.products(categoryId, currentUser.getLanguage(), chatId));
                                         } else if (message.getText().equals(ConstantUz.BACK) || message.getText().equals(ConstantRu.BACK) || message.getText().equals(ConstantEn.BACK)) {
@@ -182,7 +184,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                                 user.setState(State.CONTACT);
                                 user.setLastOperationTime(LocalDateTime.now());
                                 userRepository.save(user);
-                                execute(botService.contact(chatId, user.getLanguage()));
+                                execute(botService.menu(chatId, user.getLanguage()));
                             }
                             case SETTINGS -> {
                                 user.setPhone(message.getContact().getPhoneNumber());
@@ -198,10 +200,10 @@ public class TelegramBot extends TelegramLongPollingBot {
                     Optional<User> optionalUser = userRepository.findByChatId(chatId);
                     currentUser = optionalUser.get();
                     switch (currentUser.getState()) {
-                        case SERVICE -> {
+                        case CONTACT -> {
                             if (callbackQuery.getData().startsWith("$back")) {
                                 execute(botService.deleteMessage(chatId, callbackQuery.getMessage().getMessageId()));
-                                execute(botService.services(chatId, currentUser.getLanguage()));
+                                execute(botService.menu(chatId, currentUser.getLanguage()));
                             } else {
                                 currentUser.setState(State.PRODUCT);
                                 currentUser.setLastOperationTime(LocalDateTime.now());
@@ -212,7 +214,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                         }
                         case PRODUCT -> {
                             if (callbackQuery.getData().startsWith("$back")) {
-                                currentUser.setState(State.SERVICE);
+                                currentUser.setState(State.CONTACT);
                                 currentUser.setLastOperationTime(LocalDateTime.now());
                                 userRepository.save(currentUser);
                                 execute(botService.deleteMessage(chatId, callbackQuery.getMessage().getMessageId()));

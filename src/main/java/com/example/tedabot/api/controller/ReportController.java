@@ -20,7 +20,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReportController {
     private final ReportService reportService;
-
     @GetMapping("/auth")
     public ResponseEntity<?> checkAuth(){
         return ResponseEntity.ok().build();

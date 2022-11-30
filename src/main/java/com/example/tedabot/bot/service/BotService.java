@@ -66,28 +66,26 @@ public class BotService {
                 .replyMarkup(buttonService.contact(language))
                 .build();
     }
-
-    public SendMessage contact(String chatId, Language language) {
+    public SendMessage menu(String chatId, Language language) {
         if (language.equals(Language.UZB)) {
             return SendMessage.builder()
-                    .text(ConstantUz.WELCOME)
+                    .text(ConstantUz.MENU)
                     .chatId(chatId)
                     .replyMarkup(buttonService.menuButton(language))
                     .build();
         } else if (language.equals(Language.ENG)) {
             return SendMessage.builder()
-                    .text(ConstantEn.WELCOME)
+                    .text(ConstantEn.MENU)
                     .chatId(chatId)
                     .replyMarkup(buttonService.menuButton(language))
                     .build();
         } else {
             return SendMessage.builder()
-                    .text(ConstantRu.WELCOME)
+                    .text(ConstantRu.MENU)
                     .chatId(chatId)
                     .replyMarkup(buttonService.menuButton(language))
                     .build();
         }
-
     }
 
     public SendMessage aboutUs(String chatId, Language language){

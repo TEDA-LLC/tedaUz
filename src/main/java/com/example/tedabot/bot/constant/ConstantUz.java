@@ -16,8 +16,7 @@ public interface ConstantUz {
     String SYSTEMS_BUTTON = "Tizimlar \uD83D\uDCBB";
     String SETTINGS_BUTTON = "Sozlamalar ⚙";
     String TO_ADMIN_BUTTON = "Bog'lanish \uD83D\uDC64";
-    String WELCOME = "Bo'timizdan muvafaqiyatli ro'yxatdan o'tdingiz! \n" +
-            "Asosiy menyu : ";
+    String MENU = "Asosiy menyu : ";
     String ABOUT_US = "<b>TEDA LLC \n \n</b>" +
             "Hozirgi kunda rivojlanib borayotgan O'zbekiston xalqining hayotini yaxshilash." +
             "\n" +
