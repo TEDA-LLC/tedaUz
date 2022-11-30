@@ -20,7 +20,7 @@ spring:
       max-file-size: 5MB
 telegram:
   bot:
-    username: Uzb_Namaz_Times_bot
-    token: 5082104093:AAE0li1xLe-TzHeUHGQ7l5kOps628wnXI-k
-#   username: tedauz_bot
-#   token: 5432072116:AAHHjQHDP-IBzzQdiRyzHhqValr5tKQ6tlI
+#    username: Uzb_Namaz_Times_bot
+#    token: 5082104093:AAE0li1xLe-TzHeUHGQ7l5kOps628wnXI-k
+   username: tedauz_bot
+   token: 5432072116:AAHHjQHDP-IBzzQdiRyzHhqValr5tKQ6tlI
