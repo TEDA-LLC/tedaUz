@@ -38,5 +38,6 @@ public class User {
 
     private int count = 0;
 
-    private LocalDateTime registeredTime,lastOperationTime;
+    private LocalDateTime registeredTime = LocalDateTime.now();
+    private LocalDateTime lastOperationTime;
 }
