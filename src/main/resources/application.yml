@@ -2,7 +2,7 @@ server:
   port: 70
 spring:
   datasource:
-    url: jdbc:postgresql://185.185.80.245/tedauzbot
+    url: jdbc:postgresql://localhost:5432/tedauzbot
     username: admin
     password: turgun1970
     driver-class-name: org.postgresql.Driver
