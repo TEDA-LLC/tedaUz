@@ -66,6 +66,7 @@ public class BotService {
                 .replyMarkup(buttonService.contact(language))
                 .build();
     }
+
     public SendMessage menu(String chatId, Language language) {
         if (language.equals(Language.UZB)) {
             return SendMessage.builder()
@@ -88,7 +89,7 @@ public class BotService {
         }
     }
 
-    public SendMessage aboutUs(String chatId, Language language){
+    public SendMessage aboutUs(String chatId, Language language) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setParseMode("HTML");
         if (language.equals(Language.UZB))
@@ -357,21 +358,24 @@ public class BotService {
                 requestType(RequestType.BOT).
                 user(currentUser).
                 build();
-        requestRepository.save(request);
+        Request savedRequest = requestRepository.save(request);
 
         if (currentUser.getLanguage().equals(Language.UZB)) {
             return SendMessage.builder()
-                    .text(ConstantUz.RESPONSE_FOR_REQUEST)
+                    .text(ConstantUz.RESPONSE_FOR_REQUEST + "\n" +
+                            "Sizning murojaat raqamingiz: " + savedRequest.getId())
                     .chatId(update.getCallbackQuery().getMessage().getChatId())
                     .build();
         } else if (currentUser.getLanguage().equals(Language.ENG)) {
             return SendMessage.builder()
-                    .text(ConstantEn.RESPONSE_FOR_REQUEST)
+                    .text(ConstantEn.RESPONSE_FOR_REQUEST + "\n" +
+                            "Your reference number: " + savedRequest.getId())
                     .chatId(update.getCallbackQuery().getMessage().getChatId())
                     .build();
         } else {
             return SendMessage.builder()
-                    .text(ConstantRu.RESPONSE_FOR_REQUEST)
+                    .text(ConstantRu.RESPONSE_FOR_REQUEST + "\n" +
+                            "Ваш номер заявки: " + savedRequest.getId())
                     .chatId(update.getCallbackQuery().getMessage().getChatId())
                     .build();
         }
