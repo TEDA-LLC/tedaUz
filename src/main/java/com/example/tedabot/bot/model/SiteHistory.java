@@ -3,6 +3,7 @@ package com.example.tedabot.bot.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  * @author * Sunnatullayev Mahmudnazar *  * tedabot *  * 15:31 *
@@ -20,6 +21,8 @@ public class SiteHistory {
     private Long id;
 
     private String ipAddress, about;
+
+    private LocalDateTime dateTime = LocalDateTime.now();
 
     @ManyToOne
     private User user;

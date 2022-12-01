@@ -4,6 +4,7 @@ import com.example.tedabot.bot.model.enums.RequestType;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  * @author Mansurov Abdusamad  *  24.11.2022  *  10:22   *  tedaUz
@@ -26,6 +27,8 @@ public class Request {
 
     @ManyToOne
     private User user;
+
+    private LocalDateTime dateTime = LocalDateTime.now();
 
     @Enumerated(EnumType.STRING)
     private RequestType requestType;
