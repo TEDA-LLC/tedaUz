@@ -4,6 +4,7 @@ import com.example.tedabot.bot.constant.ConstantEn;
 import com.example.tedabot.bot.constant.ConstantRu;
 import com.example.tedabot.bot.constant.ConstantUz;
 import com.example.tedabot.bot.model.enums.Language;
+import com.example.tedabot.bot.model.enums.RegistredType;
 import com.example.tedabot.bot.model.enums.State;
 import com.example.tedabot.bot.model.User;
 import com.example.tedabot.bot.repository.UserRepository;
@@ -67,6 +68,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                             } else {
                                 currentUser = new User();
                                 currentUser.setChatId(String.valueOf(update.getMessage().getChatId()));
+                                currentUser.setRegistredType(RegistredType.BOT);
                                 currentUser.setFullName(message.getFrom().getFirstName());
                                 currentUser.setUsername(message.getFrom().getUserName());
                                 currentUser.setState(State.START);

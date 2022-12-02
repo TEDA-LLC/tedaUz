@@ -22,13 +22,13 @@ public class SiteController {
     private final SiteService siteService;
 
     @GetMapping("/request")
-    public ResponseEntity<?> getRequest(@RequestParam(defaultValue = "0") int page) {
+    public ResponseEntity<?> getRequest() {
         ApiResponse<List<Request>> response = siteService.getRequest();
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     @GetMapping("/history")
-    public ResponseEntity<?> getHistory(@RequestParam(defaultValue = "0") int page) {
+    public ResponseEntity<?> getHistory() {
         ApiResponse<List<SiteHistory>> response = siteService.getSiteHistory();
         return ResponseEntity.status(response.getStatus()).body(response);
     }
@@ -40,7 +40,7 @@ public class SiteController {
     }
 
     @PostMapping("/history")
-    public ResponseEntity<?> main(@RequestBody SiteHistory history, @RequestParam String phone, @RequestParam String email) {
+    public ResponseEntity<?> main(@RequestBody SiteHistory history, @RequestParam(required = false) String phone, @RequestParam(required = false) String email) {
         ApiResponse<?> response = siteService.historyWriter(history, phone, email);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
