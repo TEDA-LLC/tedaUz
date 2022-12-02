@@ -5,7 +5,7 @@ import com.example.tedabot.api.dto.RequestDTO;
 import com.example.tedabot.bot.model.Request;
 import com.example.tedabot.bot.model.SiteHistory;
 import com.example.tedabot.bot.model.User;
-import com.example.tedabot.bot.model.enums.RegistredType;
+import com.example.tedabot.bot.model.enums.RegisteredType;
 import com.example.tedabot.bot.repository.RequestRepository;
 import com.example.tedabot.bot.repository.SiteHistoryRepository;
 import com.example.tedabot.bot.repository.UserRepository;
@@ -29,7 +29,7 @@ public class SiteService {
 
     public ApiResponse<?> add(RequestDTO dto) {
         Request request = new Request();
-        request.setRequestType(RegistredType.WEBSITE);
+        request.setRequestType(RegisteredType.WEBSITE);
         request.setAboutProduct(dto.getAboutProduct());
 
         if (dto.getCategory() != null)

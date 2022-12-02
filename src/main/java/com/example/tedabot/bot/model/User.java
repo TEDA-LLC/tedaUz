@@ -1,7 +1,7 @@
 package com.example.tedabot.bot.model;
 
 import com.example.tedabot.bot.model.enums.Language;
-import com.example.tedabot.bot.model.enums.RegistredType;
+import com.example.tedabot.bot.model.enums.RegisteredType;
 import com.example.tedabot.bot.model.enums.State;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -43,5 +43,5 @@ public class User {
 
     private LocalDateTime lastOperationTime;
 
-    private RegistredType registredType;
+    private RegisteredType registredType;
 }

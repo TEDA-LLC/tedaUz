@@ -1,6 +1,6 @@
 package com.example.tedabot.bot.model;
 
-import com.example.tedabot.bot.model.enums.RegistredType;
+import com.example.tedabot.bot.model.enums.RegisteredType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,5 +31,5 @@ public class Request {
     private LocalDateTime dateTime = LocalDateTime.now();
 
     @Enumerated(EnumType.STRING)
-    private RegistredType requestType;
+    private RegisteredType requestType;
 }

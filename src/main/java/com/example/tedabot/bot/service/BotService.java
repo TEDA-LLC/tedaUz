@@ -4,7 +4,7 @@ import com.example.tedabot.bot.constant.ConstantEn;
 import com.example.tedabot.bot.constant.ConstantUz;
 import com.example.tedabot.bot.model.enums.Language;
 import com.example.tedabot.bot.model.*;
-import com.example.tedabot.bot.model.enums.RegistredType;
+import com.example.tedabot.bot.model.enums.RegisteredType;
 import com.example.tedabot.bot.repository.*;
 import com.example.tedabot.bot.constant.ConstantRu;
 import lombok.RequiredArgsConstructor;
@@ -355,7 +355,7 @@ public class BotService {
 
         Request request = Request.builder().
                 aboutProduct(productOptional.get().getNameEn()).
-                requestType(RegistredType.BOT).
+                requestType(RegisteredType.BOT).
                 user(currentUser).
                 build();
         Request savedRequest = requestRepository.save(request);
