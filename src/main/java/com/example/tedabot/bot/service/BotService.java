@@ -1,12 +1,16 @@
 package com.example.tedabot.bot.service;
 
+import com.example.tedabot.api.model.*;
+import com.example.tedabot.api.repository.*;
 import com.example.tedabot.bot.constant.ConstantEn;
 import com.example.tedabot.bot.constant.ConstantUz;
-import com.example.tedabot.bot.model.enums.Language;
+import com.example.tedabot.model.*;
+import com.example.tedabot.model.enums.Language;
 import com.example.tedabot.bot.model.*;
-import com.example.tedabot.bot.model.enums.RegisteredType;
+import com.example.tedabot.model.enums.RegisteredType;
 import com.example.tedabot.bot.repository.*;
 import com.example.tedabot.bot.constant.ConstantRu;
+import com.example.tedabot.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
