@@ -2,8 +2,10 @@ package com.example.tedabot.api.controller;
 
 import com.example.tedabot.api.dto.ApiResponse;
 import com.example.tedabot.api.dto.RequestDTO;
+import com.example.tedabot.api.dto.ReviewDTO;
 import com.example.tedabot.bot.model.Request;
 import com.example.tedabot.api.service.SiteService;
+import com.example.tedabot.bot.model.Review;
 import com.example.tedabot.bot.model.SiteHistory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -44,4 +46,29 @@ public class SiteController {
         ApiResponse<?> response = siteService.historyWriter(history, phone, email);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
+
+    @PostMapping("/review")
+    public ResponseEntity<?> addReview(@RequestBody ReviewDTO dto){
+        ApiResponse<?> response = siteService.addReview(dto);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+    @PatchMapping("/review")
+    public ResponseEntity<?> editStatusReview(@RequestParam Long id){
+        ApiResponse<?> response = siteService.editStatusReview(id);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+    @GetMapping("/review/{id}")
+    public ResponseEntity<?> getReview(@PathVariable Long id){
+        ApiResponse<Review> response = siteService.getReview(id);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+    @GetMapping("/review")
+    public ResponseEntity<?> getReviews(@RequestParam Boolean active){
+        ApiResponse<List<Review>> response = siteService.getReviews(active);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
 }

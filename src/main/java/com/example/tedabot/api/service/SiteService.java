@@ -2,17 +2,21 @@ package com.example.tedabot.api.service;
 
 import com.example.tedabot.api.dto.ApiResponse;
 import com.example.tedabot.api.dto.RequestDTO;
+import com.example.tedabot.api.dto.ReviewDTO;
 import com.example.tedabot.bot.model.Request;
+import com.example.tedabot.bot.model.Review;
 import com.example.tedabot.bot.model.SiteHistory;
 import com.example.tedabot.bot.model.User;
 import com.example.tedabot.bot.model.enums.RegisteredType;
 import com.example.tedabot.bot.repository.RequestRepository;
+import com.example.tedabot.bot.repository.ReviewRepository;
 import com.example.tedabot.bot.repository.SiteHistoryRepository;
 import com.example.tedabot.bot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,8 +28,8 @@ import java.util.Optional;
 public class SiteService {
     private final RequestRepository requestRepository;
     private final SiteHistoryRepository siteHistoryRepository;
-
     private final UserRepository userRepository;
+    private final ReviewRepository reviewRepository;
 
     public ApiResponse<?> add(RequestDTO dto) {
         Request request = new Request();
@@ -119,6 +123,102 @@ public class SiteService {
                 status(200).
                 success(true).
                 data(siteHistories).
+                build();
+    }
+
+    public ApiResponse<?> addReview(ReviewDTO dto) {
+        Optional<User> userOptionalByPhone = userRepository.findByPhone(dto.getPhone());
+        if (userOptionalByPhone.isEmpty()) {
+            return ApiResponse.builder().
+                    message("User not found !").
+                    status(400).
+                    success(false).
+                    build();
+        }
+
+        User user = userOptionalByPhone.get();
+
+        if (user.getEmail() == null)
+            user.setEmail(dto.getEmail());
+
+        Review review = new Review();
+        review.setText(dto.getText());
+        review.setUser(user);
+        reviewRepository.save(review);
+
+        return ApiResponse.builder().
+                message("Review saved !").
+                status(201).
+                success(true).
+                build();
+    }
+
+    public ApiResponse<?> editStatusReview(Long id) {
+        Optional<Review> reviewOptional = reviewRepository.findById(id);
+        if (reviewOptional.isEmpty()) {
+            return ApiResponse.builder().
+                    message("Review not found !").
+                    status(400).
+                    success(false).
+                    build();
+        }
+
+        Review review = reviewOptional.get();
+
+        review.setConfirmation(!review.isConfirmation());
+        Review save = reviewRepository.save(review);
+        return ApiResponse.builder().
+                message("Review saved !").
+                status(200).
+                success(true).
+                data(save).
+                build();
+    }
+
+    public ApiResponse<Review> getReview(Long id) {
+        Optional<Review> reviewOptional = reviewRepository.findById(id);
+        if (reviewOptional.isPresent()) {
+            return ApiResponse.<Review>builder().
+                    message("Review saved !").
+                    status(200).
+                    success(true).
+                    data(reviewOptional.get()).
+                    build();
+        }
+        return ApiResponse.<Review>builder().
+                message("Review not found !").
+                status(400).
+                success(false).
+                build();
+    }
+
+    public ApiResponse<List<Review>> getReviews(Boolean active) {
+        List<Review> reviewList = null;
+
+        if (active == null)
+            reviewList = reviewRepository.findAll();
+
+        if (Boolean.FALSE.equals(active))
+            reviewList = reviewRepository.findAllByConfirmationFalse();
+
+        if (Boolean.TRUE.equals(active))
+            reviewList = reviewRepository.findAllByConfirmationTrue();
+
+        assert reviewList != null;
+        reviewList.sort(Comparator.comparing(Review::getDateTime));
+
+        if (reviewList.isEmpty())
+            return ApiResponse.<List<Review>>builder().
+                    message("Reviews aren't found !").
+                    status(400).
+                    success(false).
+                    build();
+
+        return ApiResponse.<List<Review>>builder().
+                message("Reviews here!").
+                status(200).
+                success(true).
+                data(reviewList).
                 build();
     }
 }
