@@ -1,6 +1,7 @@
 package com.example.tedabot.model;
 
 import com.example.tedabot.model.enums.RegisteredType;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,7 +28,7 @@ public class Request {
 
     @ManyToOne
     private User user;
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateTime = LocalDateTime.now();
 
     @Enumerated(EnumType.STRING)
