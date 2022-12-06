@@ -1,9 +1,8 @@
 package com.example.tedabot.repository;
 
 import com.example.tedabot.model.Review;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,6 +14,7 @@ import java.util.List;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
     List<Review> findAllByConfirmationTrue();
-    List<Review> findAllByConfirmationTrue(Sort sort, Pageable pageable);
+    @Query(value = "SELECT * FROM review r where r.confirmation = true ORDER BY date_time DESC LIMIT 10", nativeQuery = true)
+    List<Review> findAllByConfirmationTrueForUsers();
     List<Review> findAllByConfirmationFalse();
 }

@@ -13,6 +13,7 @@ import com.example.tedabot.repository.ReviewRepository;
 import com.example.tedabot.repository.SiteHistoryRepository;
 import com.example.tedabot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -168,7 +169,7 @@ public class SiteService {
 
         Review review = reviewOptional.get();
 
-        review.setConfirmation(!review.isConfirmation());
+        review.setConfirmation(!review.getConfirmation());
         Review save = reviewRepository.save(review);
         return ApiResponse.builder().
                 message("Review edited!").
@@ -226,8 +227,8 @@ public class SiteService {
     }
 
     public ApiResponse<List<Review>> getReviewforUsers() {
-        Pageable pageable = PageRequest.of(0,10);
-        List<Review> reviewList = reviewRepository.findAllByConfirmationTrue(Sort.by(Sort.Direction.DESC, "date_time"), pageable);
+
+        List<Review> reviewList = reviewRepository.findAllByConfirmationTrueForUsers();
 
         if (reviewList.isEmpty()) {
             return ApiResponse.<List<Review>>builder().
