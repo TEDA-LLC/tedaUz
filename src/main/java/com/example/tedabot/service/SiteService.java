@@ -13,6 +13,9 @@ import com.example.tedabot.repository.ReviewRepository;
 import com.example.tedabot.repository.SiteHistoryRepository;
 import com.example.tedabot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -168,7 +171,7 @@ public class SiteService {
         review.setConfirmation(!review.isConfirmation());
         Review save = reviewRepository.save(review);
         return ApiResponse.builder().
-                message("Review saved !").
+                message("Review edited!").
                 status(200).
                 success(true).
                 data(save).
@@ -214,6 +217,25 @@ public class SiteService {
                     success(false).
                     build();
 
+        return ApiResponse.<List<Review>>builder().
+                message("Reviews here!").
+                status(200).
+                success(true).
+                data(reviewList).
+                build();
+    }
+
+    public ApiResponse<List<Review>> getReviewforUsers() {
+        Pageable pageable = PageRequest.of(0,10);
+        List<Review> reviewList = reviewRepository.findAllByConfirmationTrue(Sort.by(Sort.Direction.DESC, "date_time"), pageable);
+
+        if (reviewList.isEmpty()) {
+            return ApiResponse.<List<Review>>builder().
+                    message("Reviews aren't found !").
+                    status(400).
+                    success(false).
+                    build();
+        }
         return ApiResponse.<List<Review>>builder().
                 message("Reviews here!").
                 status(200).

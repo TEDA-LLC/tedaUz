@@ -72,4 +72,11 @@ public class SiteController {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
+    @GetMapping("/reviewusers")
+    public ResponseEntity<?> getReviewforUsers(){
+        ApiResponse<List<Review>> response = siteService.getReviewforUsers();
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+
 }
