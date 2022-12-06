@@ -1,4 +1,4 @@
-package com.example.tedabot.api.dto;
+package com.example.tedabot.dto;
 
 import lombok.*;
 

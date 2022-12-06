@@ -1,17 +1,17 @@
-package com.example.tedabot.api.service;
+package com.example.tedabot.service;
 
-import com.example.tedabot.api.dto.ApiResponse;
-import com.example.tedabot.api.dto.RequestDTO;
-import com.example.tedabot.api.dto.ReviewDTO;
-import com.example.tedabot.bot.model.Request;
-import com.example.tedabot.bot.model.Review;
-import com.example.tedabot.bot.model.SiteHistory;
-import com.example.tedabot.bot.model.User;
-import com.example.tedabot.bot.model.enums.RegisteredType;
-import com.example.tedabot.bot.repository.RequestRepository;
-import com.example.tedabot.bot.repository.ReviewRepository;
-import com.example.tedabot.bot.repository.SiteHistoryRepository;
-import com.example.tedabot.bot.repository.UserRepository;
+import com.example.tedabot.dto.ApiResponse;
+import com.example.tedabot.dto.RequestDTO;
+import com.example.tedabot.dto.ReviewDTO;
+import com.example.tedabot.model.Request;
+import com.example.tedabot.model.Review;
+import com.example.tedabot.model.SiteHistory;
+import com.example.tedabot.model.User;
+import com.example.tedabot.model.enums.RegisteredType;
+import com.example.tedabot.repository.RequestRepository;
+import com.example.tedabot.repository.ReviewRepository;
+import com.example.tedabot.repository.SiteHistoryRepository;
+import com.example.tedabot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

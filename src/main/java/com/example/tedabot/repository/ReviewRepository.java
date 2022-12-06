@@ -1,6 +1,6 @@
-package com.example.tedabot.bot.repository;
+package com.example.tedabot.repository;
 
-import com.example.tedabot.bot.model.Review;
+import com.example.tedabot.model.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

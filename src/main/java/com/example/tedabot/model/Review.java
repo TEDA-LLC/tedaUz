@@ -1,4 +1,4 @@
-package com.example.tedabot.bot.model;
+package com.example.tedabot.model;
 
 import lombok.*;
 
