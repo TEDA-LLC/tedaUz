@@ -16,9 +16,9 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @Entity
-//@Table(name = "Review", indexes = {
-//        @Index(name = "idx_review_active", columnList = "confirmation")
-//})
+@Table(name = "Review", indexes = {
+        @Index(name = "idx_review_active", columnList = "confirmation")
+})
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +28,6 @@ public class Review {
     private User user;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateTime = LocalDateTime.now();
-    private Boolean confirmation = false;
+    private boolean confirmation = false;
 
 }

@@ -166,7 +166,7 @@ public class SiteService {
 
         Review review = reviewOptional.get();
 
-        review.setConfirmation(!review.getConfirmation());
+        review.setConfirmation(!review.isConfirmation());
         Review save = reviewRepository.save(review);
         return ApiResponse.builder().
                 message("Review edited!").
