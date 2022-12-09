@@ -1,5 +1,6 @@
 package com.example.tedabot.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -23,7 +24,7 @@ public class WordHistory {
 
     @ManyToOne
     private User user;
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @CreationTimestamp
     private Timestamp timeStamp;
 

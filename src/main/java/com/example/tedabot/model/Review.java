@@ -2,33 +2,32 @@ package com.example.tedabot.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
- * @author * Sunnatullayev Mahmudnazar *  * tedabot *  * 11:45 *
+ * @author Mansurov Abdusamad  *  05.12.2022  *  12:19   *  tedaUz
  */
 
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@Builder
-public class UserHistory {
+@Entity
+@Table(name = "Review", indexes = {
+        @Index(name = "idx_review_active", columnList = "confirmation")
+})
+public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String text;
     @ManyToOne
     private User user;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @CreationTimestamp
-    private Timestamp timeStamp;
+    private LocalDateTime dateTime = LocalDateTime.now();
+    private boolean confirmation = false;
 
-    @ManyToOne
-    private Product product;
 }

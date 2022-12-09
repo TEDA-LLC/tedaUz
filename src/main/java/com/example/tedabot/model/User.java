@@ -3,6 +3,7 @@ package com.example.tedabot.model;
 import com.example.tedabot.model.enums.Language;
 import com.example.tedabot.model.enums.RegisteredType;
 import com.example.tedabot.model.enums.State;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -25,7 +26,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username, phone, fullName, email;
+    private String username, fullName;
+
+//    @Column(nullable = false)
+    private String phone, email;
 
     @Column(unique = true)
     private String chatId;
@@ -38,7 +42,7 @@ public class User {
     private Language language;
 
     private int count = 0;
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime registeredTime = LocalDateTime.now();
 
     private LocalDateTime lastOperationTime;

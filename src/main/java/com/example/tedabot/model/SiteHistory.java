@@ -1,5 +1,6 @@
 package com.example.tedabot.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,7 +22,7 @@ public class SiteHistory {
     private Long id;
 
     private String ipAddress, about;
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateTime = LocalDateTime.now();
 
     @ManyToOne
