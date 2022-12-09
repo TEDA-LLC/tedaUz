@@ -29,7 +29,7 @@ public interface ConstantRu {
             "\uD83D\uDCF8 <a href=\"https://instagram.com/teda.uz?igshid=YmMyMTA2M2Y=\"> @teda_uz</a>\n";
     String TO_ADMIN = "Оставьте свой вопрос нашему менеджеру и \n" +
             "наш менеджер ответит вам в ближайшее время.\n" +
-            "\uD83D\uDC64 Менеджер : @CEO_777\n";
+            "\uD83D\uDC64 Менеджер : @Proekt_Manager\n";
     String LANGUAGE = "Изменить язык \uD83C\uDDF7\uD83C\uDDFA/\uD83C\uDDFA\uD83C\uDDFF/\uD83C\uDDEC\uD83C\uDDE7";
     String PHONE = "Изменить номер \uD83D\uDCDE";
     String BACK = "Назад ⬅";

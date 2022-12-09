@@ -29,7 +29,7 @@ public interface ConstantUz {
             "\uD83D\uDCF8 <a href=\"https://instagram.com/teda.uz?igshid=YmMyMTA2M2Y=\"> @teda_uz</a>\n";
     String TO_ADMIN = "Menejirimizga savolingizni qoldiring va menejerimiz sizga \n" +
             "imkon qadar tezroq javob beradi.\n" +
-            "\uD83D\uDC64 Manager : @CEO_777\n";
+            "\uD83D\uDC64 Manager : @Proekt_Manager\n";
     String LANGUAGE = "Tilni o'zgartirish \uD83C\uDDF7\uD83C\uDDFA/\uD83C\uDDFA\uD83C\uDDFF/\uD83C\uDDEC\uD83C\uDDE7";
     String PHONE = "Raqamni o'zgartirish \uD83D\uDCDE";
     String BACK = "Orqaga ⬅";

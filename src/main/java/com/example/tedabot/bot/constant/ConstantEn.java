@@ -30,7 +30,7 @@ public interface ConstantEn {
             "\uD83D\uDCF8 <a href=\"https://instagram.com/teda.uz?igshid=YmMyMTA2M2Y=\"> @teda_uz</a>\n";
     String TO_ADMIN = "Leave your question to our manager and\n" +
             "our manager will answer you as soon as possible.\n" +
-            "\uD83D\uDC64 Manager : @CEO_777\n";
+            "\uD83D\uDC64 Manager : @Proekt_Manager\n";
     String LANGUAGE = "Change language \uD83C\uDDF7\uD83C\uDDFA/\uD83C\uDDFA\uD83C\uDDFF/\uD83C\uDDEC\uD83C\uDDE7";
     String PHONE = "Change number \uD83D\uDCDE";
     String BACK = "Back ⬅";
