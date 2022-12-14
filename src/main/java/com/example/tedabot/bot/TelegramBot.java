@@ -106,13 +106,17 @@ public class TelegramBot extends TelegramLongPollingBot {
                                         currentUser.setLastOperationTime(LocalDateTime.now());
                                         userRepository.save(currentUser);
                                         execute(botService.toAdmin(chatId, currentUser.getLanguage()));
+                                    } else if (message.getText().equals(ConstantUz.) || message.getText().equals(ConstantRu.) || message.getText().equals(ConstantEn.)) {
+                                        currentUser.setLastOperationTime(LocalDateTime.now());
+                                        userRepository.save(currentUser);
+                                        execute(botService.toAdmin(chatId, currentUser.getLanguage()));
                                     } else if (message.getText().equals(ConstantUz.SETTINGS_BUTTON) || message.getText().equals(ConstantRu.SETTINGS_BUTTON) || message.getText().equals(ConstantEn.SETTINGS_BUTTON)) {
                                         currentUser.setState(State.SETTINGS);
                                         currentUser.setLastOperationTime(LocalDateTime.now());
                                         userRepository.save(currentUser);
                                         execute(botService.settings(chatId, currentUser.getLanguage()));
-                                   }else if ((message.getText().matches("("+ConstantUz.SYSTEMS_BUTTON+"|"+ConstantRu.SYSTEMS_BUTTON+"|"+ConstantEn.SYSTEMS_BUTTON+"|"+ConstantUz.SERVICES_BUTTON+"|"+ConstantRu.SERVICES_BUTTON+"|"+ConstantEn.SERVICES_BUTTON+")"))){
-                                            Long categoryId = botService.getCategoryIdByName(message.getText());
+                                    } else if ((message.getText().matches("(" + ConstantUz.SYSTEMS_BUTTON + "|" + ConstantRu.SYSTEMS_BUTTON + "|" + ConstantEn.SYSTEMS_BUTTON + "|" + ConstantUz.SERVICES_BUTTON + "|" + ConstantRu.SERVICES_BUTTON + "|" + ConstantEn.SERVICES_BUTTON + ")"))) {
+                                        Long categoryId = botService.getCategoryIdByName(message.getText());
                                         if (categoryId != null) {
                                             execute(botService.products(categoryId, currentUser.getLanguage(), chatId));
                                         } else if (message.getText().equals(ConstantUz.BACK) || message.getText().equals(ConstantRu.BACK) || message.getText().equals(ConstantEn.BACK)) {
@@ -121,7 +125,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                                             userRepository.save(currentUser);
                                             execute(botService.ok(chatId, currentUser.getLanguage()));
                                         }
-                                    }else {
+                                    } else {
                                         botService.storyWriter(currentUser, message);
                                     }
                                 }
@@ -136,7 +140,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                                         currentUser.setLastOperationTime(LocalDateTime.now());
                                         userRepository.save(currentUser);
                                         execute(botService.ok(chatId, currentUser.getLanguage()));
-                                    }else {
+                                    } else {
                                         botService.storyWriter(currentUser, message);
                                     }
                                 }
