@@ -1,6 +1,7 @@
 package com.example.tedabot.model;
 
 import com.example.tedabot.model.enums.RegisteredType;
+import com.example.tedabot.model.enums.RequestType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
@@ -25,7 +26,8 @@ public class Request {
     private String aboutProduct, category;
 
     private boolean view = false;
-
+    @Enumerated(EnumType.STRING)
+    private RequestType requestStatusType;
     @ManyToOne
     private User user;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
