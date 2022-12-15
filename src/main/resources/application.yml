@@ -1,5 +1,12 @@
 server:
   port: 70
+  ssl:
+    enabled: true
+    key-alias: contabo_ssl
+    key-store: classpath:contabo-ssl.p12
+    key-store-type: PKCS12
+    key-password: 123456789
+    key-store-password: 123456789
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/tedauzbot
