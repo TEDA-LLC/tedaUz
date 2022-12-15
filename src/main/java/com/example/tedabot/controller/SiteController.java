@@ -77,6 +77,10 @@ public class SiteController {
         ApiResponse<List<Review>> response = siteService.getReviewforUsers();
         return ResponseEntity.status(response.getStatus()).body(response);
     }
-
+    @GetMapping("/requestsByUser/{id}")
+    public ResponseEntity<?> getOrdersByUser(@PathVariable Long id){
+        ApiResponse<List<Request>> response = siteService.getRequestsByUser(id);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
 
 }

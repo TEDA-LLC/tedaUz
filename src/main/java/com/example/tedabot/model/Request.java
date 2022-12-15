@@ -22,7 +22,6 @@ public class Request {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String aboutProduct, category;
 
     private boolean view = false;

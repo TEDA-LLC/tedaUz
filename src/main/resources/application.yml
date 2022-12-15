@@ -2,8 +2,8 @@ server:
   port: 70
   ssl:
     enabled: true
-    key-alias: local_ssl
-    key-store: classpath:local-ssl.p12
+    key-alias: contabo_ssl
+    key-store: classpath:contabo-ssl.p12
     key-store-type: PKCS12
     key-password: 123456789
     key-store-password: 123456789

@@ -242,4 +242,27 @@ public class SiteService {
                 data(reviewList).
                 build();
     }
+
+    public ApiResponse<List<Request>> getRequestsByUser(Long id) {
+        Optional<User> userOptional = userRepository.findById(id);
+
+        if (userOptional.isEmpty()) {
+            return ApiResponse.<List<Request>>builder().
+                    message("User not found!!!").
+                    success(false).
+                    status(400).
+                    build();
+        }
+
+        List<Request> requestList = requestRepository.findAllByUser(userOptional.get());
+
+        return ApiResponse.<List<Request>>builder().
+                message("Here!!!").
+                success(true).
+                status(200).
+                data(requestList).
+                build();
+    }
 }
+
+
