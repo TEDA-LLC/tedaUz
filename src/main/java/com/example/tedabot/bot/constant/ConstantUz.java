@@ -42,4 +42,5 @@ public interface ConstantUz {
     String REQUEST = "So'rov\uD83D\uDCCC";
     String RESPONSE_FOR_REQUEST = "Murojaatingiz muvafaqiyatli qabul qilindi.✅\n" +
             "Tez orada menejerimiz aloqaga chiqadi.";
+    String MY_REQUESTS = "Mening Murojaatlarim \uD83C\uDFAF";
 }

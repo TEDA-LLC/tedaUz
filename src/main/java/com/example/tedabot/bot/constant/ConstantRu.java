@@ -41,4 +41,5 @@ public interface ConstantRu {
     String REQUEST = "Заявка\uD83D\uDCCC";
     String RESPONSE_FOR_REQUEST= "Ваш запрос успешно получен.✅\n" +
             "Наш менеджер свяжется с вами в ближайшее время.";
+    String MY_REQUESTS = "Мои Заявки \uD83C\uDFAF";
 }
