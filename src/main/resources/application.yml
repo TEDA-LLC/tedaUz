@@ -1,16 +1,16 @@
 server:
   port: 70
-  ssl:
-    enabled: true
-    key-alias: contabo_ssl
-    key-store: classpath:contabo.p12
-    key-store-type: PKCS12
-    key-password: 123456789
-    key-store-password: 123456789
+#  ssl:
+#    enabled: true
+#    key-alias: contabo_ssl
+#    key-store: classpath:contabo.p12
+#    key-store-type: PKCS12
+#    key-password: 123456789
+#    key-store-password: 123456789
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/tedauzbot
-#    url: jdbc:postgresql://185.185.80.245/tedauzbot
+#    url: jdbc:postgresql://localhost:5432/tedauzbot
+    url: jdbc:postgresql://185.185.80.245/tedauzbot
     username: admin
     password: turgun1970
     driver-class-name: org.postgresql.Driver
@@ -32,3 +32,5 @@ telegram:
 #   token: 5082104093:AAEtEN22_VScHuRU7mgdvI8H-1p6v8hn8KU
    username: tedauz_bot
    token: 5432072116:AAHHjQHDP-IBzzQdiRyzHhqValr5tKQ6tlI
+#    username: warehouse_testG2_bot
+#    token: 5215163327:AAF_qcJ1KXZ2Z-2hnfAcIQVLVKRbKHLgV2w

@@ -14,6 +14,7 @@ public interface ConstantRu {
     String ABOUT_US_BUTTON = "О нас \uD83D\uDD0E";
     String SERVICES_BUTTON = "Услуги \uD83D\uDEE0";
     String SYSTEMS_BUTTON = "Системы \uD83D\uDCBB";
+    String VACANCY_BUTTON = "Вакансия \uD83D\uDC68\uD83C\uDFFB\u200D\uD83D\uDCBB";
     String SETTINGS_BUTTON = "Настройки ⚙";
     String TO_ADMIN_BUTTON = "Связь \uD83D\uDC64";
     String MENU = "Главное меню : ";

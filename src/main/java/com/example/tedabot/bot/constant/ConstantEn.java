@@ -14,6 +14,7 @@ public interface ConstantEn {
     String ABOUT_US_BUTTON = "About us \uD83D\uDD0E";
     String SERVICES_BUTTON = "Services \uD83D\uDEE0";
     String SYSTEMS_BUTTON = "Systems \uD83D\uDCBB";
+    String VACANCY_BUTTON = "Vacancy \uD83D\uDC68\uD83C\uDFFB\u200D\uD83D\uDCBB";
     String SETTINGS_BUTTON = "Settings ⚙";
     String TO_ADMIN_BUTTON = "Connection \uD83D\uDC64";
     String MENU = "Main menu : ";
