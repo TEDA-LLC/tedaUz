@@ -63,8 +63,6 @@ public class TelegramBot extends TelegramLongPollingBot {
                                 currentUser = optionalUser.get();
                                 currentUser.setState(State.START);
                                 currentUser.setFullName(update.getMessage().getFrom().getFirstName());
-                                currentUser.setLastOperationTime(LocalDateTime.now());
-                                userRepository.save(currentUser);
                             } else {
                                 currentUser = new User();
                                 currentUser.setChatId(String.valueOf(update.getMessage().getChatId()));
@@ -72,9 +70,9 @@ public class TelegramBot extends TelegramLongPollingBot {
                                 currentUser.setFullName(message.getFrom().getFirstName());
                                 currentUser.setUsername(message.getFrom().getUserName());
                                 currentUser.setState(State.START);
-                                currentUser.setLastOperationTime(LocalDateTime.now());
-                                userRepository.save(currentUser);
                             }
+                            currentUser.setLastOperationTime(LocalDateTime.now());
+                            userRepository.save(currentUser);
                             execute(botService.start(chatId));
                         } else if (message.getText().equals(ConstantUz.BUTTON)) {
                             currentUser = optionalUser.get();
@@ -106,10 +104,10 @@ public class TelegramBot extends TelegramLongPollingBot {
                                         currentUser.setLastOperationTime(LocalDateTime.now());
                                         userRepository.save(currentUser);
                                         execute(botService.toAdmin(chatId, currentUser.getLanguage()));
-                                    } else if (message.getText().equals(ConstantUz.SETTINGS_BUTTON) || message.getText().equals(ConstantRu.SETTINGS_BUTTON) || message.getText().equals(ConstantEn.SETTINGS_BUTTON)) {
+                                    } else if (message.getText().equals(ConstantUz.MY_REQUESTS) || message.getText().equals(ConstantRu.MY_REQUESTS) || message.getText().equals(ConstantEn.MY_REQUESTS)) {
                                         currentUser.setLastOperationTime(LocalDateTime.now());
                                         userRepository.save(currentUser);
-                                        execute(botService.toAdmin(chatId, currentUser.getLanguage()));
+                                        execute(botService.myRequests(chatId, currentUser));
                                     } else if (message.getText().equals(ConstantUz.SETTINGS_BUTTON) || message.getText().equals(ConstantRu.SETTINGS_BUTTON) || message.getText().equals(ConstantEn.SETTINGS_BUTTON)) {
                                         currentUser.setState(State.SETTINGS);
                                         currentUser.setLastOperationTime(LocalDateTime.now());
