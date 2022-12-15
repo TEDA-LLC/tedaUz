@@ -36,6 +36,7 @@ public class SiteService {
         Request request = new Request();
         request.setRequestType(RegisteredType.WEBSITE);
         request.setAboutProduct(dto.getAboutProduct());
+        request.setDateTime(LocalDateTime.now());
 
         if (dto.getCategory() != null)
             request.setCategory(dto.getCategory());

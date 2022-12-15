@@ -18,6 +18,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 
 import java.io.ByteArrayInputStream;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -356,6 +357,7 @@ public class BotService {
         Request request = Request.builder().
                 aboutProduct(productOptional.get().getNameEn()).
                 requestType(RegisteredType.BOT).
+                dateTime(LocalDateTime.now()).
                 user(currentUser).
                 build();
         Request savedRequest = requestRepository.save(request);
@@ -379,5 +381,52 @@ public class BotService {
                     .chatId(update.getCallbackQuery().getMessage().getChatId())
                     .build();
         }
+    }
+
+    public SendMessage myRequests(String chatId, User currentUser) {
+        List<Request> requests = requestRepository.findAllByUser(currentUser);
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (Request request : requests) {
+            if (currentUser.getLanguage().equals(Language.UZB)) {
+                stringBuilder.append("Id: ")
+                        .append(request.getId())
+                        .append("\n")
+                        .append("Sana: ")
+                        .append(request.getDateTime() == null ? "null" : request.getDateTime().toLocalDate().toString())
+                        .append("\n")
+                        .append("Xizmat haqida: ")
+                        .append(request.getAboutProduct())
+                        .append("\n")
+                        .append("\n");
+            } else if (currentUser.getLanguage().equals(Language.ENG)) {
+                stringBuilder.append("Id: ")
+                        .append(request.getId())
+                        .append("\n")
+                        .append("Date: ")
+                        .append(request.getDateTime() == null ? "null" : request.getDateTime().toLocalDate().toString())
+                        .append("\n")
+                        .append("About Service: ")
+                        .append(request.getAboutProduct())
+                        .append("\n")
+                        .append("\n");
+            } else {
+                stringBuilder.append("Id: ")
+                        .append(request.getId())
+                        .append("\n")
+                        .append("Дата: ")
+                        .append(request.getDateTime() == null ? "null" : request.getDateTime().toLocalDate().toString())
+                        .append("\n")
+                        .append("О проекте: ")
+                        .append(request.getAboutProduct())
+                        .append("\n")
+                        .append("\n");
+            }
+        }
+        return SendMessage.builder()
+                .text(String.valueOf(stringBuilder))
+                .chatId(chatId)
+                .build();
     }
 }
