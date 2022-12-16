@@ -6,7 +6,6 @@ import com.example.tedabot.model.Vacancy;
 import com.example.tedabot.repository.VacancyRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

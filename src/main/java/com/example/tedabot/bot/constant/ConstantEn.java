@@ -15,7 +15,7 @@ public interface ConstantEn {
     String SERVICES_BUTTON = "Services \uD83D\uDEE0";
     String SYSTEMS_BUTTON = "Systems \uD83D\uDCBB";
     String SETTINGS_BUTTON = "Settings ⚙";
-    String TO_ADMIN_BUTTON = "Vacancy \uD83D\uDC68\uD83C\uDFFB\u200D\uD83D\uDCBB";
+    String VACANCY_BUTTON = "Vacancy \uD83D\uDC68\uD83C\uDFFB\u200D\uD83D\uDCBB";
     String MENU = "Main menu : ";
     String ABOUT_US = "<b>TEDA LLC \n \n</b>" +
             "Improving the life of the people of Uzbekistan, which is developing today." +
@@ -33,7 +33,7 @@ public interface ConstantEn {
             "\uD83D\uDC64 <b> Manager : @Proekt_Manager</b>\n" +
             "\uD83C\uDFE6<b>Х/р: 20208000904456127001, РАКБ «QQB» Tashkent city regional branch</b>\n" +
             "<b>МФО: 01037 INN: 205985751  ОКЭД: 62010</b>\n";
-    String TO_ADMIN = "There are currently no vacancies\n" ;
+    String VACANCY = "There are currently no vacancies\n" ;
 //            "\uD83D\uDC64 Manager : @Proekt_Manager\n";
     String LANGUAGE = "Change language \uD83C\uDDF7\uD83C\uDDFA/\uD83C\uDDFA\uD83C\uDDFF/\uD83C\uDDEC\uD83C\uDDE7";
     String PHONE = "Change number \uD83D\uDCDE";

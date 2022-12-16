@@ -15,7 +15,7 @@ public interface ConstantUz {
     String SERVICES_BUTTON = "Xizmatlar \uD83D\uDEE0";
     String SYSTEMS_BUTTON = "Tizimlar \uD83D\uDCBB";
     String SETTINGS_BUTTON = "Sozlamalar ⚙";
-    String TO_ADMIN_BUTTON = "Vakansiya \uD83D\uDC68\uD83C\uDFFB\u200D\uD83D\uDCBB";
+    String VACANCY_BUTTON = "Vakansiya \uD83D\uDC68\uD83C\uDFFB\u200D\uD83D\uDCBB";
     String MENU = "Asosiy menyu : ";
     String ABOUT_US = "<b>TEDA LLC \n \n</b>" +
             "Hozirgi kunda rivojlanib borayotgan O'zbekiston xalqining hayotini yaxshilash." +
@@ -33,7 +33,7 @@ public interface ConstantUz {
             "\uD83C\uDFE6<b>Х/р: 20208000904456127001, РАКБ «QQB» Toshkent shahar regional f-li</b>\n" +
             "<b>МФО: 01037 INN: 205985751  ОКЭД: 62010</b>\n";
 
-    String TO_ADMIN = "Hozircha vakansiya yo`q \n" ;
+    String VACANCY = "Hozircha vakansiya yo`q \n" ;
 //            "\uD83D\uDC64 Manager : @Proekt_Manager\n";
     String LANGUAGE = "Tilni o'zgartirish \uD83C\uDDF7\uD83C\uDDFA/\uD83C\uDDFA\uD83C\uDDFF/\uD83C\uDDEC\uD83C\uDDE7";
     String PHONE = "Raqamni o'zgartirish \uD83D\uDCDE";
