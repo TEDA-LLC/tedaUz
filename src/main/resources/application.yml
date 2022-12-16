@@ -1,7 +1,9 @@
 server:
   port: 70
-#  ssl:
-#    enabled: true
+  ssl:
+    enabled: true
+    certificate: classpath:cert.crt
+    certificate-private-key: classpath:privkey.key
 #    key-alias: contabo_ssl
 #    key-store: classpath:contabo.p12
 #    key-store-type: PKCS12
