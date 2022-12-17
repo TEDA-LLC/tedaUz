@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 /**
- * @author * Sunnatullayev Mahmudnazar *  * tedabot *  * 16:06 *
+ * @author Mansurov Abdusamad  *  30.11.2022  *  10:08   *  tedaSystem
  */
 
 @Entity

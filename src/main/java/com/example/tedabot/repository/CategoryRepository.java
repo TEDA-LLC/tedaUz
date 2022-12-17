@@ -7,10 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 /**
- * @author * Sunnatullayev Mahmudnazar *  * tedabot *  * 16:23 *
+ * @author * Sunnatullayev Mahmudnazar *  * tedaUz *  * 10:45 *
  */
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Long> {
+public interface CategoryRepository extends JpaRepository<Category,Long> {
     Optional<Category> findByNameUzOrNameRuOrNameEn(String nameUz, String nameRu    , String nameEn);
-
 }

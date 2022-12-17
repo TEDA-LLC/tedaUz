@@ -1,6 +1,5 @@
 package com.example.tedabot.controller;
 
-
 import com.example.tedabot.dto.ApiResponse;
 import com.example.tedabot.model.Category;
 import com.example.tedabot.service.CategoryService;
