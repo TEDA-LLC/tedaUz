@@ -107,22 +107,22 @@ public class BotService {
 
     }
 
-    public SendMessage toAdmin(String chatId, Language language) {
+    public SendMessage vacancy(String chatId, Language language) {
         if (language.equals(Language.UZB)) {
             return SendMessage.builder()
-                    .text(ConstantUz.TO_ADMIN)
+                    .text(ConstantUz.VACANCY)
                     .chatId(chatId)
                     .replyMarkup(buttonService.menuButton(language))
                     .build();
         } else if (language.equals(Language.ENG)) {
             return SendMessage.builder()
-                    .text(ConstantEn.TO_ADMIN)
+                    .text(ConstantEn.VACANCY)
                     .chatId(chatId)
                     .replyMarkup(buttonService.menuButton(language))
                     .build();
         } else {
             return SendMessage.builder()
-                    .text(ConstantRu.TO_ADMIN)
+                    .text(ConstantRu.VACANCY)
                     .chatId(chatId)
                     .replyMarkup(buttonService.menuButton(language))
                     .build();

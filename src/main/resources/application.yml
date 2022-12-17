@@ -1,7 +1,9 @@
 server:
   port: 70
-#  ssl:
-#    enabled: true
+  ssl:
+    enabled: true
+    certificate: classpath:cert.crt
+    certificate-private-key: classpath:privkey.key
 #    key-alias: contabo_ssl
 #    key-store: classpath:contabo.p12
 #    key-store-type: PKCS12
@@ -28,9 +30,7 @@ spring:
       max-file-size: 5MB
 telegram:
   bot:
-#   username: Uzb_Namaz_Times_bot
-#   token: 5082104093:AAEtEN22_VScHuRU7mgdvI8H-1p6v8hn8KU
-   username: tedauz_bot
-   token: 5432072116:AAHHjQHDP-IBzzQdiRyzHhqValr5tKQ6tlI
-#    username: warehouse_testG2_bot
-#    token: 5215163327:AAF_qcJ1KXZ2Z-2hnfAcIQVLVKRbKHLgV2w
+   username: Uzb_Namaz_Times_bot
+   token: 5082104093:AAEtEN22_VScHuRU7mgdvI8H-1p6v8hn8KU
+#   username: tedauz_bot
+#   token: 5432072116:AAHHjQHDP-IBzzQdiRyzHhqValr5tKQ6tlI
