@@ -103,6 +103,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                                     } else if (message.getText().equals(ConstantUz.VACANCY_BUTTON) || message.getText().equals(ConstantRu.VACANCY_BUTTON) || message.getText().equals(ConstantEn.VACANCY_BUTTON)) {
                                         currentUser.setLastOperationTime(LocalDateTime.now());
                                         userRepository.save(currentUser);
+                                        execute(botService.vacancies(chatId, currentUser));
                                         execute(botService.vacancy(chatId, currentUser.getLanguage()));
                                     } else if (message.getText().equals(ConstantUz.MY_REQUESTS) || message.getText().equals(ConstantRu.MY_REQUESTS) || message.getText().equals(ConstantEn.MY_REQUESTS)) {
                                         currentUser.setLastOperationTime(LocalDateTime.now());

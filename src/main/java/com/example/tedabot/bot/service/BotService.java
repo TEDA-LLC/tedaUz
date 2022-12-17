@@ -429,4 +429,51 @@ public class BotService {
                 .chatId(chatId)
                 .build();
     }
+
+    public SendMessage vacancies(String chatId, User currentUser) {
+        List<Request> requests = requestRepository.findAllByUser(currentUser);
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (Request request : requests) {
+            if (currentUser.getLanguage().equals(Language.UZB)) {
+                stringBuilder.append("Id: ")
+                        .append(request.getId())
+                        .append("\n")
+                        .append("Sana: ")
+                        .append(request.getDateTime() == null ? "null" : request.getDateTime().toLocalDate().toString())
+                        .append("\n")
+                        .append("Xizmat haqida: ")
+                        .append(request.getAboutProduct())
+                        .append("\n")
+                        .append("\n");
+            } else if (currentUser.getLanguage().equals(Language.ENG)) {
+                stringBuilder.append("Id: ")
+                        .append(request.getId())
+                        .append("\n")
+                        .append("Date: ")
+                        .append(request.getDateTime() == null ? "null" : request.getDateTime().toLocalDate().toString())
+                        .append("\n")
+                        .append("About Service: ")
+                        .append(request.getAboutProduct())
+                        .append("\n")
+                        .append("\n");
+            } else {
+                stringBuilder.append("Id: ")
+                        .append(request.getId())
+                        .append("\n")
+                        .append("Дата: ")
+                        .append(request.getDateTime() == null ? "null" : request.getDateTime().toLocalDate().toString())
+                        .append("\n")
+                        .append("О проекте: ")
+                        .append(request.getAboutProduct())
+                        .append("\n")
+                        .append("\n");
+            }
+        }
+        return SendMessage.builder()
+                .text(String.valueOf(stringBuilder))
+                .chatId(chatId)
+                .build();
+    }
 }
