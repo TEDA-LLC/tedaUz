@@ -35,6 +35,7 @@ public class BotService {
     private final ProductRepository productRepository;
     private final WordHistoryRepository wordHistoryRepository;
     private final RequestRepository requestRepository;
+    private final VacancyRepository vacancyRepository;
 
     public SendMessage start(String chatId) {
         return SendMessage.builder()
@@ -388,6 +389,18 @@ public class BotService {
 
         StringBuilder stringBuilder = new StringBuilder();
 
+        if (requests.isEmpty()) {
+            SendMessage sendMessage = new SendMessage();
+            sendMessage.setChatId(chatId);
+            if (currentUser.getLanguage().equals(Language.ENG))
+                sendMessage.setText(ConstantEn.MY_REQUESTS_EMPTY);
+            else if (currentUser.getLanguage().equals(Language.RUS))
+                sendMessage.setText(ConstantRu.MY_REQUESTS_EMPTY);
+            else
+                sendMessage.setText(ConstantUz.MY_REQUESTS_EMPTY);
+
+            return sendMessage;
+        }
         for (Request request : requests) {
             if (currentUser.getLanguage().equals(Language.UZB)) {
                 stringBuilder.append("Id: ")
@@ -431,42 +444,56 @@ public class BotService {
     }
 
     public SendMessage vacancies(String chatId, User currentUser) {
-        List<Request> requests = requestRepository.findAllByUser(currentUser);
+
+        List<Vacancy> vacancies = vacancyRepository.findAllByActiveTrue();
+
+        if (vacancies.isEmpty()){
+            SendMessage sendMessage = new SendMessage();
+            sendMessage.setChatId(chatId);
+            if (currentUser.getLanguage().equals(Language.ENG))
+                sendMessage.setText(ConstantEn.VACANCY);
+            else if (currentUser.getLanguage().equals(Language.RUS))
+                sendMessage.setText(ConstantRu.VACANCY);
+            else
+                sendMessage.setText(ConstantUz.VACANCY);
+
+            return sendMessage;
+        }
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (Request request : requests) {
+        for (Vacancy vacancy : vacancies) {
             if (currentUser.getLanguage().equals(Language.UZB)) {
                 stringBuilder.append("Id: ")
-                        .append(request.getId())
+                        .append(vacancy.getId())
                         .append("\n")
-                        .append("Sana: ")
-                        .append(request.getDateTime() == null ? "null" : request.getDateTime().toLocalDate().toString())
+                        .append("Vakansiya nomi: ")
+                        .append(vacancy.getName())
                         .append("\n")
-                        .append("Xizmat haqida: ")
-                        .append(request.getAboutProduct())
+                        .append("Haqida: ")
+                        .append(vacancy.getDescription())
                         .append("\n")
                         .append("\n");
             } else if (currentUser.getLanguage().equals(Language.ENG)) {
                 stringBuilder.append("Id: ")
-                        .append(request.getId())
+                        .append(vacancy.getId())
                         .append("\n")
-                        .append("Date: ")
-                        .append(request.getDateTime() == null ? "null" : request.getDateTime().toLocalDate().toString())
+                        .append("Vacancy name: ")
+                        .append(vacancy.getName())
                         .append("\n")
-                        .append("About Service: ")
-                        .append(request.getAboutProduct())
+                        .append("About: ")
+                        .append(vacancy.getDescription())
                         .append("\n")
                         .append("\n");
             } else {
-                stringBuilder.append("Id: ")
-                        .append(request.getId())
+                stringBuilder.append("Ид: ")
+                        .append(vacancy.getId())
                         .append("\n")
-                        .append("Дата: ")
-                        .append(request.getDateTime() == null ? "null" : request.getDateTime().toLocalDate().toString())
+                        .append("Имя вакансия: ")
+                        .append(vacancy.getName())
                         .append("\n")
-                        .append("О проекте: ")
-                        .append(request.getAboutProduct())
+                        .append("О вакансии: ")
+                        .append(vacancy.getDescription())
                         .append("\n")
                         .append("\n");
             }

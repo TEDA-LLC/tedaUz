@@ -25,7 +25,7 @@ public class Attachment {
     @Column(nullable = false)
     @JsonIgnore
     private byte[] bytes;
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String originalName, contentType;
     private Long size;
 }

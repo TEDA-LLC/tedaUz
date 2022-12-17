@@ -47,4 +47,5 @@ public interface ConstantEn {
     String RESPONSE_FOR_REQUEST = "Your request has been successfully received.✅\n" +
             "Our manager will contact you soon.";
     String MY_REQUESTS = "My Requests \uD83C\uDFAF";
+    String MY_REQUESTS_EMPTY = "You don't have any requests";
 }

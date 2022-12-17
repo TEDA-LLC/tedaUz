@@ -48,4 +48,6 @@ public interface ConstantUz {
     String RESPONSE_FOR_REQUEST = "Murojaatingiz muvafaqiyatli qabul qilindi.✅\n" +
             "Tez orada menejerimiz aloqaga chiqadi.";
     String MY_REQUESTS = "Mening Murojaatlarim \uD83C\uDFAF";
+
+    String MY_REQUESTS_EMPTY = "Sizda hali hech qanday murojatlar mavjud emas";
 }

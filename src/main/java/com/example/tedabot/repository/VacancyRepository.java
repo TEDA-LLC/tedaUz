@@ -13,5 +13,6 @@ import java.util.List;
 public interface VacancyRepository extends JpaRepository<Vacancy, Long> {
 
 //    List<Vacancy> findAllByVacancyId(Long id);
+    List<Vacancy> findAllByActiveTrue();
 
 }
