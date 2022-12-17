@@ -6,7 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 
 /**
- * @author * Sunnatullayev Mahmudnazar *  * tedabot *  * 10:40 *
+ * @author Mansurov Abdusamad  *  30.11.2022  *  10:08   *  tedaSystem
  */
 
 @Entity
@@ -31,5 +31,9 @@ public class Product {
     private Attachment attachment;
 
     private Double price;
+
+    private Integer minimumTerm;
+
+    private String executionInterval;
 
 }

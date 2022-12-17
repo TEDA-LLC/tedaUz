@@ -2,13 +2,12 @@ package com.example.tedabot.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
- * @author * Sunnatullayev Mahmudnazar *  * tedabot *  * 11:45 *
+ * @author Mansurov Abdusamad  *  30.11.2022  *  10:08   *  tedaSystem
  */
 
 @Entity
@@ -26,8 +25,7 @@ public class UserHistory {
     @ManyToOne
     private User user;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @CreationTimestamp
-    private Timestamp timeStamp;
+    private LocalDateTime dateTime = LocalDateTime.now();
 
     @ManyToOne
     private Product product;

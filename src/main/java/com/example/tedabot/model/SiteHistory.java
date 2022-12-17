@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
- * @author * Sunnatullayev Mahmudnazar *  * tedabot *  * 15:31 *
+ * @author Mansurov Abdusamad  *  30.11.2022  *  10:08   *  tedaSystem
  */
 @AllArgsConstructor
 @NoArgsConstructor
