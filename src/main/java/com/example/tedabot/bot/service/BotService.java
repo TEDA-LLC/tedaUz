@@ -356,7 +356,7 @@ public class BotService {
 
         Request request = Request.builder().
                 aboutProduct(productOptional.get().getNameEn()).
-                requestType(RegisteredType.BOT).
+                registeredType(RegisteredType.BOT).
                 dateTime(LocalDateTime.now()).
                 user(currentUser).
                 build();

@@ -66,7 +66,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                             } else {
                                 currentUser = new User();
                                 currentUser.setChatId(String.valueOf(update.getMessage().getChatId()));
-                                currentUser.setRegistredType(RegisteredType.BOT);
+                                currentUser.setRegisteredType(RegisteredType.BOT);
                                 currentUser.setFullName(message.getFrom().getFirstName());
                                 currentUser.setUsername(message.getFrom().getUserName());
                                 currentUser.setState(State.START);
