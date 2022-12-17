@@ -75,7 +75,7 @@ public class VacancyService {
         Vacancy vacancy = new Vacancy();
         vacancy.setName(vacancyDTO.getName());
         vacancy.setDescription(vacancyDTO.getDescription());
-//        vacancy.setActive(vacancyDTO.isActive());
+        vacancy.setActive(vacancyDTO.isActive());
 //        vacancy.setActive(productDTO.getPrice());
 
         vacancyRepository.save(vacancy);
@@ -114,7 +114,7 @@ public class VacancyService {
         Vacancy vacancy = optionalVacancy.get();
         vacancy.setName(vacancyDTO.getName());
         vacancy.setDescription(vacancyDTO.getDescription());
-//        vacancy.setActive(vacancyDTO.isActive());
+        vacancy.setActive(vacancyDTO.isActive());
 //        vacancy.setDescriptionUz(productDTO.getNameUz());
 //        vacancy.setDescriptionRu(productDTO.getDescriptionRu());
 //        vacancy.setDescriptionEn(productDTO.getDescriptionEn());
