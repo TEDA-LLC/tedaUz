@@ -1,5 +1,6 @@
 package com.example.tedabot.model;
 
+import com.example.tedabot.model.enums.Gender;
 import com.example.tedabot.model.enums.Language;
 import com.example.tedabot.model.enums.RegisteredType;
 import com.example.tedabot.model.enums.State;
@@ -9,9 +10,10 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
- * @author * Sunnatullayev Mahmudnazar *  * tedabot *  * 16:03 *
+ * @author Mansurov Abdusamad  *  30.11.2022  *  10:08   *  tedaSystem
  */
 
 @AllArgsConstructor
@@ -25,27 +27,29 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String username, fullName;
-
-//    @Column(nullable = false)
-    private String phone, email;
-
+    private String username, phone, fullName, email;
     @Column(unique = true)
     private String chatId;
-
     @Enumerated(EnumType.STRING)
     @JsonIgnore
     private State state;
-
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+    private String passportNumber;
     @Enumerated(EnumType.STRING)
     private Language language;
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Address address;
+    @OneToOne(mappedBy = "user")
+    private Avatar avatar;
     private int count = 0;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime registeredTime = LocalDateTime.now();
+    private LocalDateTime registeredTime, lastOperationTime;
+    @OneToMany(mappedBy = "client")
+    @ToString.Exclude
+    private List<ActivityStatus> statusList;
+    private boolean active = true;
 
-    private LocalDateTime lastOperationTime;
-
-    private RegisteredType registredType;
+    @Enumerated(EnumType.STRING)
+    private RegisteredType registeredType;
 }

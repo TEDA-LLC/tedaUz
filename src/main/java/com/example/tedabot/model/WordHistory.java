@@ -2,13 +2,12 @@ package com.example.tedabot.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
- * @author * Sunnatullayev Mahmudnazar *  * tedabot *  * 10:27 *
+ * @author Mansurov Abdusamad  *  30.11.2022  *  10:08   *  tedaSystem
  */
 @Entity
 @AllArgsConstructor
@@ -21,12 +20,9 @@ public class WordHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne
     private User user;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @CreationTimestamp
-    private Timestamp timeStamp;
-
+    private LocalDateTime dateTime = LocalDateTime.now();
     private String word;
 }

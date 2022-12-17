@@ -1,5 +1,6 @@
 package com.example.tedabot.controller;
 
+import com.example.tedabot.bot.TelegramBot;
 import com.example.tedabot.dto.ApiResponse;
 import com.example.tedabot.dto.RequestDTO;
 import com.example.tedabot.dto.ReviewDTO;
@@ -24,6 +25,7 @@ public class SiteController {
 
     private final SiteService siteService;
 
+    private final TelegramBot telegramBot;
     @GetMapping("/request")
     public ResponseEntity<?> getRequest() {
         ApiResponse<List<Request>> response = siteService.getRequest();
@@ -80,6 +82,12 @@ public class SiteController {
     @GetMapping("/requestsByUser/{id}")
     public ResponseEntity<?> getOrdersByUser(@PathVariable Long id){
         ApiResponse<List<Request>> response = siteService.getRequestsByUser(id);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+    @GetMapping("/request/{id}")
+    public ResponseEntity<?> sendMessage(@PathVariable Long id){
+        ApiResponse<?> response = siteService.sendMessage(id);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 

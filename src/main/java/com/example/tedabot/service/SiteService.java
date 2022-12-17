@@ -1,5 +1,6 @@
 package com.example.tedabot.service;
 
+import com.example.tedabot.bot.TelegramBot;
 import com.example.tedabot.dto.ApiResponse;
 import com.example.tedabot.dto.RequestDTO;
 import com.example.tedabot.dto.ReviewDTO;
@@ -14,7 +15,9 @@ import com.example.tedabot.repository.SiteHistoryRepository;
 import com.example.tedabot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -31,10 +34,11 @@ public class SiteService {
     private final SiteHistoryRepository siteHistoryRepository;
     private final UserRepository userRepository;
     private final ReviewRepository reviewRepository;
+    private final TelegramBot telegramBot;
 
     public ApiResponse<?> add(RequestDTO dto) {
         Request request = new Request();
-        request.setRequestType(RegisteredType.WEBSITE);
+        request.setRegisteredType(RegisteredType.WEBSITE);
         request.setAboutProduct(dto.getAboutProduct());
         request.setDateTime(LocalDateTime.now());
 
@@ -253,14 +257,35 @@ public class SiteService {
                     status(400).
                     build();
         }
-
         List<Request> requestList = requestRepository.findAllByUser(userOptional.get());
-
         return ApiResponse.<List<Request>>builder().
                 message("Here!!!").
                 success(true).
                 status(200).
                 data(requestList).
+                build();
+    }
+
+    @SneakyThrows
+    public ApiResponse<?> sendMessage(Long id) {
+        Optional<Request> requestOptional = requestRepository.findById(id);
+        if (requestOptional.isEmpty()) {
+            return ApiResponse.builder().
+                    message("Request not found!!!").
+                    success(false).
+                    status(400).
+                    build();
+        }
+        Request request = requestOptional.get();
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setText("Sizning " + request.getId() + " raqamli murojatingizni " + request.getEmployee().getFullName() + " qabul qildi.");
+        sendMessage.setChatId(request.getUser().getChatId());
+        telegramBot.execute(sendMessage);
+
+        return ApiResponse.builder().
+                message("Sent!!!").
+                success(true).
+                status(200).
                 build();
     }
 }

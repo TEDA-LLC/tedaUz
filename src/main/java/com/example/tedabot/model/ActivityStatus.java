@@ -1,5 +1,6 @@
 package com.example.tedabot.model;
 
+import com.example.tedabot.model.enums.ActiveTypes;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
@@ -7,26 +8,22 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
- * @author Mansurov Abdusamad  *  30.11.2022  *  10:08   *  tedaSystem
+ * @author Mansurov Abdusamad  *  15.12.2022  *  10:29   *  tedaSystem
  */
-
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@Builder
-public class UserHistory {
+@Entity
+public class ActivityStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    private User user;
+    private ActiveTypes firstCase;
+    private ActiveTypes secondCase;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime dateTime = LocalDateTime.now();
-
+    private LocalDateTime period = LocalDateTime.now();
     @ManyToOne
-    private Product product;
+    private User client;
 }

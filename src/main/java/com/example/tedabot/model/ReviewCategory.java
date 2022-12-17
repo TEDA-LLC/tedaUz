@@ -5,27 +5,24 @@ import lombok.*;
 import javax.persistence.*;
 
 /**
- * @author Mansurov Abdusamad  *  30.11.2022  *  10:08   *  tedaSystem
+ * @author Mansurov Abdusamad  *  30.11.2022  *  10:56   *  tedaSystem
  */
-
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
 @Builder
-public class Category {
+@Entity
+public class ReviewCategory {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true)
-    private String nameUz;
+    private String name;
 
-    @Column(unique = true)
-    private String nameRu;
+    private boolean active = true;
 
-    @Column(unique = true)
-    private String nameEn;
 }
