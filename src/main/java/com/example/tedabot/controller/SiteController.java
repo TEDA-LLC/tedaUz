@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author * Sunnatullayev Mahmudnazar *  * tedabot *  * 18:21 *
@@ -81,7 +82,7 @@ public class SiteController {
     }
     @GetMapping("/requestsByUser/{id}")
     public ResponseEntity<?> getOrdersByUser(@PathVariable Long id){
-        ApiResponse<List<Request>> response = siteService.getRequestsByUser(id);
+        ApiResponse<Map<String, List<Request>>> response = siteService.getRequestsByUser(id);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 

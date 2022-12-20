@@ -43,8 +43,9 @@ public class User {
     @OneToOne(mappedBy = "user")
     private Avatar avatar;
     private int count = 0;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime registeredTime, lastOperationTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime registeredTime = LocalDateTime.now();
+    private LocalDateTime lastOperationTime;
     @OneToMany(mappedBy = "client")
     @ToString.Exclude
     private List<ActivityStatus> statusList;

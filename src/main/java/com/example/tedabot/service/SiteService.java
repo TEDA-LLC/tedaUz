@@ -16,13 +16,14 @@ import com.example.tedabot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
 import lombok.SneakyThrows;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
+
 
 /**
  * @author Mansurov Abdusamad  *  24.11.2022  *  10:28   *  tedaUz
@@ -247,22 +248,23 @@ public class SiteService {
                 build();
     }
 
-    public ApiResponse<List<Request>> getRequestsByUser(Long id) {
+    public ApiResponse<Map<String, List<Request>>> getRequestsByUser(Long id) {
         Optional<User> userOptional = userRepository.findById(id);
 
         if (userOptional.isEmpty()) {
-            return ApiResponse.<List<Request>>builder().
+            return ApiResponse.<Map<String, List<Request>>>builder().
                     message("User not found!!!").
                     success(false).
                     status(400).
                     build();
         }
-        List<Request> requestList = requestRepository.findAllByUser(userOptional.get());
-        return ApiResponse.<List<Request>>builder().
+        List<Request> requestList = requestRepository.findAllByUser(userOptional.get(), Sort.by(Sort.Direction.ASC, "date_time"));
+        Map<String, List<Request>> collect = requestList.stream().collect(Collectors.groupingBy(Request::getCategory));
+        return ApiResponse.<Map<String, List<Request>>>builder().
                 message("Here!!!").
                 success(true).
                 status(200).
-                data(requestList).
+                data(collect).
                 build();
     }
 
