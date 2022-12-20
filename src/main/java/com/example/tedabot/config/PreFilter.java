@@ -26,7 +26,7 @@ public class PreFilter extends OncePerRequestFilter {
         response.addHeader("Access-Control-Allow-Credentials", "true");
         String token = request.getHeader("Authorization");
         if (token == null || token.length() <= 8 || !token.substring(7).equals(botToken)) {
-            if (!request.getServletPath().equals("/api/site")){ //&& !request.getMethod().equals("POST") && !request.getMethod().equals("GET") && !request.getMethod().equals("PUT")) {
+            if (!request.getServletPath().startsWith("/api/site")){ //&& !request.getMethod().equals("POST") && !request.getMethod().equals("GET") && !request.getMethod().equals("PUT")) {
                 response.getWriter().print("{\"message\":\"Forbidden!\",\"success\":false,\"status\":403}");
                 response.setContentType("application/json");
                 if (!request.getMethod().equalsIgnoreCase("OPTIONS")) {
