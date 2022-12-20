@@ -10,10 +10,10 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-@Builder
 public class VacancyDTO {
 
     private String name, description;
+    private boolean active = true;
 
 
 }
