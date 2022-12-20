@@ -38,6 +38,8 @@ public class SiteService {
     private final TelegramBot telegramBot;
 
     public ApiResponse<?> add(RequestDTO dto) {
+        boolean isEmail = dto.getEmail() == null || !dto.getEmail().equals("");
+        boolean isPhone = dto.getPhone() == null || !dto.getPhone().equals("");
         Request request = new Request();
         request.setRegisteredType(RegisteredType.WEBSITE);
         request.setAboutProduct(dto.getAboutProduct());
@@ -46,27 +48,55 @@ public class SiteService {
         if (dto.getCategory() != null)
             request.setCategory(dto.getCategory());
 
-        if (dto.getPhone() != null) {
-            Optional<User> userOptional = userRepository.findByPhone(dto.getPhone());
-            if (userOptional.isEmpty()) {
-                User user = new User();
-                user.setPhone(dto.getPhone());
+        if (isPhone) {
+            Optional<User> userOptionalByPhone = userRepository.findByPhone(dto.getPhone());
+            if (userOptionalByPhone.isPresent()) {
+                User user = userOptionalByPhone.get();
                 user.setFullName(dto.getName());
-                user.setRegisteredTime(LocalDateTime.now());
                 user.setLastOperationTime(LocalDateTime.now());
-                user.setCount(1);
-                if (dto.getEmail() != null)
-                    user.setEmail(dto.getEmail());
-                User save = userRepository.save(user);
-                request.setUser(save);
-            } else {
-                User user = userOptional.get();
-                user.setLastOperationTime(LocalDateTime.now());
-                User save = userRepository.save(user);
-                request.setUser(save);
+                user.setCount(user.getCount() + 1);
+                user.setEmail(dto.getEmail());
+                User userSave = userRepository.save(user);
+                request.setUser(userSave);
+                Request save = requestRepository.save(request);
+                return ApiResponse.builder().
+                        message("Request was added !").
+                        status(201).
+                        success(true).
+                        data(save).
+                        build();
             }
         }
 
+        if (isEmail) {
+            Optional<User> userOptionalByEmail = userRepository.findByEmail(dto.getEmail());
+            if (userOptionalByEmail.isPresent()) {
+                User user = userOptionalByEmail.get();
+                user.setLastOperationTime(LocalDateTime.now());
+                user.setCount(user.getCount() + 1);
+                user.setPhone(dto.getPhone());
+                User userSave = userRepository.save(user);
+                request.setUser(userSave);
+                Request save = requestRepository.save(request);
+                return ApiResponse.builder().
+                        message("Request was added !").
+                        status(201).
+                        success(true).
+                        data(save).
+                        build();
+            }
+        }
+
+
+        User user = new User();
+        user.setFullName(dto.getName());
+        user.setPhone(dto.getPhone());
+        user.setCount(1);
+        user.setEmail(dto.getEmail());
+        user.setRegisteredTime(LocalDateTime.now());
+        user.setRegisteredType(RegisteredType.WEBSITE);
+        User userSave = userRepository.save(user);
+        request.setUser(userSave);
         Request save = requestRepository.save(request);
         return ApiResponse.builder().
                 message("Request was added !").
