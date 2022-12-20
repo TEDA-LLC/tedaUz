@@ -7,6 +7,7 @@ import com.example.tedabot.dto.ReviewDTO;
 import com.example.tedabot.model.Request;
 import com.example.tedabot.model.Review;
 import com.example.tedabot.model.SiteHistory;
+import com.example.tedabot.model.User;
 import com.example.tedabot.service.SiteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,12 @@ public class SiteController {
     @GetMapping("/request")
     public ResponseEntity<?> getRequest() {
         ApiResponse<List<Request>> response = siteService.getRequest();
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestParam String email, @RequestParam String phone){
+        ApiResponse<User> response = siteService.login(email, phone);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 

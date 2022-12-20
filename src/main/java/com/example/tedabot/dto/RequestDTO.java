@@ -10,8 +10,6 @@ import lombok.*;
 @Setter
 @ToString
 public class RequestDTO {
-
     private String name, email, phone;
-
     private String aboutProduct, category;
 }

@@ -258,7 +258,7 @@ public class SiteService {
                     status(400).
                     build();
         }
-        List<Request> requestList = requestRepository.findAllByUser(userOptional.get(), Sort.by(Sort.Direction.ASC, "date_time"));
+        List<Request> requestList = requestRepository.findAllByUser(userOptional.get(), Sort.by(Sort.Direction.ASC, "dateTime"));
         Map<String, List<Request>> collect = requestList.stream().collect(Collectors.groupingBy(Request::getCategory));
         return ApiResponse.<Map<String, List<Request>>>builder().
                 message("Here!!!").
@@ -289,6 +289,90 @@ public class SiteService {
                 success(true).
                 status(200).
                 build();
+    }
+
+    public ApiResponse<User> login(String email, String phone) {
+        boolean isEmail = email == null || !email.equals("");
+        boolean isPhone = phone == null || !phone.equals("");
+
+        Optional<User> userOptionalByEmail = userRepository.findByEmail(email);
+        Optional<User> userOptionalByPhone = userRepository.findByPhone(phone);
+        if (userOptionalByEmail.isPresent()) {
+            User userByEmail = userOptionalByEmail.get();
+            if (userByEmail.getPhone() == null) {
+                userByEmail.setPhone(phone);
+            }
+            userByEmail.setCount(userByEmail.getCount() + 1);
+            User save = userRepository.save(userByEmail);
+            return ApiResponse.<User>builder().
+                    message("User updated!!!").
+                    success(true).
+                    status(200).
+                    data(save).
+                    build();
+        } else {
+            if (userOptionalByPhone.isPresent()) {
+                User userByPhone = userOptionalByPhone.get();
+                if (userByPhone.getEmail() == null) {
+                    userByPhone.setEmail(email);
+                }
+                userByPhone.setCount(userByPhone.getCount() + 1);
+                User save = userRepository.save(userByPhone);
+                return ApiResponse.<User>builder().
+                        message("User updated!!!").
+                        success(true).
+                        status(200).
+                        data(save).
+                        build();
+            }
+        }
+        if (!isEmail && !isPhone)
+            return ApiResponse.<User>builder().
+                    message("Parameters are required!!!").
+                    success(false).
+                    status(400).
+                    build();
+        if (isEmail && !email.contains("@"))
+            return ApiResponse.<User>builder().
+                    message("Email type is not supported!!!").
+                    success(false).
+                    status(400).
+                    build();
+        if (isPhone) {
+            try {
+                Long.parseLong(phone.substring(1));
+            } catch (NumberFormatException e) {
+                return ApiResponse.<User>builder().
+                        message("Phone is not numeric!!!").
+                        success(false).
+                        status(400).
+                        build();
+            }
+        }
+
+        if (isPhone && !phone.startsWith("+"))
+            return ApiResponse.<User>builder().
+                    message("Phone is not numeric!!!").
+                    success(false).
+                    status(400).
+                    build();
+
+
+        User user = new User();
+        if (isEmail) ;
+        user.setEmail(email);
+        user.setCount(1);
+        if (isPhone) ;
+        user.setPhone(phone);
+        user.setRegisteredType(RegisteredType.WEBSITE);
+        User save = userRepository.save(user);
+        return ApiResponse.<User>builder().
+                message("User saved!!!").
+                success(true).
+                status(201).
+                data(save).
+                build();
+
     }
 }
 
