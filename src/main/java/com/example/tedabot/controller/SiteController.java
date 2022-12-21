@@ -34,7 +34,7 @@ public class SiteController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestParam String email, @RequestParam String phone){
+    public ResponseEntity<?> login(@RequestParam String email, @RequestParam(required = false) String phone){
         ApiResponse<User> response = siteService.login(email, phone);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
