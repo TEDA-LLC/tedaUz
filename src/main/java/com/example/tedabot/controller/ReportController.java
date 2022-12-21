@@ -21,15 +21,13 @@ public class ReportController {
     private final ReportService reportService;
     @GetMapping("/auth")
     public ResponseEntity<?> checkAuth(){
-        return ResponseEntity.ok("Here ");
+        return ResponseEntity.ok("Here !!!!! ");
     }
-
     @GetMapping("/users")
     public ResponseEntity<?> getAllUsers() {
         ApiResponse<List<User>> response = reportService.getAll();
         return ResponseEntity.status(response.getStatus()).body(response);
     }
-
     @GetMapping("/userHistory")
     public ResponseEntity<?> getUserHistory() {
         ApiResponse<List<UserHistory>> response = reportService.getUserHistory();
