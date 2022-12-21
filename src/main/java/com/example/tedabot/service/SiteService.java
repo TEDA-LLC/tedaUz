@@ -327,8 +327,8 @@ public class SiteService {
         boolean isPhone = phone == null || !phone.equals("");
 
         Optional<User> userOptionalByEmail = userRepository.findByEmail(email);
-        Optional<User> userOptionalByPhone = userRepository.findByPhone(phone);
-        if (userOptionalByEmail.isPresent()) {
+
+        if (isEmail && userOptionalByEmail.isPresent()) {
             User userByEmail = userOptionalByEmail.get();
             if (userByEmail.getPhone() == null) {
                 userByEmail.setPhone(phone);
@@ -342,7 +342,8 @@ public class SiteService {
                     data(save).
                     build();
         } else {
-            if (userOptionalByPhone.isPresent()) {
+            Optional<User> userOptionalByPhone = userRepository.findByPhone(phone);
+            if (isPhone && userOptionalByPhone.isPresent()) {
                 User userByPhone = userOptionalByPhone.get();
                 if (userByPhone.getEmail() == null) {
                     userByPhone.setEmail(email);
