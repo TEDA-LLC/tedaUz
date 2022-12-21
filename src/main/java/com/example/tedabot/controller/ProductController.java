@@ -1,5 +1,6 @@
 package com.example.tedabot.controller;
 
+import com.example.tedabot.model.Attachment;
 import com.example.tedabot.service.ProductService;
 import com.example.tedabot.dto.ApiResponse;
 import com.example.tedabot.dto.ProductDTO;
@@ -47,5 +48,10 @@ public class ProductController {
     public ResponseEntity<?> delete(@PathVariable Long id) {
         ApiResponse<?> response = productService.delete(id);
         return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+    @GetMapping("/photo/{id}")
+    public ResponseEntity<?> getPhoto(@PathVariable Long id){
+        return productService.getPhoto(id);
     }
 }

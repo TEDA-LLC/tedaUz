@@ -5,10 +5,13 @@ import com.example.tedabot.dto.ProductDTO;
 import com.example.tedabot.model.Attachment;
 import com.example.tedabot.model.Category;
 import com.example.tedabot.model.Product;
+import com.example.tedabot.repository.AttachmentRepository;
 import com.example.tedabot.repository.CategoryRepository;
 import com.example.tedabot.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,6 +27,7 @@ import java.util.Optional;
 public class ProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
+    private final AttachmentRepository attachmentRepository;
 
     public ApiResponse<List<Product>> getAll() {
         List<Product> products = productRepository.findAll();
@@ -115,13 +119,14 @@ public class ProductService {
                     success(false).
                     build();
         }
-
-        MultipartFile photo = productDTO.getPhoto();
-        Attachment attachment = new Attachment();
-        attachment.setBytes(photo.getBytes());
-        attachment.setOriginalName(photo.getOriginalFilename());
-
         Product product = optionalProduct.get();
+        if (productDTO.getPhoto() != null) {
+            MultipartFile photo = productDTO.getPhoto();
+            Attachment attachment = new Attachment();
+            attachment.setBytes(photo.getBytes());
+            attachment.setOriginalName(photo.getOriginalFilename());
+            product.setAttachment(attachment);
+        }
         product.setNameUz(productDTO.getNameUz());
         product.setNameRu(productDTO.getNameRu());
         product.setNameEn(productDTO.getNameEn());
@@ -130,7 +135,7 @@ public class ProductService {
         product.setDescriptionEn(productDTO.getDescriptionEn());
         product.setPrice(productDTO.getPrice());
         product.setCategory(optionalCategory.get());
-        product.setAttachment(attachment);
+
 
         productRepository.save(product);
 
@@ -156,5 +161,17 @@ public class ProductService {
                 status(201).
                 success(true).
                 build();
+    }
+
+    public ResponseEntity<?> getPhoto(Long id) {
+        Optional<Attachment> attachmentOptional = attachmentRepository.findById(id);
+        if (attachmentOptional.isEmpty()) {
+            return ResponseEntity.badRequest().body("Photo not found!!!");
+        }
+        Attachment attachment = attachmentOptional.get();
+        return ResponseEntity.ok()
+                .contentType(MediaType.valueOf(attachment.getContentType()))
+                .contentLength(attachment.getSize())
+                .body(attachment.getBytes());
     }
 }
