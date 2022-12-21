@@ -76,7 +76,7 @@ public class ProductService {
                     build();
         }
 
-        MultipartFile photo = productDTO.getPhoto();
+        MultipartFile photo = productDTO.getAttachment();
         Attachment attachment = new Attachment();
         attachment.setBytes(photo.getBytes());
         attachment.setOriginalName(photo.getOriginalFilename());
@@ -120,8 +120,8 @@ public class ProductService {
                     build();
         }
         Product product = optionalProduct.get();
-        if (productDTO.getPhoto() != null) {
-            MultipartFile photo = productDTO.getPhoto();
+        if (productDTO.getAttachment() != null) {
+            MultipartFile photo = productDTO.getAttachment();
             Attachment attachment = new Attachment();
             attachment.setBytes(photo.getBytes());
             attachment.setOriginalName(photo.getOriginalFilename());
