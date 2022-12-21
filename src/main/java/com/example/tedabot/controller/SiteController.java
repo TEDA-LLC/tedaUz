@@ -27,7 +27,6 @@ public class SiteController {
 
     private final SiteService siteService;
 
-    private final TelegramBot telegramBot;
     @GetMapping("/request")
     public ResponseEntity<?> getRequest() {
         ApiResponse<List<Request>> response = siteService.getRequest();
