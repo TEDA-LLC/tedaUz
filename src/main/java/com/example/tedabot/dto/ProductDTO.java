@@ -16,7 +16,7 @@ public class ProductDTO {
 
     private Long categoryId;
 
-    private MultipartFile photo;
+    private MultipartFile attachment;
 
     private Double price;
 }

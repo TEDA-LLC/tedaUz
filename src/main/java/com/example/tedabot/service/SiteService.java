@@ -52,7 +52,8 @@ public class SiteService {
             Optional<User> userOptionalByPhone = userRepository.findByPhone(dto.getPhone());
             if (userOptionalByPhone.isPresent()) {
                 User user = userOptionalByPhone.get();
-                user.setFullName(dto.getName());
+                if (dto.getName() != null && !dto.getName().equals(""))
+                    user.setFullName(dto.getName());
                 user.setLastOperationTime(LocalDateTime.now());
                 user.setCount(user.getCount() + 1);
                 user.setEmail(dto.getEmail());
