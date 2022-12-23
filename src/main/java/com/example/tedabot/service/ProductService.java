@@ -75,15 +75,17 @@ public class ProductService {
                     success(false).
                     build();
         }
-
-        MultipartFile photo = productDTO.getAttachment();
-        Attachment attachment = new Attachment();
-        attachment.setBytes(photo.getBytes());
-        attachment.setOriginalName(photo.getOriginalFilename());
-
         Product product = new Product();
+        if (productDTO.getAttachment() != null) {
+            MultipartFile photo = productDTO.getAttachment();
+            Attachment attachment = new Attachment();
+            attachment.setBytes(photo.getBytes());
+            attachment.setOriginalName(photo.getOriginalFilename());
+            attachment.setContentType(attachment.getContentType());
+            attachment.setSize(attachment.getSize());
+            product.setAttachment(attachment);
+        }
         product.setCategory(categoryOptional.get());
-        product.setAttachment(attachment);
         product.setPrice(productDTO.getPrice());
         product.setNameRu(productDTO.getNameRu());
         product.setNameUz(productDTO.getNameUz());
