@@ -27,7 +27,6 @@ public class Product {
     private Category category;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JsonIgnore
     private Attachment attachment;
 
     private Double price;
