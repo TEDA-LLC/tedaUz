@@ -125,6 +125,8 @@ public class ProductService {
             Attachment attachment = new Attachment();
             attachment.setBytes(photo.getBytes());
             attachment.setOriginalName(photo.getOriginalFilename());
+            attachment.setContentType(attachment.getContentType());
+            attachment.setSize(attachment.getSize());
             product.setAttachment(attachment);
         }
         product.setNameUz(productDTO.getNameUz());

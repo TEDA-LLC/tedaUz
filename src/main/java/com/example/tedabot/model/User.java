@@ -28,9 +28,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username, fullName;
-//    @Column(unique = true)
+    //    @Column(unique = true)
     private String phone, email;
-//    @Column(unique = true)
+    //    @Column(unique = true)
     private String chatId;
     @Enumerated(EnumType.STRING)
     @JsonIgnore
@@ -39,22 +39,25 @@ public class User {
     private Gender gender;
     private String passportNumber;
     @Enumerated(EnumType.STRING)
+    @JsonIgnore
     private Language language;
     @ManyToOne(cascade = CascadeType.ALL)
     private Address address;
     @OneToOne(mappedBy = "user")
+    @JsonIgnore
     private Avatar avatar;
     @ManyToOne
     private Company company;
     private int count = 0;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime registeredTime = LocalDateTime.now();
+    @JsonIgnore
     private LocalDateTime lastOperationTime;
     @OneToMany(mappedBy = "client")
     @ToString.Exclude
     private List<ActivityStatus> statusList;
     private boolean active = true;
-
+    @JsonIgnore
     @Enumerated(EnumType.STRING)
     private RegisteredType registeredType;
 }

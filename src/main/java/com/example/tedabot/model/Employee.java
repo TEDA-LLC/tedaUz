@@ -2,6 +2,7 @@ package com.example.tedabot.model;
 
 import com.example.tedabot.model.enums.RoleType;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,13 +26,14 @@ public class Employee {
     private String username, fullName;
 
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
 
     @Column(unique = true)
     private String phoneFirst;
 
     private String phoneSecond;
-
+    @JsonIgnore
     private String chatId;
 
     @ManyToOne
@@ -40,7 +42,7 @@ public class Employee {
     @ManyToOne(cascade = CascadeType.ALL)
     private Address address;
     private boolean active = true;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime registeredTime = LocalDateTime.now();
 
     @Enumerated(EnumType.STRING)
@@ -50,14 +52,12 @@ public class Employee {
     @Enumerated(EnumType.STRING)
     private RoleType selectedRole;
 
-//    @Override
+    //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {
 //        return Collections.singleton(new SimpleGrantedAuthority(selectedRole.name()));
 //    }
-
-    private boolean accountNonExpired = true;
-    private boolean accountNonLocked = true;
-    private boolean credentialsNonExpired = true;
+    @JsonIgnore
+    private boolean accountNonExpired = true, accountNonLocked = true, credentialsNonExpired = true;
     private boolean enabled = true;
 
     public Employee(String Username, String password, Set<RoleType> roles) {
