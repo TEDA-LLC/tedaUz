@@ -81,8 +81,8 @@ public class ProductService {
             Attachment attachment = new Attachment();
             attachment.setBytes(photo.getBytes());
             attachment.setOriginalName(photo.getOriginalFilename());
-            attachment.setContentType(attachment.getContentType());
-            attachment.setSize(attachment.getSize());
+            attachment.setContentType(photo.getContentType());
+            attachment.setSize(photo.getSize());
             product.setAttachment(attachment);
         }
         product.setCategory(categoryOptional.get());
@@ -125,10 +125,12 @@ public class ProductService {
         if (productDTO.getAttachment() != null) {
             MultipartFile photo = productDTO.getAttachment();
             Attachment attachment = new Attachment();
+            if (product.getAttachment() != null)
+                attachment = product.getAttachment();
             attachment.setBytes(photo.getBytes());
             attachment.setOriginalName(photo.getOriginalFilename());
-            attachment.setContentType(attachment.getContentType());
-            attachment.setSize(attachment.getSize());
+            attachment.setContentType(photo.getContentType());
+            attachment.setSize(photo.getSize());
             product.setAttachment(attachment);
         }
         product.setNameUz(productDTO.getNameUz());
