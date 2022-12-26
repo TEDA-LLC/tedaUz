@@ -35,7 +35,6 @@ public class Request {
     private User user;
     @Enumerated(EnumType.STRING)
     private RegisteredType registeredType;
-
     @ManyToOne
     private Employee employee;
 }

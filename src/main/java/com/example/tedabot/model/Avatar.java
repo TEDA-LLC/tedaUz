@@ -19,18 +19,13 @@ public class Avatar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @OneToMany(cascade = CascadeType.ALL)
     @ToString.Exclude
     @JsonIgnore
     private List<Attachment> photos;
-
     @OneToOne
     private User user;
-
     private String personal;
-
     private String  aboutWork;
-
     private String hobby;
 }

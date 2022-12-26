@@ -3,10 +3,12 @@ package com.example.tedabot.bot;
 import com.example.tedabot.bot.constant.ConstantEn;
 import com.example.tedabot.bot.constant.ConstantRu;
 import com.example.tedabot.bot.constant.ConstantUz;
+import com.example.tedabot.model.Bot;
 import com.example.tedabot.model.enums.Language;
 import com.example.tedabot.model.enums.RegisteredType;
 import com.example.tedabot.model.enums.State;
 import com.example.tedabot.model.User;
+import com.example.tedabot.repository.BotRepository;
 import com.example.tedabot.repository.UserRepository;
 import com.example.tedabot.bot.service.BotService;
 import lombok.RequiredArgsConstructor;
@@ -32,8 +34,11 @@ public class TelegramBot extends TelegramLongPollingBot {
     private String userName;
     @Value("${telegram.bot.token}")
     private String botToken;
+    @Value("${telegram.bot.id}")
+    private Long botId;
     private final BotService botService;
     private final UserRepository userRepository;
+    private final BotRepository botRepository;
 
     @Override
     public String getBotUsername() {
@@ -54,9 +59,11 @@ public class TelegramBot extends TelegramLongPollingBot {
             public void run() {
                 User currentUser;
                 if (update.hasMessage()) {
+                    Optional<Bot> botOptional = botRepository.findById(botId);
+                    Bot bot = botOptional.get();
                     Message message = update.getMessage();
                     String chatId = String.valueOf(message.getChatId());
-                    Optional<User> optionalUser = userRepository.findByChatId(chatId);
+                    Optional<User> optionalUser = userRepository.findByBot_IdAndChatId(botId, chatId);
                     if (message.hasText()) {
                         if (message.getText().equals("/start")) {
                             if (optionalUser.isPresent()) {
@@ -70,6 +77,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                                 currentUser.setFullName(message.getFrom().getFirstName());
                                 currentUser.setUsername(message.getFrom().getUserName());
                                 currentUser.setState(State.START);
+                                currentUser.setBot(bot);
                             }
                             currentUser.setLastOperationTime(LocalDateTime.now());
                             userRepository.save(currentUser);
@@ -189,7 +197,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                 } else if (update.hasCallbackQuery()) {
                     CallbackQuery callbackQuery = update.getCallbackQuery();
                     String chatId = String.valueOf(callbackQuery.getMessage().getChatId());
-                    Optional<User> optionalUser = userRepository.findByChatId(chatId);
+                    Optional<User> optionalUser = userRepository.findByBot_IdAndChatId(botId, chatId);
                     currentUser = optionalUser.get();
                     switch (currentUser.getState()) {
                         case CONTACT -> {

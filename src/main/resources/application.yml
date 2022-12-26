@@ -1,16 +1,16 @@
 server:
   port: 70
   ssl:
-    enabled: true
+    enabled: false
     key-store: /etc/letsencrypt/live/api.teda.uz/keystore.p12
     key-store-type: PKCS12
     key-store-password: turgun1970
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/tedauzbot
+    url: jdbc:postgresql://localhost:5432/our_system
 #    url: jdbc:postgresql://185.185.80.245/tedauzbot
-    username: admin
-    password: turgun1970
+    username: postgres
+    password: 977515747
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true
@@ -26,7 +26,8 @@ spring:
       max-file-size: 5MB
 telegram:
   bot:
-#   username: Uzb_Namaz_Times_bot
-#   token: 5082104093:AAEtEN22_VScHuRU7mgdvI8H-1p6v8hn8KU
-   username: tedauz_bot
-   token: 5432072116:AAHHjQHDP-IBzzQdiRyzHhqValr5tKQ6tlI
+   username: Uzb_Namaz_Times_bot
+   token: 5082104093:AAEtEN22_VScHuRU7mgdvI8H-1p6v8hn8KU
+#   username: tedauz_bot
+#   token: 5432072116:AAHHjQHDP-IBzzQdiRyzHhqValr5tKQ6tlI
+   id: 1

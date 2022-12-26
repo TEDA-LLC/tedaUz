@@ -48,6 +48,8 @@ public class User {
     private Avatar avatar;
     @ManyToOne
     private Company company;
+    @ManyToOne
+    private Bot bot;
     private int count = 0;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime registeredTime = LocalDateTime.now();

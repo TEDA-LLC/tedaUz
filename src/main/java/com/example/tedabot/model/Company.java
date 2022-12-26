@@ -26,13 +26,15 @@ public class Company {
     private Employee director;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime registeredTime = LocalDateTime.now();
-
     @ManyToMany
     @ToString.Exclude
     private List<User> clientList;
     @ManyToMany
     @ToString.Exclude
     private List<Employee> employees;
+    @OneToMany(mappedBy = "company")
+    @ToString.Exclude
+    private List<Bot> botList;
     @Builder.Default
     private boolean active = true;
 

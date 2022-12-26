@@ -22,6 +22,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     @Query(nativeQuery = true, value = "select * from users inner join users_roles on users.id = users_roles.users_id where users_roles.roles = :role")
     User getByRole(String role);
-    Optional<User> findByChatId(String chatId);
+    Optional<User> findByBot_IdAndChatId(Long bot_id, String chatId);
+    Optional<User> findByChatId( String chatId);
 
 }
