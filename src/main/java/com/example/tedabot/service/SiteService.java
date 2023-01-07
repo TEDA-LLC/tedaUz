@@ -323,12 +323,31 @@ public class SiteService {
     }
 
     public ApiResponse<User> login(String email, String phone) {
-        boolean isEmail = email == null || !email.equals("");
-        boolean isPhone = phone == null || !phone.equals("");
+        boolean isEmail = email != null || !email.equals("");
+        boolean isPhone = phone != null || !phone.equals("");
+        if (isEmail && isPhone){
+            Optional<User> userOptionalByEmail1 = userRepository.findByEmail(email);
+            Optional<User> userOptionalByPhone1 = userRepository.findByPhone(phone);
+            if (userOptionalByPhone1.isPresent() && userOptionalByEmail1.isPresent()) {
+                User userByEmail = userOptionalByEmail1.get();
+                User userByPhone = userOptionalByPhone1.get();
+                if (!userByPhone.getId().equals(userByEmail.getId())){
+                    userByPhone.setEmail(userByEmail.getEmail());
+                    User save = userRepository.save(userByPhone);
+                    userRepository.delete(userByEmail);
+                    return ApiResponse.<User>builder().
+                            message("User updated!!!").
+                            success(true).
+                            status(200).
+                            data(save).
+                            build();
+                }
+            }
 
+        }
         Optional<User> userOptionalByEmail = userRepository.findByEmail(email);
 
-        if (isEmail && userOptionalByEmail.isPresent()) {
+        if (isEmail && !isPhone && userOptionalByEmail.isPresent()) {
             User userByEmail = userOptionalByEmail.get();
             if (userByEmail.getPhone() == null) {
                 userByEmail.setPhone(phone);
@@ -341,9 +360,9 @@ public class SiteService {
                     status(200).
                     data(save).
                     build();
-        } else {
+        }
             Optional<User> userOptionalByPhone = userRepository.findByPhone(phone);
-            if (isPhone && userOptionalByPhone.isPresent()) {
+            if (isPhone && !isEmail && userOptionalByPhone.isPresent()) {
                 User userByPhone = userOptionalByPhone.get();
                 if (userByPhone.getEmail() == null) {
                     userByPhone.setEmail(email);
@@ -357,7 +376,8 @@ public class SiteService {
                         data(save).
                         build();
             }
-        }
+
+
         if (!isEmail && !isPhone)
             return ApiResponse.<User>builder().
                     message("Parameters are required!!!").
@@ -391,11 +411,13 @@ public class SiteService {
 
 
         User user = new User();
-        if (isEmail) ;
-        user.setEmail(email);
+        if (isEmail) {
+            user.setEmail(email);
+        }
+        if (isPhone) {
+            user.setPhone(phone);
+        }
         user.setCount(1);
-        if (isPhone) ;
-        user.setPhone(phone);
         user.setRegisteredType(RegisteredType.WEBSITE);
         User save = userRepository.save(user);
         return ApiResponse.<User>builder().
