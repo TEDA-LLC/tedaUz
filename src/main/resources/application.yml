@@ -7,7 +7,7 @@ server:
     key-store-password: turgun1970
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/our_system
+    url: jdbc:postgresql://localhost:5432/tedauzbot
 #    url: jdbc:postgresql://185.185.80.245/tedauzbot
     username: admin
     password: turgun1970
