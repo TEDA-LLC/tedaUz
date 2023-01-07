@@ -1,7 +1,7 @@
 server:
   port: 70
   ssl:
-    enabled: false
+    enabled: true
     key-store: /etc/letsencrypt/live/api.teda.uz/keystore.p12
     key-store-type: PKCS12
     key-store-password: turgun1970
