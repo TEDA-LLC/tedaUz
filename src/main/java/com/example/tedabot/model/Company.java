@@ -20,8 +20,13 @@ public class Company {
     private Long id;
     private String name;
     private String phone;
-    @ManyToOne
+    private String activityType;
+    private String stirNumber;
+    private String memberOrganization;
+    @ManyToOne(cascade = CascadeType.ALL)
     private Address address;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private BankInfo bankInfo;
     @ManyToOne
     private Employee director;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
